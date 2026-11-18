@@ -69,17 +69,19 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .mic.spk::after{border-color:var(--muted)}
 
 /* HUD */
-.hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding:12px 0 10px}
+.hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding:6px 0 6px}
 .hudrow{display:flex;align-items:center;gap:10px}
-.lv{flex:none;width:46px;height:46px;border-radius:14px;background:var(--amber);color:var(--amber-ink);display:grid;place-items:center;font-weight:700;line-height:1;font-size:11px}
-.lv b{font-size:19px;display:block}
+.lv{flex:none;width:34px;height:34px;border-radius:10px;background:var(--amber);color:var(--amber-ink);display:grid;place-items:center;font-weight:700;line-height:1;font-size:11px}
+.lv b{font-size:15px;display:block}
 .xp{flex:1;min-width:0}
-.xp .nm{font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.xp .nm{font-weight:700;font-size:13px;display:flex;justify-content:space-between;gap:8px}
 .xp .nm small{color:var(--muted);font-weight:500;font-size:12px}
-.bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-top:5px}
+.bar{height:5px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:4px}
 .bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .5s ease}
-.chips{display:flex;gap:6px;margin-top:8px;font-size:12px;color:var(--muted);flex-wrap:wrap}
-.chips span{padding:3px 9px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chips{display:flex;gap:5px;margin-top:6px;font-size:11.5px;color:var(--muted);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips span{white-space:nowrap}
+.chips span{padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
 .chips b{color:var(--ink)}
 .stages{display:flex;gap:6px;margin:2px 0 12px}
 .stages span{flex:1;font-size:12px;font-weight:600;color:var(--muted);text-align:center;padding:5px 0;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
@@ -160,7 +162,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .toast.show{opacity:1;transform:translate(-50%,0)}
 nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
 nav.tabs .in{display:flex;max-width:560px;width:100%}
-nav.tabs button{flex:1;height:60px;font-size:13px;font-weight:600;color:var(--muted)}
+nav.tabs button{flex:1;height:44px;font-size:12.5px;font-weight:600;color:var(--muted)}
 nav.tabs button[aria-selected="true"]{color:var(--amber)}
 .dl{display:flex;flex-direction:column;gap:8px}
 .ln{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:14px;background:var(--surface);border:1px solid var(--line);text-align:left;width:100%}
@@ -172,17 +174,17 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
 .ln .tip{margin-top:8px}
 .note{color:var(--muted);font-size:14px;margin:0 0 12px}
 @media (prefers-reduced-motion: reduce){.mic,.mic::after{animation:none}.bar i{transition:none}}
-.actbar{position:fixed;left:0;right:0;bottom:calc(60px + env(safe-area-inset-bottom,0px));z-index:15;background:var(--bg);padding:10px 16px 8px;border-top:1px solid var(--line)}
+.actbar{position:fixed;left:0;right:0;bottom:calc(44px + env(safe-area-inset-bottom,0px));z-index:15;background:var(--bg);padding:10px 16px 8px;border-top:1px solid var(--line)}
 .actbar .in{max-width:528px;margin:0 auto;display:flex;flex-direction:column}
 .actbar .actions{margin-top:0}
 .actbar .btn{min-height:64px;font-size:18px}
 .actbar .known{margin-top:6px;padding:4px 10px}
 .actbar .selfnote{margin:0 0 8px}
-.hudquit{margin-left:auto;font-size:13px;font-weight:700;color:#fff;padding:5px 12px;border-radius:999px;background:var(--no);box-shadow:0 2px 8px -2px rgba(176,63,44,.5)}
+.hudquit{flex:none;font-size:12px;font-weight:700;color:#fff;padding:5px 10px;border-radius:999px;background:var(--no);box-shadow:0 2px 8px -2px rgba(176,63,44,.5)}
 .saved{display:flex;gap:10px;align-items:flex-start;background:var(--ok-soft);color:var(--ok);border-radius:14px;padding:12px 14px;margin-top:12px;font-size:14px;line-height:1.5}
 .saved b{display:block;font-size:15px}
 #study .card{min-height:0}
-.app.withbar{padding-bottom:250px}
+.app.withbar{padding-bottom:230px}
 .wpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;max-height:150px;overflow:auto}
 .wchip{border-radius:12px;padding:6px 10px;border:1px solid var(--line);background:var(--surface);text-align:center}
 .wchip .pj{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:16px;display:block}
@@ -255,8 +257,9 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
         <div class="nm"><span id="hName">-</span><small id="hXp">0 / 100 XP</small></div>
         <div class="bar"><i id="hBar"></i></div>
       </div>
+      <button class="hudquit" id="quitBtn">그만할래요</button>
     </div>
-    <div class="chips"><span>🔥 연속 <b id="hStreak">0</b>일 <small id="hBest"></small></span><span>오늘 <b id="hToday">0</b>문제</span><span>성취도 <b id="hDone">0</b>%</span><span>복습 대기 <b id="hDue">0</b></span><button class="hudquit" id="quitBtn">오늘은 그만할래요</button></div>
+    <div class="chips"><span>🔥 <b id="hStreak">0</b>일 <small id="hBest"></small></span><span>오늘 <b id="hToday">0</b>문제</span><span>이 단원 <b id="hDone">0</b>%</span><span>복습 <b id="hDue">0</b></span></div>
   </header>
 
   <section id="study">
@@ -663,7 +666,7 @@ const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"
 const MIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
 function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
 function hud(){rollover();const L=level(S.xp);$("#hLv").textContent=L.lv;$("#hXp").textContent=L.cur+" / "+L.need+" XP";$("#hBar").style.width=Math.round(L.cur/L.need*100)+"%";
-  $("#hName").textContent=me+" · "+unitTitle();$("#hStreak").textContent=streak();$("#hBest").textContent="(최장 "+Math.max(S.best||0,streak())+"일)";$("#hToday").textContent=S.todayN;$("#hDone").textContent=progress();$("#hDue").textContent=dueList().length;}
+  $("#hName").textContent=me+" · "+unitTitle();$("#hStreak").textContent=streak();$("#hBest").textContent="(최장 "+Math.max(S.best||0,streak())+")";$("#hToday").textContent=S.todayN;$("#hDone").textContent=progress(ITEMS.filter(i=>i.u===curU()));$("#hDue").textContent=dueList().length;}
 function stage(t){["W","S","D"].forEach(x=>$("#sg"+x).classList.toggle("on",{w:"W",s:"S",d:"D",l:"D"}[t]===x));}
 function cueBlock(c){const b=el("div","cue");b.append(el("span","who2","손님"));const t=el("div","t");t.append(el("div","ja",c.ja));t.append(el("small",null,c.m));b.append(t);
   const p=el("button","play");p.innerHTML=PLAY;p.setAttribute("aria-label","손님 말 듣기");p.onclick=()=>{hush();say(c.ja);};b.append(p);return b;}
