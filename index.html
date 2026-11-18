@@ -509,7 +509,7 @@ async function flushLog(){try{if(!docBase||!me)return;const d=docBase.doc("osu-l
 window.addEventListener("error",ev=>logEv("ERR",String(ev.message||ev).slice(0,200),(ev.filename||"").slice(-30)+":"+(ev.lineno||"")));
 window.addEventListener("unhandledrejection",ev=>logEv("ERR",String(ev.reason).slice(0,200)));
 function snap(id){const st=S.st[id];if(!st)return null;return{ivl:Math.round(st.ivl||0),ok:st.ok||0,w:st.wrong||0,lad:st.lad,kn:st.kn,ds:st.dueStep,da:st.dueAt?Math.round((st.dueAt-Date.now())/MIN):null};}
-function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=docFor(me);if(d){clearTimeout(saveT);saveT=setTimeout(()=>d.set(JSON.parse(JSON.stringify({...S,name:me}))).catch(()=>{}),1000);}}
+function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=docFor(me);if(d){clearTimeout(saveT);saveT=setTimeout(()=>d.set({v:1,name:me,updated:S.updated,mxp:S.mxp||{},xp:S.xp||0,json:JSON.stringify(S)}).catch(e=>logEv("ERR","save "+String(e.message).slice(0,120))),1000);}}
 (async()=>{try{if(!window.firebase)return;
   firebase.initializeApp({apiKey:"AIzaSyBRtZT_GIaFAG6XWZmYAbZKL352OmlA8UU",authDomain:"trinity-osusume.firebaseapp.com",projectId:"trinity-osusume",storageBucket:"trinity-osusume.firebasestorage.app",messagingSenderId:"973094802398",appId:"1:973094802398:web:e78ae5d16be461ded2034f"});
   docBase=firebase.firestore().collection("osusume");
@@ -517,7 +517,7 @@ function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=docFor(me);if(d){
   if(ps.exists){const rp=ps.data().pins||{};Object.keys(rp).forEach(k=>{if(!pins[k])pins[k]=rp[k];});lsSet(PINKEY,pins);const list=(ps.data().list)||[];let ch=false;list.forEach(n=>{if(!profiles.includes(n)){profiles.push(n);ch=true;}});if(ch){lsSet(PKEY,profiles);if(!picked)picked=profiles[0];renderProfiles();}}
   window.__pd=pd;pd.set({list:profiles,pins}).catch(()=>{});
   if(me)pullRemote();}catch(e){}})();
-async function pullRemote(){const d=docFor(me);if(!d)return;try{const sn=await d.get();if(sn.exists){const r=sn.data();if(r&&r.v===1&&(r.updated||0)>(S.updated||0)){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);hud();if(!cur||cur.type==="done")next();}}else if(S.updated)save();}catch(e){}}
+async function pullRemote(){const d=docFor(me);if(!d)return;try{const sn=await d.get();if(sn.exists){const raw=sn.data();let r=raw;try{if(raw.json)r=JSON.parse(raw.json);}catch(e){}if(r&&r.v===1&&(r.updated||0)>(S.updated||0)){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);hud();if(!cur||cur.type==="done")next();}}else if(S.updated)save();}catch(e){}}
 function renderProfiles(){const pl=$("#plist");pl.innerHTML="";profiles.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});needPin();$("#goBtn").disabled=!picked;}
 const PINKEY="osusume-pins";let pins=lsGet(PINKEY,{});
 function needPin(){const has=picked&&pins[picked];$("#pinBox").hidden=!picked;$("#pinLabel").textContent=has?picked+"님 비밀번호 4자리":"새 비밀번호 4자리 정하기 (숫자)";}
