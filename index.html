@@ -80,6 +80,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .bub .pr{font-size:13px;color:var(--muted)}
 .bub .ko{font-size:14px;margin-top:4px;transition:filter .4s}
 .bub .ko.mask{filter:blur(6px);cursor:pointer}
+.bub .mic.cvmic{width:40px;height:40px;margin:2px 0 6px 2px}.bub .mic.cvmic svg{width:22px;height:22px}
+.cvhint{font-size:12px;color:var(--muted);margin-top:4px}
 .bub .rp{border:0;background:none;font-size:18px;padding:2px 4px;cursor:pointer}
 .bub.s.ok{box-shadow:inset 0 0 0 2px var(--ok)} .bub.s.no{box-shadow:inset 0 0 0 2px var(--no)}
 .cvbar{padding:10px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px}
@@ -683,7 +685,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v23";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v24";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1058,6 +1060,7 @@ function showOffer(u){const o=$("#offer");o.innerHTML="";const b=el("div","box")
   n.onclick=()=>{cvFrom="study";S.conv[u]={...(S.conv[u]||{}),skip:S.step+20};save();o.hidden=true;next();};
   y.onclick=()=>{cvFrom="study";o.hidden=true;startConv(u);};a.append(n,y);b.append(a);o.append(b);o.hidden=false;logEv("CONV_OFFER",u);}
 let CV=null;
+function cvScroll(){const l=$("#cvLog");const f=()=>{l.scrollTop=l.scrollHeight;};f();requestAnimationFrame(f);setTimeout(f,120);setTimeout(f,450);}
 function startConv(u){hush();CV={u,ls:convLines(u),i:0,ok:0,no:0,wrong:[]};logEv("CONV_START",u);
   $("#cvTitle").textContent="🎬 "+UNITS[u].title;$("#cvImg").src=custImg(u);
   const ch=document.querySelector(".lvchick svg");$("#cvChick").innerHTML=ch?ch.outerHTML:"🐥";
@@ -1065,16 +1068,16 @@ function startConv(u){hush();CV={u,ls:convLines(u),i:0,ok:0,no:0,wrong:[]};logEv
 function speaker(r){$("#cvImg").className="cvcust "+(r==="c"?"talk":"dim");$("#cvChick").className="cvchick "+(r==="s"?"talk":"dim");}
 function bubble(d){const b=el("div","bub "+d.r);const top=el("div");const ja=el("span","ja",d.ja);const rp=el("button","rp","🔊");rp.setAttribute("aria-label","다시 듣기");
   rp.onclick=()=>{hush();say(d.ja);};top.append(ja,rp);b.append(top);if(d.p)b.append(el("div","pr",d.p));const ko=el("div","ko",d.m);b.append(ko);
-  $("#cvLog").append(b);b.scrollIntoView({behavior:"smooth",block:"end"});return{b,top,ko};}
+  $("#cvLog").append(b);cvScroll();return{b,top,ko};}
 async function convStep(){const bar=$("#cvBar");bar.innerHTML="";if(!CV)return;if(CV.i>=CV.ls.length)return convEnd();
   const d=CV.ls[CV.i],t=++tok;speaker(d.r);
-  if(d.r==="c"){const x=bubble(d);x.ko.classList.add("mask");x.ko.onclick=()=>x.ko.classList.remove("mask");
+  if(d.r==="c"){const x=bubble(d);x.ko.classList.add("mask");x.b.append(el("div","cvhint","🎧 잘 듣고 속으로 뜻을 맞혀 보세요"));cvScroll();x.ko.onclick=()=>x.ko.classList.remove("mask");
     const nb=el("button","btn ok","다음 ▶");nb.onclick=()=>{hush();CV.i++;convStep();};bar.append(nb);
-    await say(d.ja);if(t!==tok)return;setTimeout(()=>x.ko.classList.remove("mask"),1200);return;}
+    await say(d.ja);if(t!==tok)return;setTimeout(()=>{x.ko.classList.remove("mask");cvScroll();},1200);return;}
   // 직원(내 차례): 한국어 먼저
-  const b=el("div","bub s");b.append(el("div","ko",d.m));if(d.tip)b.append(el("div","pr","💡 "+d.tip));$("#cvLog").append(b);b.scrollIntoView({behavior:"smooth",block:"end"});
+  const b=el("div","bub s");const mc=el("div","mic cvmic");mc.innerHTML=MIC;b.append(mc,el("div","cvhint","내 차례! 일본어로 소리 내어 말해 보세요"),el("div","ko",d.m));if(d.tip)b.append(el("div","pr","💡 "+d.tip));$("#cvLog").append(b);cvScroll();
   sayKo(d.m);
-  const rv=el("button","btn ok","일본어로 말해보고 → 정답 보기");rv.onclick=()=>{hush();b.remove();const x=bubble(d);say(d.ja);bar.innerHTML="";
+  const rv=el("button","btn ok","일본어로 말해보고 → 정답 보기");rv.onclick=()=>{hush();b.remove();const x=bubble(d);cvScroll();say(d.ja);bar.innerHTML="";
     const no=el("button","btn no","틀렸어요"),ok=el("button","btn ok","맞았어요");
     const fin=k=>{x.b.classList.add(k);convGrade(d,k);CV.i++;bar.innerHTML="";setTimeout(convStep,k==="no"?500:350);};
     no.onclick=()=>fin("no");ok.onclick=()=>fin("ok");bar.append(no,ok);};
@@ -1085,7 +1088,7 @@ function convGrade(d,k){ding(k);logEv("CONV_GRADE",d.iid,k);if(k==="ok"){CV.ok++
 function convEnd(){const u=CV.u;S.conv=S.conv||{};S.conv[u]={done:Date.now()};const tot=CV.ok+CV.no;addXp(30);save();hud();logEv("CONV_END",u,CV.ok,CV.no);
   speaker("c");const log=$("#cvLog");const b=el("div","bub s");b.append(el("div","ja","🎉 완주!"),el("div","ko",tot+"문장 중 "+CV.ok+"개 성공 · 보너스 +30 XP"));
   if(CV.wrong.length){b.append(el("div","pr","다시 볼 문장"));CV.wrong.forEach(w=>{const r=el("div","ko",w.ja+" — "+w.m);b.append(r);});}
-  log.append(b);b.scrollIntoView({behavior:"smooth",block:"end"});setTimeout(()=>ding("ok"),300);
+  log.append(b);cvScroll();setTimeout(()=>ding("ok"),300);
   const bar=$("#cvBar");bar.innerHTML="";const bk=el("button","btn ok","기본 학습으로 돌아가기");bk.onclick=closeConv;bar.append(bk);}
 let cvFrom="study";function closeConv(){hush();CV=null;$("#conv").hidden=true;tab(cvFrom);}
 $("#cvQuit").onclick=()=>{if(CV)logEv("CONV_QUIT",CV.u,CV.i);closeConv();};
