@@ -57,6 +57,33 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.conv{position:fixed;inset:0;z-index:60;background:var(--bg,#FFF8EE);display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+.cvtop{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;font-weight:700;font-size:15px}
+.cvtop button{font:inherit;font-size:14px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.cvstage{position:relative;height:30vh;min-height:190px;margin:0 14px;border-radius:22px;overflow:hidden;background:var(--amber-soft)}
+.cvcust{position:absolute;right:0;bottom:0;height:100%;width:62%;object-fit:cover;object-position:top;border-radius:0 22px 22px 0;transition:transform .25s,filter .25s}
+.cvchick{position:absolute;left:6%;bottom:6%;width:34%;max-width:150px;transition:transform .25s,filter .25s}
+.cvchick svg{width:100%;height:auto}
+.cvstage .dim{filter:saturate(.6) brightness(.85);transform:scale(.94)}
+.cvstage .talk{transform:scale(1.04)}
+.cvlog{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:84%;padding:10px 12px;border-radius:16px;font-size:16px;line-height:1.45}
+.bub.c{align-self:flex-end;background:var(--surface);border:1px solid var(--line);border-bottom-right-radius:4px}
+.bub.s{align-self:flex-start;background:var(--amber-soft);border-bottom-left-radius:4px}
+.bub .ja{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:18px}
+.bub .pr{font-size:13px;color:var(--muted)}
+.bub .ko{font-size:14px;margin-top:4px;transition:filter .4s}
+.bub .ko.mask{filter:blur(6px);cursor:pointer}
+.bub .rp{border:0;background:none;font-size:18px;padding:2px 4px;cursor:pointer}
+.bub.s.ok{box-shadow:inset 0 0 0 2px var(--ok)} .bub.s.no{box-shadow:inset 0 0 0 2px var(--no)}
+.cvbar{padding:10px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px}
+.cvbar .btn{flex:1}
+.offer{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.offer .box{background:var(--surface);border-radius:22px;padding:18px;max-width:380px;width:100%;text-align:center}
+.offer img{width:110px;height:130px;object-fit:cover;object-position:top;border-radius:16px}
+.offer h3{margin:10px 0 4px;font-size:18px}.offer p{margin:0 0 14px;color:var(--muted);font-size:14px}
+.offer .actions{display:flex;gap:10px}.offer .btn{flex:1}
+
 .pinin{width:100%;font:inherit;font-size:22px;letter-spacing:.5em;text-align:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .rank{display:flex;flex-direction:column;gap:6px}
 .rk{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);font-weight:600}
@@ -272,6 +299,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
   <section id="script" hidden>
     <p class="note">완성하면 이렇게 말하게 돼요. 줄을 누르면 들려주고, 직원 줄 아래에는 판매 노하우가 붙어 있어요.</p>
     <button class="btn ghost" style="width:100%;margin-bottom:10px" id="playAll">대화 전체 듣기</button>
+    <button class="btn ok" style="width:100%;margin-bottom:10px" id="convBtn">🎬 대화 연습 (직원 역할)</button>
     <div class="dl" id="dl"></div>
   </section>
 </div>
@@ -298,6 +326,8 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
           <path d="M84 120q12 14 24 0z" fill="#FF8A1E" stroke="#E5700A" stroke-width="2" stroke-linejoin="round"/>
           <path d="M80 182v-6M112 182v-6" stroke="#FF8A1E" stroke-width="6" stroke-linecap="round"/>
         </svg></div><div class="lvsmall">LEVEL UP</div><div class="lvnum">Lv.<span id="lvN">2</span></div><div class="lvmsg" id="lvMsg"></div></div><div id="confetti"></div></div>
+<div class="conv" id="conv" hidden><div class="cvtop"><span id="cvTitle"></span><button id="cvQuit">그만하기</button></div><div class="cvstage"><img class="cvcust" id="cvImg" alt="손님"><div class="cvchick" id="cvChick"></div></div><div class="cvlog" id="cvLog"></div><div class="cvbar" id="cvBar"></div></div>
+<div class="offer" id="offer" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -643,7 +673,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v20";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v21";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -802,7 +832,7 @@ function grade(id,kind){const _b=snap(id);setTimeout(()=>logEv("GRADE",id,kind,{
   const MS={20:"🎉 20문제 돌파! 입이 풀리기 시작했어요",50:"🔥 50문제! 오늘 제대로 하고 있어요",100:"🏅 100문제! 이 정도면 오늘 상담 거뜬해요",200:"👑 200문제! 오늘의 전설이에요"};
   const msg=MS[S.todayN]||(S.todayN>200&&S.todayN%100===0?"👑 "+S.todayN+"문제! 멈출 줄 모르네요":null);
   if(msg){S.xp+=S.todayN>=100?50:20;setTimeout(()=>{ding("ok");toast(msg);},300);}
-  $("#actbar").style.pointerEvents="none";setTimeout(()=>{$("#actbar").style.pointerEvents="";next();},kind==="no"?450:550);
+  $("#actbar").style.pointerEvents="none";setTimeout(()=>{$("#actbar").style.pointerEvents="";if(kind!=="no"&&S.todayN%8===0&&maybeOffer())return;next();},kind==="no"?450:550);
 }
 
 /* ---------- 레벨·성취도 ---------- */
@@ -982,6 +1012,56 @@ function levelUp(n){const o=$("#lvup");$("#lvN").textContent=n;
 let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
 let hiddenAt=0;document.addEventListener("visibilitychange",()=>{logEv(document.hidden?"HIDE":"BACK");if(document.hidden){hiddenAt=Date.now();flushLog();hush();}else if(me&&hiddenAt&&Date.now()-hiddenAt>30*MIN){startSession();hud();tab("study");}});
 renderProfiles();
+
+// ===== 대화 연습 =====
+const CUST=["024553_8939e0d6-df7e-406e-b567-1f1d6ef59a0e","024612_7f3374f3-bd94-4a59-bced-2355175ec307","024612_3a474781-56b0-42de-b15d-442c9ce6e52b","024553_c0bc67e9-29b2-4d82-9760-8a9b25d45f4e","024552_381e7215-b5e6-4699-8c89-1a5d272c6903","024552_ca3c9112-5e22-426a-9547-6b0d1e898a73","024612_936caade-4149-4359-8fd0-dd677625032a"].map(x=>"https://d8j0ntlcm91z4.cloudfront.net/user_3KtI32pMQ3R7HnVDVkhilxtY6yu/hf_20261119_"+x+".png");
+const custImg=u=>CUST[u%CUST.length];
+function convLines(u){const U=UNITS[u],pre=u===0?"":U.id+"-";return U.D.map(d=>({...d,iid:d.id?pre+d.id:null}));}
+const convMin=u=>Math.max(2,Math.round(convLines(u).length*20/60));
+function convReady(u){const ls=convLines(u).filter(d=>d.iid);if(!ls.length)return false;const seen=ls.filter(d=>S.st[d.iid]&&(S.st[d.iid].ok||0)>=1).length;return seen/ls.length>=0.7;}
+function maybeOffer(){S.conv=S.conv||{};const now=Date.now();
+  for(let u=0;u<UNITS.length;u++){const c=S.conv[u]||{};if(!convReady(u))continue;
+    if(c.skip&&S.step<c.skip)continue;if(c.done&&now-c.done<3*DAY)continue;
+    showOffer(u);return true;}
+  return false;}
+function showOffer(u){const o=$("#offer");o.innerHTML="";const b=el("div","box");const im=el("img");im.src=custImg(u);im.alt="손님";
+  b.append(im,el("h3",null,"“"+UNITS[u].title+"” 대화를 처음부터 끝까지 해볼까요?"),el("p",null,"약 "+convMin(u)+"분 걸려요. 직원 대사를 내가 말해요."));
+  const a=el("div","actions");const n=el("button","btn ghost","다음에요");const y=el("button","btn ok","시작할래요");
+  n.onclick=()=>{S.conv[u]={...(S.conv[u]||{}),skip:S.step+20};save();o.hidden=true;next();};
+  y.onclick=()=>{o.hidden=true;startConv(u);};a.append(n,y);b.append(a);o.append(b);o.hidden=false;logEv("CONV_OFFER",u);}
+let CV=null;
+function startConv(u){hush();CV={u,ls:convLines(u),i:0,ok:0,no:0,wrong:[]};logEv("CONV_START",u);
+  $("#cvTitle").textContent="🎬 "+UNITS[u].title;$("#cvImg").src=custImg(u);
+  const ch=document.querySelector(".lvchick svg");$("#cvChick").innerHTML=ch?ch.outerHTML:"🐥";
+  $("#cvLog").innerHTML="";$("#conv").hidden=false;convStep();}
+function speaker(r){$("#cvImg").className="cvcust "+(r==="c"?"talk":"dim");$("#cvChick").className="cvchick "+(r==="s"?"talk":"dim");}
+function bubble(d){const b=el("div","bub "+d.r);const top=el("div");const ja=el("span","ja",d.ja);const rp=el("button","rp","🔊");rp.setAttribute("aria-label","다시 듣기");
+  rp.onclick=()=>{hush();say(d.ja);};top.append(ja,rp);b.append(top);if(d.p)b.append(el("div","pr",d.p));const ko=el("div","ko",d.m);b.append(ko);
+  $("#cvLog").append(b);b.scrollIntoView({behavior:"smooth",block:"end"});return{b,top,ko};}
+async function convStep(){const bar=$("#cvBar");bar.innerHTML="";if(!CV)return;if(CV.i>=CV.ls.length)return convEnd();
+  const d=CV.ls[CV.i],t=++tok;speaker(d.r);
+  if(d.r==="c"){const x=bubble(d);x.ko.classList.add("mask");x.ko.onclick=()=>x.ko.classList.remove("mask");
+    const nb=el("button","btn ok","다음 ▶");nb.onclick=()=>{hush();CV.i++;convStep();};bar.append(nb);
+    await say(d.ja);if(t!==tok)return;setTimeout(()=>x.ko.classList.remove("mask"),1200);return;}
+  // 직원(내 차례): 한국어 먼저
+  const b=el("div","bub s");b.append(el("div","ko",d.m));if(d.tip)b.append(el("div","pr","💡 "+d.tip));$("#cvLog").append(b);b.scrollIntoView({behavior:"smooth",block:"end"});
+  sayKo(d.m);
+  const rv=el("button","btn ok","일본어로 말해보고 → 정답 보기");rv.onclick=()=>{hush();b.remove();const x=bubble(d);say(d.ja);bar.innerHTML="";
+    const no=el("button","btn no","틀렸어요"),ok=el("button","btn ok","맞았어요");
+    const fin=k=>{x.b.classList.add(k);convGrade(d,k);CV.i++;bar.innerHTML="";setTimeout(convStep,k==="no"?500:350);};
+    no.onclick=()=>fin("no");ok.onclick=()=>fin("ok");bar.append(no,ok);};
+  bar.append(rv);}
+function convGrade(d,k){ding(k);logEv("CONV_GRADE",d.iid,k);if(k==="ok"){CV.ok++;addXp(3);}else{CV.no++;CV.wrong.push(d);
+  const st=d.iid&&S.st[d.iid];if(st){st.wrong=(st.wrong||0)+1;st.ok=0;st.ivl=Math.max(MIN_IVL,st.ivl*MULT.no);st.dueStep=S.step+3;st.dueAt=null;S.todayWrong[d.iid]=(S.todayWrong[d.iid]||0)+1;}}
+  save();hud();}
+function convEnd(){const u=CV.u;S.conv=S.conv||{};S.conv[u]={done:Date.now()};const tot=CV.ok+CV.no;addXp(30);save();hud();logEv("CONV_END",u,CV.ok,CV.no);
+  speaker("c");const log=$("#cvLog");const b=el("div","bub s");b.append(el("div","ja","🎉 완주!"),el("div","ko",tot+"문장 중 "+CV.ok+"개 성공 · 보너스 +30 XP"));
+  if(CV.wrong.length){b.append(el("div","pr","다시 볼 문장"));CV.wrong.forEach(w=>{const r=el("div","ko",w.ja+" — "+w.m);b.append(r);});}
+  log.append(b);b.scrollIntoView({behavior:"smooth",block:"end"});setTimeout(()=>ding("ok"),300);
+  const bar=$("#cvBar");bar.innerHTML="";const bk=el("button","btn ok","기본 학습으로 돌아가기");bk.onclick=closeConv;bar.append(bk);}
+function closeConv(){hush();CV=null;$("#conv").hidden=true;tab("study");}
+$("#cvQuit").onclick=()=>{if(CV)logEv("CONV_QUIT",CV.u,CV.i);closeConv();};
+$("#convBtn").onclick=()=>startConv(curU());
 </script>
 </body>
 </html>
