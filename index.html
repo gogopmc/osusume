@@ -57,12 +57,14 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.uchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.uchips button{font:inherit;font-size:13px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}.uchips button.on{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}.uchips button.lk{opacity:.5}
+.lockbox{text-align:center;padding:30px 10px;color:var(--muted);font-size:15px;line-height:1.6}
 .conv{position:fixed;inset:0;z-index:60;background:var(--bg,#FFF8EE);display:flex;flex-direction:column;max-width:560px;margin:0 auto}
 .cvtop{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;font-weight:700;font-size:15px}
 .cvtop button{font:inherit;font-size:14px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .cvstage{position:relative;height:30vh;min-height:190px;margin:0 14px;border-radius:22px;overflow:hidden;background:var(--amber-soft)}
-.cvcust{position:absolute;right:0;bottom:0;height:100%;width:62%;object-fit:cover;object-position:top;border-radius:0 22px 22px 0;transition:transform .25s,filter .25s}
-.cvchick{position:absolute;left:6%;bottom:6%;width:34%;max-width:150px;transition:transform .25s,filter .25s}
+.cvcust{position:absolute;right:0;bottom:0;height:100%;width:54%;object-fit:cover;object-position:top;border-radius:0 22px 22px 0;transition:transform .25s,filter .25s}
+.cvchick{position:absolute;left:2%;bottom:2%;width:48%;max-width:230px;transition:transform .25s,filter .25s}
 .cvchick svg{width:100%;height:auto}
 .cvstage .dim{filter:saturate(.6) brightness(.85);transform:scale(.94)}
 .cvstage .talk{transform:scale(1.04)}
@@ -297,10 +299,11 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
   <section id="summary" hidden></section>
   <section id="status" hidden></section>
   <section id="script" hidden>
-    <p class="note">완성하면 이렇게 말하게 돼요. 줄을 누르면 들려주고, 직원 줄 아래에는 판매 노하우가 붙어 있어요.</p>
+    <div class="uchips" id="uchips"></div>
+    <p class="note" id="scNote">완성하면 이렇게 말하게 돼요. 줄을 누르면 들려주고, 직원 줄 아래에는 판매 노하우가 붙어 있어요.</p>
     <button class="btn ghost" style="width:100%;margin-bottom:10px" id="playAll">대화 전체 듣기</button>
     <button class="btn ok" style="width:100%;margin-bottom:10px" id="convBtn">🎬 대화 연습 (직원 역할)</button>
-    <div class="dl" id="dl"></div>
+    <div class="dl" id="dl"></div><div id="scLock" class="lockbox" hidden></div>
   </section>
 </div>
 
@@ -673,7 +676,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v21";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v22";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -975,11 +978,16 @@ function renderStatus(){
 }
 
 /* ---------- 대화문 ---------- */
-function renderScript(){const dl=$("#dl");dl.innerHTML="";DIALOG.forEach(d=>{const b=el("button","ln "+d.r);b.append(el("span","role",d.r==="c"?"손님":"직원"));
+let scU=null;const unitPct=u=>progress(ITEMS.filter(it=>it.u===u));const unitOpen=u=>unitPct(u)>=50;
+function renderScript(){if(scU==null){scU=0;for(let u=UNITS.length-1;u>=0;u--)if(unitOpen(u)){scU=u;break;}}
+  const uc=$("#uchips");uc.innerHTML="";UNITS.forEach((U,u)=>{const op=unitOpen(u);const b=el("button",(u===scU?"on ":"")+(op?"":"lk"),(op?"":"🔒 ")+(u+1)+". "+U.title);b.onclick=()=>{scU=u;renderScript();};uc.append(b);});
+  const op=unitOpen(scU);["#scNote","#playAll","#convBtn","#dl"].forEach(s=>$(s).hidden=!op);const lk=$("#scLock");lk.hidden=op;
+  if(!op){lk.textContent="🔒 이 단원은 진도 50% 이상이면 대화문이 열려요. 지금 "+unitPct(scU)+"%예요.";return;}
+  const dl=$("#dl");dl.innerHTML="";UNITS[scU].D.forEach(d=>{const b=el("button","ln "+d.r);b.append(el("span","role",d.r==="c"?"손님":"직원"));
   const tx=el("div","tx");tx.append(el("div","ja",d.ja));tx.append(el("div","pr",d.p));tx.append(el("div","mn",d.m));
   if(d.tip){const tp=el("div","tip");tp.innerHTML="<b>판매 노하우</b> ";tp.append(document.createTextNode(d.tip));tx.append(tp);}
   b.append(tx);b.onclick=()=>{hush();say(d.ja);};dl.append(b);});}
-$("#playAll").onclick=async()=>{hush();const t=++tok;for(const d of DIALOG){if(t!==tok)return;await say(d.ja);await wait(600);}};
+$("#playAll").onclick=async()=>{hush();const t=++tok;for(const d of UNITS[scU].D){if(t!==tok)return;await say(d.ja);await wait(600);}};
 
 /* ---------- navigation ---------- */
 function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").classList.toggle("withbar",name==="study");["study","status","script","summary"].forEach(x=>$("#"+x).hidden=x!==name);
@@ -1014,7 +1022,7 @@ let hiddenAt=0;document.addEventListener("visibilitychange",()=>{logEv(document.
 renderProfiles();
 
 // ===== 대화 연습 =====
-const CUST=["024553_8939e0d6-df7e-406e-b567-1f1d6ef59a0e","024612_7f3374f3-bd94-4a59-bced-2355175ec307","024612_3a474781-56b0-42de-b15d-442c9ce6e52b","024553_c0bc67e9-29b2-4d82-9760-8a9b25d45f4e","024552_381e7215-b5e6-4699-8c89-1a5d272c6903","024552_ca3c9112-5e22-426a-9547-6b0d1e898a73","024612_936caade-4149-4359-8fd0-dd677625032a"].map(x=>"https://d8j0ntlcm91z4.cloudfront.net/user_3KtI32pMQ3R7HnVDVkhilxtY6yu/hf_20261119_"+x+".png");
+const CUST=["024553_8939e0d6-df7e-406e-b567-1f1d6ef59a0e","024612_7f3374f3-bd94-4a59-bced-2355175ec307","024612_3a474781-56b0-42de-b15d-442c9ce6e52b","024553_c0bc67e9-29b2-4d82-9760-8a9b25d45f4e","024552_381e7215-b5e6-4699-8c89-1a5d272c6903","024552_ca3c9112-5e22-426a-9547-6b0d1e898a73","024612_936caade-4149-4359-8fd0-dd677625032a"].map((x,i)=>"img/c"+(i+1)+".jpg");
 const custImg=u=>CUST[u%CUST.length];
 function convLines(u){const U=UNITS[u],pre=u===0?"":U.id+"-";return U.D.map(d=>({...d,iid:d.id?pre+d.id:null}));}
 const convMin=u=>Math.max(2,Math.round(convLines(u).length*20/60));
@@ -1027,8 +1035,8 @@ function maybeOffer(){S.conv=S.conv||{};const now=Date.now();
 function showOffer(u){const o=$("#offer");o.innerHTML="";const b=el("div","box");const im=el("img");im.src=custImg(u);im.alt="손님";
   b.append(im,el("h3",null,"“"+UNITS[u].title+"” 대화를 처음부터 끝까지 해볼까요?"),el("p",null,"약 "+convMin(u)+"분 걸려요. 직원 대사를 내가 말해요."));
   const a=el("div","actions");const n=el("button","btn ghost","다음에요");const y=el("button","btn ok","시작할래요");
-  n.onclick=()=>{S.conv[u]={...(S.conv[u]||{}),skip:S.step+20};save();o.hidden=true;next();};
-  y.onclick=()=>{o.hidden=true;startConv(u);};a.append(n,y);b.append(a);o.append(b);o.hidden=false;logEv("CONV_OFFER",u);}
+  n.onclick=()=>{cvFrom="study";S.conv[u]={...(S.conv[u]||{}),skip:S.step+20};save();o.hidden=true;next();};
+  y.onclick=()=>{cvFrom="study";o.hidden=true;startConv(u);};a.append(n,y);b.append(a);o.append(b);o.hidden=false;logEv("CONV_OFFER",u);}
 let CV=null;
 function startConv(u){hush();CV={u,ls:convLines(u),i:0,ok:0,no:0,wrong:[]};logEv("CONV_START",u);
   $("#cvTitle").textContent="🎬 "+UNITS[u].title;$("#cvImg").src=custImg(u);
@@ -1059,9 +1067,9 @@ function convEnd(){const u=CV.u;S.conv=S.conv||{};S.conv[u]={done:Date.now()};co
   if(CV.wrong.length){b.append(el("div","pr","다시 볼 문장"));CV.wrong.forEach(w=>{const r=el("div","ko",w.ja+" — "+w.m);b.append(r);});}
   log.append(b);b.scrollIntoView({behavior:"smooth",block:"end"});setTimeout(()=>ding("ok"),300);
   const bar=$("#cvBar");bar.innerHTML="";const bk=el("button","btn ok","기본 학습으로 돌아가기");bk.onclick=closeConv;bar.append(bk);}
-function closeConv(){hush();CV=null;$("#conv").hidden=true;tab("study");}
+let cvFrom="study";function closeConv(){hush();CV=null;$("#conv").hidden=true;tab(cvFrom);}
 $("#cvQuit").onclick=()=>{if(CV)logEv("CONV_QUIT",CV.u,CV.i);closeConv();};
-$("#convBtn").onclick=()=>startConv(curU());
+$("#convBtn").onclick=()=>{cvFrom="script";startConv(scU);};
 </script>
 </body>
 </html>
