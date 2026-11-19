@@ -1,0 +1,46 @@
+name: azure-tts
+on:
+  push:
+    paths: ['tts/list.tsv', '.github/workflows/tts.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: tts
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: synth
+        env:
+          KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+        run: |
+          python3 - <<'PY'
+          import os,urllib.request,html,time,sys
+          key=os.environ['KEY'];reg=os.environ.get('REGION') or 'koreacentral'
+          url=f'https://{reg}.tts.speech.microsoft.com/cognitiveservices/v1'
+          V={'ja':('ja-JP','ja-JP-NanamiNeural'),'ko':('ko-KR','ko-KR-SunHiNeural')}
+          os.makedirs('audio',exist_ok=True);n=fail=0
+          for line in open('tts/list.tsv',encoding='utf-8'):
+              p=line.rstrip('\n').split('\t')
+              if len(p)<3: continue
+              fid,lang,text=p[0],p[1],p[2];rate=p[3] if len(p)>3 and p[3] else '-8%'
+              out=f'audio/{fid}.mp3'
+              if os.path.exists(out): continue
+              loc,voice=V[lang]
+              ssml=f"<speak version='1.0' xml:lang='{loc}'><voice name='{voice}'><prosody rate='{rate}'>{html.escape(text)}</prosody></voice></speak>"
+              req=urllib.request.Request(url,data=ssml.encode(),headers={'Ocp-Apim-Subscription-Key':key,'Content-Type':'application/ssml+xml','X-Microsoft-OutputFormat':'audio-24khz-48kbitrate-mono-mp3','User-Agent':'osusume'})
+              for t in range(4):
+                  try:
+                      d=urllib.request.urlopen(req,timeout=30).read();open(out,'wb').write(d);n+=1;break
+                  except Exception as e:
+                      print('ERR',fid,e);time.sleep(3*(t+1))
+              else: fail+=1
+              time.sleep(0.35)
+          print('made',n,'fail',fail)
+          if n==0 and fail: sys.exit(1)
+          PY
+          git config user.name Claude; git config user.email noreply@anthropic.com
+          git add audio; git diff --cached --quiet && exit 0
+          git commit -m "애저 음성 생성"; git pull --rebase; git push
