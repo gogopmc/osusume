@@ -57,6 +57,8 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.namein{width:100%;font:inherit;font-size:18px;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.newhint{margin:10px 0 0;font-size:12px;color:var(--muted);text-align:left;width:100%}
 .pinin{width:100%;font:inherit;font-size:22px;letter-spacing:.5em;text-align:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .rank{display:flex;flex-direction:column;gap:6px}
 .rk{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);font-weight:600}
@@ -238,14 +240,10 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
   <div class="wordmark" style="margin-top:6px">TRINITY</div>
   <div class="wordmark2">おすすめ</div>
   <div class="wordmark3">트리니티 오스스메 · 매장 상담 일본어</div>
-  <div class="who">
-    <h3>누가 공부하나요?</h3>
-    <div class="plist" id="plist"></div>
-  </div>
-  <div class="who" id="pinBox" hidden><h3 id="pinLabel">비밀번호 4자리</h3><input id="pin" class="pinin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-label="비밀번호 4자리"></div>
-  <div class="who" style="margin-top:18px"><h3>처음이세요?</h3>
-    <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
-  </div>
+  <div class="who"><h3>이름</h3><input id="nameIn" class="namein" placeholder="이름을 입력하세요" maxlength="12" autocomplete="username" aria-label="이름"></div>
+  <div class="who" style="margin-top:14px"><h3>비밀번호 4자리</h3><input id="pin" class="pinin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-label="비밀번호 4자리"></div>
+  <p class="newhint">처음이면 이름과 새 비밀번호 숫자 4자리를 넣으면 바로 등록돼요.</p>
+  <div hidden><div id="plist"></div><div id="pinBox"><span id="pinLabel"></span></div><input id="newName"><button id="addBtn"></button></div>
   <button class="go" id="goBtn" disabled>시작하기</button>
 </section>
 
@@ -643,7 +641,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v17";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v18";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -668,7 +666,7 @@ function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=remoteReady?docFo
 let remoteReady=false;
 async function fetchRemote(){const d=docFor(me);if(!d)return null;try{const sn=await d.get();if(!sn.exists)return null;const raw=sn.data();if(raw.json){try{return JSON.parse(raw.json);}catch(e){return null;}}return raw;}catch(e){logEv("ERR","fetch "+String(e.message).slice(0,120));return null;}}
 async function pullRemote(){const d=docFor(me);if(!d)return;try{const sn=await d.get();if(sn.exists){const raw=sn.data();let r=raw;try{if(raw.json)r=JSON.parse(raw.json);}catch(e){}if(r&&r.v===1&&(r.updated||0)>(S.updated||0)){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);hud();if(!cur||cur.type==="done")next();}}else if(S.updated)save();}catch(e){}}
-function renderProfiles(){const pl=$("#plist");pl.innerHTML="";profiles.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});needPin();$("#goBtn").disabled=!picked;}
+function renderProfiles(){picked=($("#nameIn").value||"").trim()||null;$("#goBtn").disabled=!picked;return;const pl=$("#plist");pl.innerHTML="";profiles.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});needPin();$("#goBtn").disabled=!picked;}
 const PINKEY="osusume-pins";let pins=lsGet(PINKEY,{});
 function needPin(){const has=picked&&pins[picked];$("#pinBox").hidden=!picked;$("#pinLabel").textContent=has?picked+"님 비밀번호 4자리":"새 비밀번호 4자리 정하기 (숫자)";}
 function addProfile(){const n=$("#newName").value.trim();if(!n)return;if(!profiles.includes(n)){profiles.push(n);lsSet(PKEY,profiles);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});}picked=n;$("#newName").value="";renderProfiles();}
@@ -920,8 +918,8 @@ function renderStatus(){
   if(docBase&&(!window.__rkT||Date.now()-window.__rkT>60000)){window.__rkT=Date.now();Promise.all(profiles.filter(n=>n!==me).map(n=>docFor(n).get().then(sn=>{if(sn.exists)window.__rk[n]={mxp:sn.data().mxp||{}};}).catch(()=>{}))).then(()=>{if(!$("#status").hidden)renderStatus();});}
   const pr=el("div","panel");pr.append(el("h3",null,(new Date().getMonth()+1)+"월 순위"));pr.append(el("div","sub","이번 달에 얻은 경험치 기준이에요. 매달 1일에 새로 시작해요."));
   const rk=el("div","rank");const myI=rows.findIndex(r=>r.n===me);
-  rows.slice(0,2).forEach((r,i)=>{const d=el("div","rk"+(r.n===me?" me":""));d.append(el("span","no",(i+1)+"위"));d.append(el("span",null,r.n));d.append(el("span",null,r.x+" XP"));rk.append(d);});
-  if(myI>=2){const d=el("div","rk me");d.append(el("span","no",(myI+1)+"위"));d.append(el("span",null,"나 ("+me+")"));d.append(el("span",null,rows[myI].x+" XP"));rk.append(d);}
+  rows.slice(0,3).forEach((r,i)=>{const d=el("div","rk"+(r.n===me?" me":""));d.append(el("span","no",(i+1)+"위"));d.append(el("span",null,r.n));d.append(el("span",null,r.x+" XP"));rk.append(d);});
+  if(myI>=3){const d=el("div","rk me");d.append(el("span","no",(myI+1)+"위"));d.append(el("span",null,"나 ("+me+")"));d.append(el("span",null,rows[myI].x+" XP"));rk.append(d);}
   pr.append(rk);v.append(pr);
   UNITS.forEach((U,u)=>{const UI=ITEMS.filter(i=>i.u===u);
   const p0=el("div","panel");const row=el("div","lessonrow");row.append(el("span",null,(u===curU()?"▶ ":"")+U.title));row.append(el("span",null,progress(UI)+"%"));p0.append(row);
@@ -955,8 +953,13 @@ function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").clas
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
 $("#quitBtn").onclick=showSummary;
 function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;renderProfiles();}
-$("#addBtn").onclick=addProfile;$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#goBtn").click();});$("#newName").addEventListener("keydown",e=>{if(e.key==="Enter")addProfile();});
-$("#goBtn").onclick=async()=>{if(!picked)return;const pv=$("#pin").value.trim();
+$("#nameIn").value=lsGet("osusume-last","")||"";$("#nameIn").addEventListener("input",renderProfiles);$("#nameIn").addEventListener("keydown",e=>{if(e.key==="Enter")$("#pin").focus();});$("#addBtn").onclick=addProfile;$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#goBtn").click();});$("#newName").addEventListener("keydown",e=>{if(e.key==="Enter")addProfile();});
+$("#goBtn").onclick=async()=>{renderProfiles();if(!picked)return;const pv=$("#pin").value.trim();
+  if(!/^\d{4}$/.test(pv)){toast("비밀번호 숫자 4자리를 입력해 주세요");return;}
+  // 서버의 이름·비밀번호 목록을 받은 뒤에 확인 (다른 기기에서 처음 들어올 때 비밀번호가 덮어써지지 않게)
+  if(docBase&&!window.__pd){const gb=$("#goBtn");gb.disabled=true;gb.textContent="확인 중…";for(let k=0;k<35&&!window.__pd;k++)await new Promise(r=>setTimeout(r,200));gb.disabled=false;gb.textContent="시작하기";}
+  if(!profiles.includes(picked)){profiles.push(picked);lsSet(PKEY,profiles);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});toast(picked+"님, 새로 등록됐어요");}
+  lsSet("osusume-last",picked);
   if(!/^\d{4}$/.test(pv)){toast("비밀번호 숫자 4자리를 입력해 주세요");return;}
   if(pins[picked]&&pins[picked]!==pv){toast("비밀번호가 맞지 않아요");$("#pin").value="";return;}
   if(!pins[picked]){pins[picked]=pv;lsSet(PINKEY,pins);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});toast("비밀번호를 정했어요. 다음부터 이 번호로 들어와요");}
