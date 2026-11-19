@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
+          sudo apt-get install -y imagemagick >/dev/null 2>&1 || true
           mkdir -p img; changed=0
           while read n x; do
             [ -z "$n" ] && continue
