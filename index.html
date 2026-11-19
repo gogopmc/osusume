@@ -57,6 +57,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.chg{font:inherit;font-size:12px;color:var(--muted);background:none;border:0;text-decoration:underline;padding:6px 4px;cursor:pointer;align-self:center}
 .cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ccard{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;text-align:left;cursor:pointer}.ccard img,.ccard .qm{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:12px;display:block}.ccard .qm{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--muted);background:var(--line)}.ccard.lk img{filter:grayscale(1) brightness(.75)}.ccard .ct{font-weight:700;font-size:14px;margin-top:6px}.ccard .cs{font-size:12px;color:var(--muted);margin-top:2px}
 .schead{display:flex;align-items:center;gap:10px;margin-bottom:8px}.schead img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top}.backb{font:inherit;font-size:13px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 #convBtn:disabled{opacity:.55}
@@ -278,7 +279,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
     <div class="plist" id="plist"></div>
   </div>
   <div class="who" id="pinBox" hidden><h3 id="pinLabel">비밀번호 4자리</h3><input id="pin" class="pinin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-label="비밀번호 4자리"></div>
-  <div class="who" style="margin-top:14px;font-size:12px;opacity:.75"><h3 style="font-size:12px;margin:0 0 4px">처음이세요?</h3>
+  <div class="who" id="newWho" style="margin-top:14px;font-size:12px;opacity:.75"><h3 style="font-size:12px;margin:0 0 4px">처음이세요?</h3>
     <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
   </div>
   <button class="go" id="goBtn" disabled>시작하기</button>
@@ -685,7 +686,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v24";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v25";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -710,7 +711,11 @@ function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=remoteReady?docFo
 let remoteReady=false;
 async function fetchRemote(){const d=docFor(me);if(!d)return null;try{const sn=await d.get();if(!sn.exists)return null;const raw=sn.data();if(raw.json){try{return JSON.parse(raw.json);}catch(e){return null;}}return raw;}catch(e){logEv("ERR","fetch "+String(e.message).slice(0,120));return null;}}
 async function pullRemote(){const d=docFor(me);if(!d)return;try{const sn=await d.get();if(sn.exists){const raw=sn.data();let r=raw;try{if(raw.json)r=JSON.parse(raw.json);}catch(e){}if(r&&r.v===1&&(r.updated||0)>(S.updated||0)){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);hud();if(!cur||cur.type==="done")next();}}else if(S.updated)save();}catch(e){}}
-function renderProfiles(){const pl=$("#plist");pl.innerHTML="";profiles.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});needPin();$("#goBtn").disabled=!picked;}
+let showAll=false;
+function renderProfiles(){const pl=$("#plist");pl.innerHTML="";const last=lsGet("osusume-last","");
+  const solo=!showAll&&last&&profiles.includes(last);if(solo&&!picked)picked=last;
+  $("#newWho").hidden=!!solo;const lst=solo?[last]:profiles;
+  lst.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});if(solo){const c=el("button","chg","사용자 변경");c.onclick=()=>{showAll=true;picked=null;$("#pin").value="";renderProfiles();};pl.append(c);}needPin();$("#goBtn").disabled=!picked;if(solo)setTimeout(()=>{try{$("#pin").focus();}catch(e){}},50);}
 const PINKEY="osusume-pins";let pins=lsGet(PINKEY,{});
 function needPin(){const has=picked&&pins[picked];$("#pinBox").hidden=!picked;$("#pinLabel").textContent=has?picked+"님 비밀번호 4자리":"새 비밀번호 4자리 정하기 (숫자)";}
 function addProfile(){const n=$("#newName").value.trim();if(!n)return;if(!profiles.includes(n)){profiles.push(n);lsSet(PKEY,profiles);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});}picked=n;$("#newName").value="";renderProfiles();}
@@ -1016,9 +1021,9 @@ function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").clas
   if(name==="status")renderStatus();if(name==="script")renderScript();if(name==="study"){if(!cur||cur.type==="done")next();else show(cur);}hud();}
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
 $("#quitBtn").onclick=showSummary;
-function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;renderProfiles();}
+function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;showAll=false;picked=null;renderProfiles();}
 $("#addBtn").onclick=addProfile;$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#goBtn").click();});$("#newName").addEventListener("keydown",e=>{if(e.key==="Enter")addProfile();});
-$("#goBtn").onclick=async()=>{if(!picked)return;const pv=$("#pin").value.trim();
+$("#goBtn").onclick=async()=>{if(!picked)return;lsSet("osusume-last",picked);const pv=$("#pin").value.trim();
   if(!/^\d{4}$/.test(pv)){toast("비밀번호 숫자 4자리를 입력해 주세요");return;}
   if(pins[picked]&&pins[picked]!==pv){toast("비밀번호가 맞지 않아요");$("#pin").value="";return;}
   if(!pins[picked]){pins[picked]=pv;lsSet(PINKEY,pins);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});toast("비밀번호를 정했어요. 다음부터 이 번호로 들어와요");}
