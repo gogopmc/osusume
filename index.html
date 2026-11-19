@@ -58,7 +58,9 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
 .chg{font:inherit;font-size:12px;color:var(--muted);background:none;border:0;text-decoration:underline;padding:6px 4px;cursor:pointer;align-self:center}
-.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ccard{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;text-align:left;cursor:pointer}.ccard img,.ccard .qm{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:12px;display:block}.ccard .qm{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--muted);background:var(--line)}.cimg{position:relative}.cimg .lock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:46px;opacity:.75;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ccard{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;text-align:left;cursor:pointer}.ccard img,.ccard .qm{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:12px;display:block}.ccard .qm{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--muted);background:var(--line)}.cimg{position:relative;overflow:hidden;border-radius:12px}.ccard .cimg img.blur{filter:blur(14px) grayscale(.4) brightness(.9);transform:scale(1.15)}.cimg .qmk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:64px;font-weight:900;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.medal{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:12px!important;font-weight:900;color:#4a3300;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.25)}.medal.m1{background:radial-gradient(circle at 35% 30%,#FFF3B0,#F2C230 60%,#C9971A)}.medal.m2{background:radial-gradient(circle at 35% 30%,#FFFFFF,#C9CED6 60%,#9097A3);color:#2f3540}.medal.m3{background:radial-gradient(circle at 35% 30%,#FFE1C4,#D4894A 60%,#A4602B);color:#3d1f08}
+.cimg{position:relative}.cimg .lock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:46px;opacity:.75;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 .ccard.lk img{filter:grayscale(1) brightness(.75)}.ccard .ct{font-weight:700;font-size:14px;margin-top:6px}.ccard .cs{font-size:12px;color:var(--muted);margin-top:2px}
 .schead{display:flex;align-items:center;gap:10px;margin-bottom:8px}.schead img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top}.backb{font:inherit;font-size:13px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 #convBtn:disabled{opacity:.55}
@@ -810,7 +812,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v26";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v27";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1097,7 +1099,7 @@ function renderStatus(){
   if(docBase&&(!window.__rkT||Date.now()-window.__rkT>60000)){window.__rkT=Date.now();Promise.all(profiles.filter(n=>n!==me).map(n=>docFor(n).get().then(sn=>{if(sn.exists)window.__rk[n]={mxp:sn.data().mxp||{}};}).catch(()=>{}))).then(()=>{if(!$("#status").hidden)renderStatus();});}
   const pr=el("div","panel");pr.append(el("h3",null,(new Date().getMonth()+1)+"월 순위"));pr.append(el("div","sub","이번 달에 얻은 경험치 기준이에요. 매달 1일에 새로 시작해요."));
   const rk=el("div","rank");const myI=rows.findIndex(r=>r.n===me);
-  rows.slice(0,3).forEach((r,i)=>{const d=el("div","rk"+(r.n===me?" me":""));d.append(el("span","no",(i+1)+"위"));d.append(el("span",null,r.n));d.append(el("span",null,r.x+" XP"));rk.append(d);});
+  rows.slice(0,3).forEach((r,i)=>{const d=el("div","rk"+(r.n===me?" me":""));d.append(el("span","no medal m"+(i+1),(i+1)+"위"));d.append(el("span",null,r.n));d.append(el("span",null,r.x+" XP"));rk.append(d);});
   if(myI>=3){const d=el("div","rk me");d.append(el("span","no",(myI+1)+"위"));d.append(el("span",null,"나 ("+me+")"));d.append(el("span",null,rows[myI].x+" XP"));rk.append(d);}
   pr.append(rk);v.append(pr);
   UNITS.forEach((U,u)=>{const UI=ITEMS.filter(i=>i.u===u);
@@ -1127,7 +1129,7 @@ function renderScript(){const gal=$("#uchips");const det=$("#scDetail");
   if(scU==null||!unitOpen(scU)){scU=null;det.hidden=true;gal.hidden=false;gal.innerHTML="";
     gal.append(el("p","note","손님을 골라 들어가요. 단원을 100% 익히면 대화문이 열려요."));
     const g=el("div","cgrid");UNITS.forEach((U,u)=>{const st=unitStarted(u),op=unitOpen(u);const c=el("button","ccard"+(op?"":" lk"));
-      if(st){const w=el("div","cimg");const im=el("img");im.src=custImg(u);im.alt="";w.append(im);if(!op)w.append(el("span","lock","🔒"));c.append(w);}else c.append(el("div","qm","?"));
+      if(st){const w=el("div","cimg");const im=el("img");im.src=custImg(u);im.alt="";w.append(im);if(!op)w.append(el("span","lock","🔒"));c.append(w);}else{const w=el("div","cimg");const im=el("img");im.src=custImg(u);im.alt="";im.className="blur";w.append(im,el("span","qmk","?"));c.append(w);}
       c.append(el("div","ct",st?U.title:"???"));c.append(el("div","cs",!st?"아직 만나지 않은 손님":op?(convOpen(u)?"🎬 실전 연습 가능":"대화문 열람 가능"):"익힘 "+learnPct(UI_(u))+"%"));
       c.onclick=()=>{if(!st){toast("이 단원을 시작하면 손님이 공개돼요");return;}if(!op){toast("익힘 100%가 되면 대화문이 열려요 (지금 "+learnPct(UI_(u))+"%)");return;}scU=u;renderScript();};g.append(c);});
     gal.append(g);return;}
