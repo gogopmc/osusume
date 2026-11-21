@@ -57,6 +57,16 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.tipline{margin:14px 6px 0;font-size:12.5px;line-height:1.5;color:var(--muted);text-align:center;min-height:2.4em}
+.cardwrap{position:relative}.flag{position:absolute;bottom:8px;right:8px;border:0;background:none;font-size:15px;opacity:.45;padding:6px;cursor:pointer;z-index:2}.flag:hover{opacity:1}
+.rpsheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.rpsheet .box{background:var(--surface);color:var(--ink);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+.rpsheet h3{margin:0 0 4px;font-size:16px}.rpsheet .q{font-size:13px;color:var(--muted);margin-bottom:12px}
+.rpsheet .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.rpsheet .opts button{font:inherit;font-size:14px;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.rpsheet .opts button.on{border-color:var(--amber);background:var(--amber-soft);color:var(--amber)}
+.rpsheet input{width:100%;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-bottom:12px;box-sizing:border-box}
+.rpsheet .row{display:flex;gap:10px}.rpsheet .row .btn{flex:1}
 .chg{font:inherit;font-size:12px;color:var(--muted);background:none;border:0;text-decoration:underline;padding:6px 4px;cursor:pointer;align-self:center}
 .cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ccard{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;text-align:left;cursor:pointer}.ccard img,.ccard .qm{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:12px;display:block}.ccard .qm{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--muted);background:var(--line)}.cimg{position:relative;overflow:hidden;border-radius:12px}.ccard .cimg img.blur{filter:blur(14px) grayscale(.4) brightness(.9);transform:scale(1.15)}.cimg .qmk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:64px;font-weight:900;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45)}
 .medal{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:12px!important;font-weight:900;color:#4a3300;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.25)}.medal.m1{background:radial-gradient(circle at 35% 30%,#FFF3B0,#F2C230 60%,#C9971A)}.medal.m2{background:radial-gradient(circle at 35% 30%,#FFFFFF,#C9CED6 60%,#9097A3);color:#2f3540}.medal.m3{background:radial-gradient(circle at 35% 30%,#FFE1C4,#D4894A 60%,#A4602B);color:#3d1f08}
@@ -286,6 +296,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
     <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
   </div>
   <button class="go" id="goBtn" disabled>시작하기</button>
+  <p class="tipline" id="tipline"></p>
 </section>
 
 <div class="app" id="mainView" hidden>
@@ -303,7 +314,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
 
   <section id="study">
     <div class="stages" aria-hidden="true"><span id="sgW">단어</span><span id="sgS">문장</span><span id="sgD">대화</span></div>
-    <div class="card" id="card"></div>
+    <div class="cardwrap"><div class="card" id="card"></div><button class="flag" id="flagBtn" aria-label="오류 신고" title="오류 신고" hidden>🚩</button></div>
   </section>
 
   <section id="summary" hidden></section>
@@ -812,7 +823,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v28";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v29";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1025,6 +1036,7 @@ function show(c){
   if(c.id&&c.type!=="done"&&c.type!=="intro"&&guard<4){const it=BY[c.id];const rec=S.recent||[];
     if(rec.some(r=>r.id===c.id||r.ja===it.ja)||(S.st[c.id]&&S.st[c.id].kn&&sessN[c.id]>=99)){logEv("GUARD",c.id,c.type,c.why||"");guard++;if(S.st[c.id])S.st[c.id].seen=S.step;return next();}}
   guard=0;
+  window.__curId=(c.id&&c.type!=="done")?c.id:null;try{$("#flagBtn").hidden=!window.__curId;}catch(e){}
   if(c.id&&c.type!=="done"){S.recent=[{id:c.id,ja:BY[c.id].ja},...(S.recent||[])].slice(0,2);
     S.dbg=[[Date.now(),S.step,c.id,c.type,c.why||""],...(S.dbg||[])].slice(0,60);
     logEv("SHOW",c.id,c.type,c.why||"",c.again?"again":"",c.chain||"",{retryQ:retryQ.map(x=>x.id+"@"+x.at),st:snap(c.id),sessN:sessN[c.id]||0});markShown(BY[c.id]);hardHist.push(hard(BY[c.id]));unitHist.push(BY[c.id].u);typeHist.push(BY[c.id].t);}
@@ -1148,7 +1160,7 @@ function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").clas
   if(name==="status")renderStatus();if(name==="script")renderScript();if(name==="study"){if(!cur||cur.type==="done")next();else show(cur);}hud();}
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
 $("#quitBtn").onclick=showSummary;
-function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;showAll=false;picked=null;renderProfiles();}
+function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;showAll=false;picked=null;renderProfiles();try{showTip()}catch(e){}}
 $("#addBtn").onclick=addProfile;$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#goBtn").click();});$("#newName").addEventListener("keydown",e=>{if(e.key==="Enter")addProfile();});
 $("#goBtn").onclick=async()=>{if(!picked)return;lsSet("osusume-last",picked);const pv=$("#pin").value.trim();
   if(!/^\d{4}$/.test(pv)){toast("비밀번호 숫자 4자리를 입력해 주세요");return;}
@@ -1226,6 +1238,57 @@ let cvFrom="study";function closeConv(){hush();CV=null;$("#conv").hidden=true;ta
 $("#cvQuit").onclick=()=>{if(CV)logEv("CONV_QUIT",CV.u,CV.i);closeConv();};
 $("#scBack").onclick=()=>{hush();scU=null;renderScript();};
 $("#convBtn").onclick=()=>{cvFrom="script";startConv(scU);};
+
+// ===== 첫 화면 팁 =====
+const TIPS=["💬 오늘 배운 한 문장, 매장에서 꼭 한 번 써보세요. 배운 말이 진짜 내 말이 돼요.",
+"🌱 하루 10분도 충분해요. 매일 조금씩이 한 번에 몰아서보다 훨씬 오래 남아요.",
+"😊 틀려도 괜찮아요. 손님은 발음보다 말을 걸어준 마음을 기억해요.",
+"🔁 '틀렸어요'를 누르는 건 실패가 아니라 복습 예약이에요.",
+"🗣️ 눈으로만 보지 말고 꼭 소리 내서 말해보세요. 입이 기억해야 매장에서 나와요.",
+"⭐ 손님이 「日本語上手ですね!」라고 하면 성공이에요. 그 말을 들을 때까지!",
+"🏪 교과서 일본어가 아니라, 약국 카운터에서 진짜 쓰는 말만 모았어요.",
+"⌨️ 키보드가 있다면 → 맞았어요, ← 틀렸어요, ↑ 다시 듣기, ↓ 이미 알아요",
+"🎧 블루투스 스피커나 이어폰을 연결하면 다음곡은 맞았어요, 이전곡은 틀렸어요, 재생 버튼은 다시 듣기예요.",
+"🔊 말풍선의 스피커를 누르면 몇 번이든 다시 들을 수 있어요.",
+"🎬 단원을 다 익히면 대화문 탭에서 손님을 만나 실전 연습을 할 수 있어요.",
+"🤔 이미 아는 말은 '이미 알아요'를 누르세요. 덜 자주 나와서 모르는 말에 더 집중할 수 있어요.",
+"⏸️ 바쁠 땐 '그만할래요'를 누르세요. 진도는 자동으로 저장되고 다음에 이어서 해요.",
+"🚩 발음이나 뜻이 이상하면 🚩를 눌러 알려주세요. 바로 고칠게요."];
+function showTip(){try{let i=Math.floor(Math.random()*TIPS.length);const last=+lsGet("osusume-tip",-1);if(i===last)i=(i+1)%TIPS.length;lsSet("osusume-tip",i);$("#tipline").textContent=TIPS[i];}catch(e){}}
+showTip();
+
+// ===== 키보드 · 블루투스 버튼 =====
+const vis=b=>b&&b.offsetParent!==null&&!b.disabled;
+function visBtns(){const scope=[...document.querySelectorAll(".offer:not([hidden]) button,.rpsheet button,#conv:not([hidden]) #cvBar button,#actin button,#card button")];return scope.filter(vis);}
+function findBtn(re){return visBtns().find(b=>re.test(b.textContent));}
+function keyAct(k){if(!$("#startView").hidden)return false;
+  if(k==="ok"){const b=findBtn(/^맞았어요/);if(b){b.click();return true;}}
+  if(k==="no"){const b=findBtn(/^틀렸어요/);if(b){b.click();return true;}}
+  if(k==="known"){const b=visBtns().find(b=>b.classList.contains("known"));if(b){b.click();return true;}}
+  if(k==="replay"){if(CV){const r=[...document.querySelectorAll("#cvLog .rp")].pop();if(r){r.click();return true;}}
+    const r=visBtns().find(b=>b.classList.contains("replay"));if(r){r.click();return true;}
+    if(window.__curId&&BY[window.__curId]){hush();say(BY[window.__curId].ja);return true;}}
+  if(k==="primary"){const bs=visBtns().filter(b=>!/^(맞았어요|틀렸어요)/.test(b.textContent)&&!b.classList.contains("known")&&!b.classList.contains("replay")&&!b.classList.contains("rp"));
+    if(findBtn(/^맞았어요/))return false;const b=bs[bs.length-1];if(b){b.click();return true;}}
+  return false;}
+document.addEventListener("keydown",e=>{const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"))return;if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const m={ArrowRight:"ok",ArrowLeft:"no",ArrowUp:"replay",ArrowDown:"known"," ":"primary",Enter:"primary"}[e.key];
+  if(m&&keyAct(m))e.preventDefault();});
+try{if("mediaSession" in navigator){const ms=navigator.mediaSession;ms.metadata=new MediaMetadata({title:"트리니티 오스스메",artist:"일본어 학습"});
+  const H={nexttrack:()=>keyAct("ok"),previoustrack:()=>keyAct("no"),play:()=>keyAct("replay"),pause:()=>keyAct("replay"),seekforward:()=>keyAct("ok"),seekbackward:()=>keyAct("no")};
+  for(const [a,f] of Object.entries(H)){try{ms.setActionHandler(a,f);}catch(e){}}}}catch(e){}
+
+// ===== 오류 신고 =====
+function openReport(){const id=window.__curId;if(!id)return;const it=BY[id];const sh=el("div","rpsheet");const box=el("div","box");
+  box.append(el("h3",null,"🚩 이 문제에 오류가 있나요?"),el("div","q",it.ja+" — "+it.m));
+  const op=el("div","opts");let pick=null;["발음이 이상해요","뜻이 이상해요","일본어가 이상해요","기타"].forEach(t=>{const b=el("button",null,t);b.onclick=()=>{pick=t;[...op.children].forEach(x=>x.classList.toggle("on",x===b));};op.append(b);});
+  const memo=el("input");memo.placeholder="메모 (선택)";memo.maxLength=200;
+  const row=el("div","row");const c=el("button","btn ghost","취소"),s=el("button","btn ok","보내기");
+  c.onclick=()=>sh.remove();sh.onclick=e=>{if(e.target===sh)sh.remove();};
+  s.onclick=async()=>{if(!pick){toast("사유를 하나 골라주세요");return;}const rec={name:me||"",id,ja:it.ja,m:it.m,unit:(UNITS[it.u]||{}).title||"",reason:pick,memo:memo.value.trim(),at:Date.now(),ver:APP_VER,done:false};
+    sh.remove();logEv("REPORT",id,pick);try{if(docBase)await docBase.doc("osu-rep-"+Date.now()+"-"+ukey(me||"x")).set(rec);toast("신고 고마워요! 확인해서 고칠게요");}catch(e){toast("전송 실패, 잠시 후 다시 해주세요");}};
+  row.append(c,s);box.append(op,memo,row);sh.append(box);document.body.append(sh);}
+$("#flagBtn").onclick=openReport;
 </script>
 </body>
 </html>
