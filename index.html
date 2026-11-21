@@ -823,7 +823,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v30";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v31";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1248,7 +1248,7 @@ const TIPS=["💬 오늘 배운 한 문장, 매장에서 꼭 한 번 써보세�
 "⭐ 손님이 「日本語上手ですね!」라고 하면 성공이에요. 그 말을 들을 때까지!",
 "🏪 교과서 일본어가 아니라, 약국 카운터에서 진짜 쓰는 말만 모았어요.",
 "⌨️ 키보드가 있다면 → 맞았어요, ← 틀렸어요, ↑ 다시 듣기, ↓ 이미 알아요",
-"🎧 블루투스 스피커나 이어폰을 연결하면 다음곡은 맞았어요, 이전곡은 틀렸어요, 재생 버튼은 다시 듣기예요.",
+"🎧 블루투스 스피커나 이어폰을 연결하면 다음곡은 맞았어요·넘어가기, 이전곡은 틀렸어요·다시 듣기예요.",
 "🔊 말풍선의 스피커를 누르면 몇 번이든 다시 들을 수 있어요.",
 "🎬 단원을 다 익히면 대화문 탭에서 손님을 만나 실전 연습을 할 수 있어요.",
 "🤔 이미 아는 말은 '이미 알아요'를 누르세요. 덜 자주 나와서 모르는 말에 더 집중할 수 있어요.",
@@ -1275,7 +1275,8 @@ document.addEventListener("keydown",e=>{const t=e.target;if(t&&(t.tagName==="INP
   const m={ArrowRight:"ok",ArrowLeft:"no",ArrowUp:"replay",ArrowDown:"known"," ":"primary",Enter:"primary"}[e.key];
   if(m&&keyAct(m))e.preventDefault();});
 try{if("mediaSession" in navigator){const ms=navigator.mediaSession;ms.metadata=new MediaMetadata({title:"트리니티 오스스메",artist:"일본어 학습"});
-  const H={nexttrack:()=>keyAct("ok"),previoustrack:()=>keyAct("no"),play:()=>keyAct("replay"),pause:()=>keyAct("replay"),seekforward:()=>keyAct("ok"),seekbackward:()=>keyAct("no")};
+  const fwd=()=>keyAct("ok")||keyAct("primary"),back=()=>keyAct("no")||keyAct("replay");
+  const H={nexttrack:fwd,previoustrack:back,play:()=>keyAct("replay"),pause:()=>keyAct("replay"),seekforward:fwd,seekbackward:back};
   for(const [a,f] of Object.entries(H)){try{ms.setActionHandler(a,f);}catch(e){}}}}catch(e){}
 
 // ===== 오류 신고 =====
