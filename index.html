@@ -57,7 +57,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
-.tipline{margin:14px 6px 0;font-size:12.5px;line-height:1.5;color:var(--muted);text-align:center;min-height:2.4em}
+.tipline{margin:16px 0 4px;padding:10px 14px;border-radius:14px;background:var(--amber-soft);color:var(--ink);font-size:14px;line-height:1.5;text-align:center;width:100%;box-sizing:border-box;word-break:keep-all}
 .cardwrap{position:relative}.flag{position:absolute;bottom:8px;right:8px;border:0;background:none;font-size:15px;opacity:.45;padding:6px;cursor:pointer;z-index:2}.flag:hover{opacity:1}
 .rpsheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
 .rpsheet .box{background:var(--surface);color:var(--ink);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
@@ -287,6 +287,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
   <div class="wordmark" style="margin-top:6px">TRINITY</div>
   <div class="wordmark2">おすすめ</div>
   <div class="wordmark3">트리니티 오스스메 · 매장 상담 일본어</div>
+  <p class="tipline" id="tipline"></p>
   <div class="who">
     <h3>누가 공부하나요?</h3>
     <div class="plist" id="plist"></div>
@@ -296,7 +297,6 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
     <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
   </div>
   <button class="go" id="goBtn" disabled>시작하기</button>
-  <p class="tipline" id="tipline"></p>
 </section>
 
 <div class="app" id="mainView" hidden>
@@ -823,7 +823,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v29";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v30";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
