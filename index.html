@@ -57,6 +57,7 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-
 .addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
 .go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
 .go:disabled{opacity:.4}
+.staffonly{margin:14px 0 0;font-size:11.5px;color:var(--muted);text-align:center;word-break:keep-all}
 .tipline{margin:16px 0 4px;padding:10px 14px;border-radius:14px;background:var(--amber-soft);color:var(--ink);font-size:14px;line-height:1.5;text-align:center;width:100%;box-sizing:border-box;word-break:keep-all}
 .cardwrap{position:relative}.flag{position:absolute;bottom:8px;right:8px;border:0;background:none;font-size:15px;opacity:.45;padding:6px;cursor:pointer;z-index:2}.flag:hover{opacity:1}
 .rpsheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
@@ -297,6 +298,7 @@ nav.tabs button[aria-selected="true"]{color:var(--amber)}
     <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
   </div>
   <button class="go" id="goBtn" disabled>시작하기</button>
+  <p class="staffonly">트리니티성수약국 직원 전용 앱입니다. 외부인 사용과 내용 공유를 금합니다.</p>
 </section>
 
 <div class="app" id="mainView" hidden>
@@ -823,7 +825,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v31";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v32";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1253,7 +1255,8 @@ const TIPS=["💬 오늘 배운 한 문장, 매장에서 꼭 한 번 써보세�
 "🎬 단원을 다 익히면 대화문 탭에서 손님을 만나 실전 연습을 할 수 있어요.",
 "🤔 이미 아는 말은 '이미 알아요'를 누르세요. 덜 자주 나와서 모르는 말에 더 집중할 수 있어요.",
 "⏸️ 바쁠 땐 '그만할래요'를 누르세요. 진도는 자동으로 저장되고 다음에 이어서 해요.",
-"🚩 발음이나 뜻이 이상하면 🚩를 눌러 알려주세요. 바로 고칠게요."];
+"🚩 발음이나 뜻이 이상하면 🚩를 눌러 알려주세요. 바로 고칠게요.",
+"📱 아이폰은 사파리 공유 버튼 → '홈 화면에 추가', 갤럭시는 크롬 메뉴(⋮) → '홈 화면에 추가'를 누르면 앱처럼 바로 열려요."];
 function showTip(){try{let i=Math.floor(Math.random()*TIPS.length);const last=+lsGet("osusume-tip",-1);if(i===last)i=(i+1)%TIPS.length;lsSet("osusume-tip",i);$("#tipline").textContent=TIPS[i];}catch(e){}}
 showTip();
 
