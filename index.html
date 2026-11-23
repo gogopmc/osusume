@@ -825,7 +825,7 @@ function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.co
 /* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
    기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
    한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
-const APP_VER="v34";let LOGDAY=[],logT=null,logDayKey="";
+const APP_VER="v35";let LOGDAY=[],logT=null,logDayKey="";
 function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
 function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
   const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
@@ -1033,13 +1033,13 @@ function pickWords(it,ws){const bar=$("#actin");bar.innerHTML="";const sel=new S
 function knownBtn(fn){const b=el("button","known","이미 알아요 · 덜 나오게");b.onclick=fn;return b;}
 let unitHist=[],typeHist=[];
 let guard=0;
-function show(c){
+function show(c,resume){
   // 안전장치: 직전 2문제와 같은 항목·같은 일본어면 다른 문제로 바꾼다
-  if(c.id&&c.type!=="done"&&c.type!=="intro"&&guard<4){const it=BY[c.id];const rec=S.recent||[];
+  if(!resume&&c.id&&c.type!=="done"&&c.type!=="intro"&&guard<4){const it=BY[c.id];const rec=S.recent||[];
     if(rec.some(r=>r.id===c.id||r.ja===it.ja)||(S.st[c.id]&&S.st[c.id].kn&&sessN[c.id]>=99)){logEv("GUARD",c.id,c.type,c.why||"");guard++;if(S.st[c.id])S.st[c.id].seen=S.step;return next();}}
   guard=0;
   window.__curId=(c.id&&c.type!=="done")?c.id:null;try{$("#flagBtn").hidden=!window.__curId;}catch(e){}
-  if(c.id&&c.type!=="done"){S.recent=[{id:c.id,ja:BY[c.id].ja},...(S.recent||[])].slice(0,2);
+  if(!resume&&c.id&&c.type!=="done"){S.recent=[{id:c.id,ja:BY[c.id].ja},...(S.recent||[])].slice(0,2);
     S.dbg=[[Date.now(),S.step,c.id,c.type,c.why||""],...(S.dbg||[])].slice(0,60);
     logEv("SHOW",c.id,c.type,c.why||"",c.again?"again":"",c.chain||"",{retryQ:retryQ.map(x=>x.id+"@"+x.at),st:snap(c.id),sessN:sessN[c.id]||0});markShown(BY[c.id]);hardHist.push(hard(BY[c.id]));unitHist.push(BY[c.id].u);typeHist.push(BY[c.id].t);}
   cur=c;if(c.id)remember(c.id);const card=$("#card");card.innerHTML="";const bar=$("#actin");bar.innerHTML="";hud();
@@ -1159,7 +1159,7 @@ $("#playAll").onclick=async()=>{hush();const t=++tok;for(const d of UNITS[scU].D
 /* ---------- navigation ---------- */
 function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").classList.toggle("withbar",name==="study");["study","status","script","summary"].forEach(x=>$("#"+x).hidden=x!==name);
   document.querySelectorAll("nav.tabs button").forEach(x=>x.setAttribute("aria-selected",x.dataset.tab===name));
-  if(name==="status")renderStatus();if(name==="script")renderScript();if(name==="study"){if(!cur||cur.type==="done")next();else show(cur);}hud();}
+  if(name==="status")renderStatus();if(name==="script")renderScript();if(name==="study"){if(!cur||cur.type==="done")next();else show(cur,true);}hud();}
 document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
 $("#quitBtn").onclick=showSummary;
 function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;showAll=false;picked=null;renderProfiles();try{showTip()}catch(e){}}
@@ -1172,7 +1172,7 @@ $("#goBtn").onclick=async()=>{if(!picked)return;lsSet("osusume-last",picked);con
   // 이 기기에 진도가 있으면 바로 시작하고 서버 기록은 뒤에서 맞춘다. 맞추기 전엔 서버에 저장하지 않는다(0으로 덮어쓰기 방지)
   remoteReady=false;const who=me;const hasLocal=Object.keys(S.st||{}).length>0;
   const merge=r=>{if(me!==who)return;if(r&&r.v===1){const nl=Object.keys(S.st||{}).length,nr=Object.keys(r.st||{}).length;
-      if((r.updated||0)>(S.updated||0)||nr>nl+3){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);try{hud();if(!cur||cur.type==="done"||cur.type==="intro")next();}catch(e){}}}
+      if((r.updated||0)>(S.updated||0)||nr>nl+3){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);try{hud();if(!cur||cur.type==="done")next();}catch(e){}}}
     remoteReady=true;try{save();}catch(e){}};
   const sync=async(tries)=>{for(let k=0;k<tries&&me===who&&!remoteReady;k++){const r=await Promise.race([fetchRemote(),new Promise(res=>setTimeout(()=>res(undefined),12000))]);
       if(r!==undefined&&r!=="ERR"){merge(r);return true;}await new Promise(z=>setTimeout(z,Math.min(30000,3000*(k+1))));}return false;};
