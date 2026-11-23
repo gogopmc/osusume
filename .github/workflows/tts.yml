@@ -20,7 +20,7 @@ jobs:
           import os,urllib.request,html,time,sys
           key=os.environ['KEY'];reg=os.environ.get('REGION') or 'koreacentral'
           url=f'https://{reg}.tts.speech.microsoft.com/cognitiveservices/v1'
-          V={'ja':('ja-JP','ja-JP-NanamiNeural'),'ko':('ko-KR','ko-KR-SunHiNeural')}
+          V={'ja':('ja-JP','ja-JP-NanamiNeural'),'ko':('ko-KR','ko-KR-SunHiNeural'),'zh':('zh-CN','zh-CN-XiaoxiaoNeural')}
           os.makedirs('audio',exist_ok=True);n=fail=0
           import glob
           for line in [l for fn in sorted(glob.glob('tts/*.tsv')) for l in open(fn,encoding='utf-8')]:
