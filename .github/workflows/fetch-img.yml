@@ -14,9 +14,10 @@ jobs:
           mkdir -p img; changed=0
           while read n x; do
             [ -z "$n" ] && continue
-            [ -f img/c$n.jpg ] && continue
-            curl -sSfL -o /tmp/c.png "https://d8j0ntlcm91z4.cloudfront.net/user_3KtI32pMQ3R7HnVDVkhilxtY6yu/hf_20261119_$x.png"
-            convert /tmp/c.png -resize 480x -quality 78 img/c$n.jpg; changed=1
+            case "$n" in [0-9]*) n=c$n;; esac
+            [ -f img/$n.jpg ] && continue
+            curl -sSfL -o /tmp/c.png "https://d8j0ntlcm91z4.cloudfront.net/user_3KtI32pMQ3R7HnVDVkhilxtY6yu/hf_$x.png"
+            convert /tmp/c.png -resize 480x -quality 78 img/$n.jpg; changed=1
           done < img/list.txt
           [ $changed = 1 ] || exit 0
           git config user.name Claude; git config user.email noreply@anthropic.com
