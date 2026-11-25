@@ -633,6 +633,9 @@ f0e13c1318e5	ja	黒は朝、洗顔してから塗ります。	0%	ja-JP-MayuNeura
 a29ec09c8b3f	ko	2~3년 전부터인데, 요즘 진해졌어요.	+12%	ko-KR-SunHiNeural	
 99c8add86c0f	ko	2만 원	+12%	ko-KR-SunHiNeural	
 7211ebd3fd2c	ko	2만 원이에요, 환급하면 더 싸요.	+12%	ko-KR-SunHiNeural	
+278de77b74fd	ko	2주	+12%	ko-KR-SunHiNeural	
+c1a6b8b32c1b	ko	2주 꾸준히 쓰면 느낄 수 있어요.	+12%	ko-KR-SunHiNeural	
+ffeb16e49ffb	ko	2주 꾸준히 쓰시면 느끼실 거예요.	+12%	ko-KR-SunHiNeural	
 6fa882dc0058	ko	3개 들어 있고, 따로 사는 것보다 5천 원 싸요.	+12%	ko-KR-SunHiNeural	
 a2d091ec500f	ko	3개월	+12%	ko-KR-SunHiNeural	
 86c3b84d3bb9	ko	3개월 계속 드시면 차이를 아실 거예요.	+12%	ko-KR-SunHiNeural	
@@ -650,6 +653,7 @@ e3aac144febc	ko	~가 아니면	+12%	ko-KR-SunHiNeural
 8115f22c291b	ko	~네요 (말 끝)	+12%	ko-KR-SunHiNeural	
 0d4ddf85e0ab	ko	~라서, ~니까 (이유)	+12%	ko-KR-SunHiNeural	
 2f3e005125c2	ko	~만	+12%	ko-KR-SunHiNeural	
+b079c8b043f2	ko	~만 할 수 있다	+12%	ko-KR-SunHiNeural	
 281fde31fc3e	ko	~보다 (비교)	+12%	ko-KR-SunHiNeural	
 0932339de3bb	ko	~씩	+12%	ko-KR-SunHiNeural	
 3fdbf2aa932e	ko	~였어요 (과거)	+12%	ko-KR-SunHiNeural	
@@ -704,8 +708,10 @@ bfa17d1723f2	ko	건조해지다	+12%	ko-KR-SunHiNeural
 af13edea4c0b	ko	검은색	+12%	ko-KR-SunHiNeural	
 f1ffe760d7ee	ko	검은색은 아침에 세안하고 나서 발라요.	+12%	ko-KR-SunHiNeural	
 e9a7103efac4	ko	것, 물건	+12%	ko-KR-SunHiNeural	
+c971d13e92ac	ko	결제	+12%	ko-KR-SunHiNeural	
 25f9bcf65fbb	ko	결제 바코드	+12%	ko-KR-SunHiNeural	
 4031997e01ad	ko	결제 바코드 보여주세요.	+12%	ko-KR-SunHiNeural	
+bf75730f71d0	ko	결제가 안 되다	+12%	ko-KR-SunHiNeural	
 7230f4fbb187	ko	결제됐어요	+12%	ko-KR-SunHiNeural	
 54fa4ad3baff	ko	결제됐어요, 감사합니다!	+12%	ko-KR-SunHiNeural	
 a36653227ac8	ko	계산 (お会計 = 손님께 쓰는 높임말)	+12%	ko-KR-SunHiNeural	
@@ -727,6 +733,7 @@ d3e86bda5667	ko	그 밖에, 다른	+12%	ko-KR-SunHiNeural
 a77114c15ff4	ko	그다음에	+12%	ko-KR-SunHiNeural	
 17bc5ff2c9f3	ko	그다음에 여드름에 발라 주세요.	+12%	ko-KR-SunHiNeural	
 e27976f6722a	ko	그대로	+12%	ko-KR-SunHiNeural	
+986232ba8da1	ko	그래도 안 되네요. 카드 돼요?	+12%	ko-KR-SunHiNeural	
 9352415b2d08	ko	그러세요. 지금 붉은기나 따끔거림 있으세요?	+12%	ko-KR-SunHiNeural	
 4534335d2533	ko	그러시면	+12%	ko-KR-SunHiNeural	
 e6a207ede8f2	ko	그러시면 목 염증을 가라앉히는 약이 좋아요.	+12%	ko-KR-SunHiNeural	
@@ -738,27 +745,37 @@ b2501da51d90	ko	그럼 두 세트로 할게요.	+12%	ko-KR-SunHiNeural
 be850ba14561	ko	그럼 둘 다 주세요.	+12%	ko-KR-SunHiNeural	
 9ab6ee09ec4c	ko	그럼 무거운 쪽 세트로 할게요.	+12%	ko-KR-SunHiNeural	
 130421597026	ko	그럼 뭘 바르면 돼요?	+12%	ko-KR-SunHiNeural	
+cc0ac7283b4d	ko	그럼 선크림도 하나 주세요.	+12%	ko-KR-SunHiNeural	
 faa44793aeb3	ko	그럼 세 개 다 해서 얼마예요?	+12%	ko-KR-SunHiNeural	
 6065a818a80c	ko	그럼 세트로 부탁해요.	+12%	ko-KR-SunHiNeural	
 e7239eb0c961	ko	그럼 세트로 주세요.	+12%	ko-KR-SunHiNeural	
+992b8c800d44	ko	그럼 어떡해요?	+12%	ko-KR-SunHiNeural	
 69ba15d95377	ko	금방, 바로	+12%	ko-KR-SunHiNeural	
 42441bc7d49c	ko	기다리셨죠	+12%	ko-KR-SunHiNeural	
 3522dd79b935	ko	기다리셨죠. 특별히 싸게 해드릴 수 있어요.	+12%	ko-KR-SunHiNeural	
 e5a10d605a3c	ko	기다리셨죠. 특별히 조금 싸게 해드릴 수 있어요.	+12%	ko-KR-SunHiNeural	
 a85371214637	ko	기미	+12%	ko-KR-SunHiNeural	
 940d001ece3e	ko	기미 부위에 발라 주세요.	+12%	ko-KR-SunHiNeural	
+da9d0dbaa7b0	ko	기미, 잡티	+12%	ko-KR-SunHiNeural	
 002324192207	ko	기미가 신경 쓰이는데요.	+12%	ko-KR-SunHiNeural	
+f07d34082ddd	ko	기미가 진한데, 더 센 거 있어요?	+12%	ko-KR-SunHiNeural	
 3a8f910c0c1b	ko	기미에는 연고가 효과적이에요.	+12%	ko-KR-SunHiNeural	
 fda5c890974b	ko	기침	+12%	ko-KR-SunHiNeural	
 7a7ea2394881	ko	기침이 좀 나요.	+12%	ko-KR-SunHiNeural	
 1ed4aa6e0959	ko	깊이까지	+12%	ko-KR-SunHiNeural	
+bfbcda16a965	ko	꼭	+12%	ko-KR-SunHiNeural	
+884412cd677f	ko	꾸준히 하다	+12%	ko-KR-SunHiNeural	
 2c10aa66c690	ko	나쁘다, 안 좋다	+12%	ko-KR-SunHiNeural	
 04299290add0	ko	나이가 들면	+12%	ko-KR-SunHiNeural	
 c12f6d5f8179	ko	나이가 들면 연골이 닳아버려요.	+12%	ko-KR-SunHiNeural	
 3eee459477fa	ko	나이가 들수록	+12%	ko-KR-SunHiNeural	
 c85d0d437c29	ko	나이가 들수록 모공이 늘어나요.	+12%	ko-KR-SunHiNeural	
+7c22ed97c989	ko	나이아신아마이드	+12%	ko-KR-SunHiNeural	
+c4bd9b3d77ba	ko	나이아신아마이드와 비타민C가 있어서 피부를 밝게 해줘요.	+12%	ko-KR-SunHiNeural	
 6db55ff0d1c0	ko	낫지 않다	+12%	ko-KR-SunHiNeural	
 8b8eba11c5f5	ko	낫지 않으면 병원에 가세요.	+12%	ko-KR-SunHiNeural	
+6c0f4d0f469f	ko	낮	+12%	ko-KR-SunHiNeural	
+447ad7041ad4	ko	낮엔 에센스, 밤엔 연고를 쓰세요.	+12%	ko-KR-SunHiNeural	
 9783199639d8	ko	너무 좋아요!	+12%	ko-KR-SunHiNeural	
 5b39991d9d8c	ko	넣어 드릴게요	+12%	ko-KR-SunHiNeural	
 b19bc91625b3	ko	네	+12%	ko-KR-SunHiNeural	
@@ -785,10 +802,16 @@ c22c664ff509	ko	노란색은 레티놀이 들어 있어서 밤에 바르세요.	
 6047ac5e5111	ko	높다, 비싸다	+12%	ko-KR-SunHiNeural	
 5fce667d96e7	ko	눈 밑	+12%	ko-KR-SunHiNeural	
 33aa860b138a	ko	눈 밑에 가볍게 두드리듯 발라 주세요.	+12%	ko-KR-SunHiNeural	
+760c5b3d2a2e	ko	느끼다	+12%	ko-KR-SunHiNeural	
 fde900f55b05	ko	늘어나요	+12%	ko-KR-SunHiNeural	
 82bfdaf7880b	ko	다르다	+12%	ko-KR-SunHiNeural	
+b80d47d20b20	ko	다른	+12%	ko-KR-SunHiNeural	
+9a307cf4d3ad	ko	다른 카드 있으세요?	+12%	ko-KR-SunHiNeural	
+c703face0c29	ko	다른 카드 있으세요? 아니면 위챗도 돼요.	+12%	ko-KR-SunHiNeural	
 259809b071e2	ko	다섯 개	+12%	ko-KR-SunHiNeural	
 471b2155d7e5	ko	다섯 개 사시면 10% 할인돼요.	+12%	ko-KR-SunHiNeural	
+2a8871e87501	ko	다시	+12%	ko-KR-SunHiNeural	
+a48399192d45	ko	다시 한번 해볼게요.	+12%	ko-KR-SunHiNeural	
 f61e5068c3c6	ko	다크서클	+12%	ko-KR-SunHiNeural	
 0149f091e83f	ko	다크서클을 없애고 싶어요.	+12%	ko-KR-SunHiNeural	
 402c63366a94	ko	다크서클을 없애고 싶으세요, 아니면 촉촉하게 하고 싶으세요?	+12%	ko-KR-SunHiNeural	
@@ -803,12 +826,19 @@ aaeb7fd5dabb	ko	당연히 정품이죠.	+12%	ko-KR-SunHiNeural
 4fe9a4020104	ko	닿아요, 들어가요	+12%	ko-KR-SunHiNeural	
 889408eec2e2	ko	대신 샘플을 드릴게요.	+12%	ko-KR-SunHiNeural	
 8906f8ef7e4d	ko	더	+12%	ko-KR-SunHiNeural	
+b198f877da13	ko	더 세다	+12%	ko-KR-SunHiNeural	
 591eea5f3fa8	ko	도와줘요	+12%	ko-KR-SunHiNeural	
 065c93f1459e	ko	돌려드려요	+12%	ko-KR-SunHiNeural	
 aca99994db7f	ko	돕는	+12%	ko-KR-SunHiNeural	
+368dd3fa1f9d	ko	돼요, 낮엔 에센스, 밤엔 연고를 쓰세요.	+12%	ko-KR-SunHiNeural	
+e914aa373e39	ko	돼요, 카드를 꽂아 주세요.	+12%	ko-KR-SunHiNeural	
+f7de049ca2c9	ko	돼요, 하지만 아침엔 꼭 선크림을 바르세요.	+12%	ko-KR-SunHiNeural	
+4e2f55e3bebe	ko	됐어요! 오래 기다리게 해서 죄송해요.	+12%	ko-KR-SunHiNeural	
 f1af4ca30c91	ko	되기 쉬운	+12%	ko-KR-SunHiNeural	
+c1fe90cbdeb9	ko	두 개 같이 써도 돼요?	+12%	ko-KR-SunHiNeural	
 98ad0b62ad70	ko	두 개 같이면 이득이에요.	+12%	ko-KR-SunHiNeural	
 06ccae569a2c	ko	두 개 같이면 이득인 세트가 돼요.	+12%	ko-KR-SunHiNeural	
+a458f1993c1c	ko	두 번	+12%	ko-KR-SunHiNeural	
 660e3a2974db	ko	두 세트 사면 뭐 있어요?	+12%	ko-KR-SunHiNeural	
 1242df2a5071	ko	두 세트면 이쪽 마스크팩을 한 장씩 드려요.	+12%	ko-KR-SunHiNeural	
 f9e17bbc3f05	ko	두드리듯이	+12%	ko-KR-SunHiNeural	
@@ -842,12 +872,15 @@ a06288c45804	ko	마지막에 크림이에요.	+12%	ko-KR-SunHiNeural
 182e6bc5cc33	ko	만 (10,000)	+12%	ko-KR-SunHiNeural	
 ae403bb354b1	ko	만들어서 (作る 만들다)	+12%	ko-KR-SunHiNeural	
 842eb3583328	ko	만들어진	+12%	ko-KR-SunHiNeural	
+875a0550e82f	ko	만약	+12%	ko-KR-SunHiNeural	
 38002f747ae7	ko	말 끝에 붙이면 질문 (~까?)	+12%	ko-KR-SunHiNeural	
 0c45f58dfb66	ko	맞아요, 이게 저희 가게에서 제일 인기 있어요.	+12%	ko-KR-SunHiNeural	
 f09d047bce5b	ko	매일	+12%	ko-KR-SunHiNeural	
 624218467e58	ko	매일이에요?	+12%	ko-KR-SunHiNeural	
 1095f30b328e	ko	먹으면	+12%	ko-KR-SunHiNeural	
 9834a75b6632	ko	먼저	+12%	ko-KR-SunHiNeural	
+5e5d5aec8d6c	ko	먼저 세안해요.	+12%	ko-KR-SunHiNeural	
+8e2fc2d4cab5	ko	먼저 에센스, 그다음 크림을 쓰세요.	+12%	ko-KR-SunHiNeural	
 4b9907a7d64b	ko	먼저 토너예요.	+12%	ko-KR-SunHiNeural	
 8424682c1709	ko	면세	+12%	ko-KR-SunHiNeural	
 327fc99cff1d	ko	면세로 4만 5천 원이에요.	+12%	ko-KR-SunHiNeural	
@@ -875,14 +908,20 @@ cf9290bd8715	ko	무거운 크림은 지금은 모공을 막을 수 있어요.	+1
 0d8392bbf6bd	ko	무료로 피부 진단을 할 수 있어요.	+12%	ko-KR-SunHiNeural	
 de41e2305e8d	ko	무료로 피부 진단을 해 드릴 수 있어요.	+12%	ko-KR-SunHiNeural	
 266b24d92ab9	ko	무릎	+12%	ko-KR-SunHiNeural	
+f1f8799142d9	ko	무슨 성분이에요?	+12%	ko-KR-SunHiNeural	
 949d7b7f455c	ko	무언가, 뭔가	+12%	ko-KR-SunHiNeural	
 26e6b38780db	ko	무엇	+12%	ko-KR-SunHiNeural	
 8d1ae6b26f92	ko	문제없어요	+12%	ko-KR-SunHiNeural	
 07ea6a1c4964	ko	물	+12%	ko-KR-SunHiNeural	
 0559a7931a22	ko	물 없어도 괜찮아요.	+12%	ko-KR-SunHiNeural	
 33c918acdc51	ko	물은 필요 없어요?	+12%	ko-KR-SunHiNeural	
+ab4cb422cf03	ko	미백	+12%	ko-KR-SunHiNeural	
+fa70280e12cd	ko	미백 제품 있어요?	+12%	ko-KR-SunHiNeural	
 89dc05a6db36	ko	미백 크림	+12%	ko-KR-SunHiNeural	
+97d57723f928	ko	미백은 꼭 선크림을 발라야 해요. 안 그러면 효과가 없어요.	+12%	ko-KR-SunHiNeural	
 9c4e67b6d025	ko	민감성 피부	+12%	ko-KR-SunHiNeural	
+1a2b65e433ce	ko	민감성 피부도 써도 돼요?	+12%	ko-KR-SunHiNeural	
+4ec90f4f0eb8	ko	민감성 피부에도 순한 편이에요.	+12%	ko-KR-SunHiNeural	
 5e5e03646d26	ko	민감성이 아니면 이쪽을 추천해요.	+12%	ko-KR-SunHiNeural	
 066c8c928b9b	ko	바늘, 니들	+12%	ko-KR-SunHiNeural	
 cdde43c432a2	ko	바로 세금 환급돼요.	+12%	ko-KR-SunHiNeural	
@@ -895,6 +934,7 @@ e6e884f9333d	ko	받아 (受ける 받다)	+12%	ko-KR-SunHiNeural
 59e27f57801f	ko	발라 (塗る 바르다)	+12%	ko-KR-SunHiNeural	
 0cb6e90bf20c	ko	발라 주세요	+12%	ko-KR-SunHiNeural	
 12e1d813e916	ko	발라보셔도 돼요, 이게 테스터예요.	+12%	ko-KR-SunHiNeural	
+247090d5834e	ko	밝아지다	+12%	ko-KR-SunHiNeural	
 b26d0d85c4c0	ko	밤	+12%	ko-KR-SunHiNeural	
 f62afeba0b33	ko	밤에만	+12%	ko-KR-SunHiNeural	
 5c916f643c35	ko	병원	+12%	ko-KR-SunHiNeural	
@@ -942,6 +982,7 @@ fe63f6ee3654	ko	사면	+12%	ko-KR-SunHiNeural
 f37ff392ea3e	ko	사모님이 좋아하시겠어요.	+12%	ko-KR-SunHiNeural	
 06d766bbd31e	ko	산뜻하게, 깔끔하게	+12%	ko-KR-SunHiNeural	
 9542b357697a	ko	상품	+12%	ko-KR-SunHiNeural	
+17b03070d455	ko	새로고침	+12%	ko-KR-SunHiNeural	
 05cfaa42f829	ko	색소	+12%	ko-KR-SunHiNeural	
 ca982fbb8022	ko	색소가 원인인 다크서클이네요.	+12%	ko-KR-SunHiNeural	
 d50686389d1e	ko	샘플	+12%	ko-KR-SunHiNeural	
@@ -965,6 +1006,7 @@ c8ada82cf7da	ko	성분은 같아요.	+12%	ko-KR-SunHiNeural
 f28578cb9ab6	ko	세럼	+12%	ko-KR-SunHiNeural	
 8e4ba143a8c3	ko	세안	+12%	ko-KR-SunHiNeural	
 9d6dc16ac274	ko	세안 후 먼저 토너예요. 그다음 이 세럼을 조금 바르세요. 마지막에 크림이에요.	+12%	ko-KR-SunHiNeural	
+1671fb214a35	ko	세안 후에 먼저 에센스, 그다음 크림을 쓰세요.	+12%	ko-KR-SunHiNeural	
 946ffc257fdb	ko	세안 후에 이 토너로 닦고, 그다음에 여드름에 발라 주세요.	+12%	ko-KR-SunHiNeural	
 13e0636c3cff	ko	세안 후에 이 토너로 닦아 주세요.	+12%	ko-KR-SunHiNeural	
 7157d3dda245	ko	세안하고 나서	+12%	ko-KR-SunHiNeural	
@@ -978,6 +1020,8 @@ d571b9de0ecf	ko	세지 않다	+12%	ko-KR-SunHiNeural
 4242066c63c2	ko	손에	+12%	ko-KR-SunHiNeural	
 c590a8c492d9	ko	쇼핑백	+12%	ko-KR-SunHiNeural	
 457bd3fe9991	ko	쇼핑백에 담아드릴게요.	+12%	ko-KR-SunHiNeural	
+9f41246fbcd4	ko	순하다	+12%	ko-KR-SunHiNeural	
+08210562a63c	ko	순한 편이에요. 자극이 있으면 처음엔 이틀에 한 번 쓰세요.	+12%	ko-KR-SunHiNeural	
 ebdc9cb03468	ko	쉽게 빨개지세요?	+12%	ko-KR-SunHiNeural	
 e4cba20970aa	ko	시술 후	+12%	ko-KR-SunHiNeural	
 413a4695238d	ko	시술 후를 위해 만든 크림이에요.	+12%	ko-KR-SunHiNeural	
@@ -994,6 +1038,7 @@ ae7cf7a00e62	ko	심하세요, 가끔이세요?	+12%	ko-KR-SunHiNeural
 b2ccf3408414	ko	써 (使う 쓰다)	+12%	ko-KR-SunHiNeural	
 12aa24f6e2ff	ko	쓰고 있다	+12%	ko-KR-SunHiNeural	
 ed247ae06406	ko	쓰고 있어요	+12%	ko-KR-SunHiNeural	
+93cdfb290254	ko	쓰다	+12%	ko-KR-SunHiNeural	
 831c4f544be0	ko	쓰다, 사용하다	+12%	ko-KR-SunHiNeural	
 460a5ecd2bea	ko	쓸 수 있어요	+12%	ko-KR-SunHiNeural	
 67ae1172824c	ko	아, 그것도 갖고 싶어요.	+12%	ko-KR-SunHiNeural	
@@ -1002,6 +1047,7 @@ fe97af6b8ad2	ko	아내	+12%	ko-KR-SunHiNeural
 37ac94492abe	ko	아내가 부탁했는데, 먹는 콜라겐 있어요?	+12%	ko-KR-SunHiNeural	
 c4a2d4238489	ko	아내가 좋아하겠네요. 그것도 하나 주세요.	+12%	ko-KR-SunHiNeural	
 e7b24534123c	ko	아니면	+12%	ko-KR-SunHiNeural	
+d68ddbbc6e54	ko	아니면 위챗도 돼요.	+12%	ko-KR-SunHiNeural	
 0ccea4806963	ko	아니요, 졸리지 않아서 여행 중에도 안심하고 드실 수 있어요.	+12%	ko-KR-SunHiNeural	
 5c9c90932d38	ko	아이	+12%	ko-KR-SunHiNeural	
 e57ed06b6cc9	ko	아이도 쓸 수 있어요.	+12%	ko-KR-SunHiNeural	
@@ -1012,7 +1058,9 @@ b59f5d610786	ko	아이크림	+12%	ko-KR-SunHiNeural
 c4d8e7307d76	ko	아침엔 선크림을 바르세요.	+12%	ko-KR-SunHiNeural	
 27dc2ba2ce3d	ko	아침저녁으로 눈 밑에 가볍게 두드리듯 발라 주세요.	+12%	ko-KR-SunHiNeural	
 7663189e24fd	ko	아프다	+12%	ko-KR-SunHiNeural	
+a3faa498711d	ko	안 그러면	+12%	ko-KR-SunHiNeural	
 398227227992	ko	안 돼요, 할 수 없어요	+12%	ko-KR-SunHiNeural	
+a2bd2e50e861	ko	안 됐다, 실패했다	+12%	ko-KR-SunHiNeural	
 47e63e60c6c4	ko	안 바르면	+12%	ko-KR-SunHiNeural	
 b56afce34aad	ko	안 바르면 금방 진해져요.	+12%	ko-KR-SunHiNeural	
 ede58e6be715	ko	안녕하세요	+12%	ko-KR-SunHiNeural	
@@ -1029,6 +1077,7 @@ fdbc00cbb711	ko	약산성	+12%	ko-KR-SunHiNeural
 eaef8282db6b	ko	약하다	+12%	ko-KR-SunHiNeural	
 1641e524691f	ko	어떠세요? (정중)	+12%	ko-KR-SunHiNeural	
 dad810db7504	ko	어떻게	+12%	ko-KR-SunHiNeural	
+72d8ee73f2f6	ko	어떻게 된 거예요	+12%	ko-KR-SunHiNeural	
 0572477c9e49	ko	어떻게 먹어요?	+12%	ko-KR-SunHiNeural	
 148e430ab262	ko	어떻게 써요?	+12%	ko-KR-SunHiNeural	
 f0018b0c6c4e	ko	어머님	+12%	ko-KR-SunHiNeural	
@@ -1050,20 +1099,29 @@ f53bbd425a4d	ko	언제쯤	+12%	ko-KR-SunHiNeural
 a5903dcac27c	ko	얼굴 전체라면 이쪽 미백 크림이 더 좋아요.	+12%	ko-KR-SunHiNeural	
 831eec200dfb	ko	얼굴 전체에 바르면 안 돼요?	+12%	ko-KR-SunHiNeural	
 904a51cf26d1	ko	얼굴 전체에는 미백 크림이 더 좋아요.	+12%	ko-KR-SunHiNeural	
+ca94ad558f8c	ko	얼굴에	+12%	ko-KR-SunHiNeural	
+02de957d2288	ko	얼굴에 기미가 있는데, 미백 제품 있어요?	+12%	ko-KR-SunHiNeural	
+21bf78671cc4	ko	얼굴에 기미가 있어요.	+12%	ko-KR-SunHiNeural	
 1f537b090bd0	ko	얼굴이 산뜻해져요.	+12%	ko-KR-SunHiNeural	
 c75dd5809500	ko	얼마	+12%	ko-KR-SunHiNeural	
 bf88bf213523	ko	얼마나 먹으면 효과가 있어요?	+12%	ko-KR-SunHiNeural	
+5f17929fe4f7	ko	얼마나 써요?	+12%	ko-KR-SunHiNeural	
+1c4b12ee40d2	ko	얼마나 지나야 효과가 보여요?	+12%	ko-KR-SunHiNeural	
 b07d5be6bacb	ko	엄마 무릎이 안 좋아요.	+12%	ko-KR-SunHiNeural	
 c43350d124c0	ko	엄마 무릎이 안 좋은데, 뭐 좋은 거 있어요?	+12%	ko-KR-SunHiNeural	
 937ccd89938d	ko	없애고 싶다	+12%	ko-KR-SunHiNeural	
+6ab26206ae3b	ko	에센스	+12%	ko-KR-SunHiNeural	
 571f38438f2b	ko	여권	+12%	ko-KR-SunHiNeural	
 739678d1a9ad	ko	여권 돌려드릴게요, 또 오세요!	+12%	ko-KR-SunHiNeural	
 95d757b28dff	ko	여권은 왜요?	+12%	ko-KR-SunHiNeural	
 5ea4e3464e62	ko	여기 기미가 신경 쓰이는데, 뭐가 좋아요?	+12%	ko-KR-SunHiNeural	
 fcf34ff71ac8	ko	여드름	+12%	ko-KR-SunHiNeural	
 e9e05196de56	ko	여드름이 신경 쓰여요.	+12%	ko-KR-SunHiNeural	
+bfd3a7bdce95	ko	여전히 안 돼요	+12%	ko-KR-SunHiNeural	
+f79e8699874f	ko	여전히 안 돼요. 결제 바코드를 새로고침해 주세요.	+12%	ko-KR-SunHiNeural	
 b1d2e0c76309	ko	여행 중	+12%	ko-KR-SunHiNeural	
 c0f05376691f	ko	연고	+12%	ko-KR-SunHiNeural	
+f132e801fc5f	ko	연고는 효과가 더 세지만 밤에만 써야 해요.	+12%	ko-KR-SunHiNeural	
 21beb7e986b5	ko	연골	+12%	ko-KR-SunHiNeural	
 2fe445a1d708	ko	연세 (몇 살)	+12%	ko-KR-SunHiNeural	
 0cfcbc5eafe9	ko	연어	+12%	ko-KR-SunHiNeural	
@@ -1076,13 +1134,19 @@ f485be0e653f	ko	열이나 두통은 없으세요?	+12%	ko-KR-SunHiNeural
 9a403328b15d	ko	영수증	+12%	ko-KR-SunHiNeural	
 2aa4ba602e5b	ko	영양제	+12%	ko-KR-SunHiNeural	
 699e229b72f0	ko	옅게 (薄い 옅다 → 薄く 옅게)	+12%	ko-KR-SunHiNeural	
+547bcf52685c	ko	오래 기다렸다	+12%	ko-KR-SunHiNeural	
+c1c46d3e7cc5	ko	오래 기다리게 해드렸네요.	+12%	ko-KR-SunHiNeural	
 0fb7b0811b97	ko	오류	+12%	ko-KR-SunHiNeural	
 25a825f954a2	ko	와 주세요 (오세요의 높임말)	+12%	ko-KR-SunHiNeural	
+91331c301428	ko	왜 그래요?	+12%	ko-KR-SunHiNeural	
 5e22e0e5fc86	ko	요즘 진해졌어요.	+12%	ko-KR-SunHiNeural	
 174a60a1debb	ko	요즘, 최근	+12%	ko-KR-SunHiNeural	
 68e94e2fa6ad	ko	원 (한국 돈)	+12%	ko-KR-SunHiNeural	
 72d444c246f1	ko	원인	+12%	ko-KR-SunHiNeural	
 c12f069c24b4	ko	위챗	+12%	ko-KR-SunHiNeural	
+daadccf4803d	ko	위챗으로 해볼게요.	+12%	ko-KR-SunHiNeural	
+9f672f49f4b9	ko	유니온페이 카드	+12%	ko-KR-SunHiNeural	
+315d0ef2acb2	ko	유니온페이 카드는 가끔 결제가 안 돼요.	+12%	ko-KR-SunHiNeural	
 3ad8b2e98343	ko	이 (이 제품의 '이')	+12%	ko-KR-SunHiNeural	
 ac4ff5505872	ko	이 계절은 건조해서 무거운 쪽이 좋아요.	+12%	ko-KR-SunHiNeural	
 32b682588783	ko	이 마스크팩도 선물하기 좋아요.	+12%	ko-KR-SunHiNeural	
@@ -1096,6 +1160,7 @@ b6531030aa39	ko	이 세트가 제일 인기예요.	+12%	ko-KR-SunHiNeural
 312d66406f91	ko	이 영수증을 공항에서 보여 주세요.	+12%	ko-KR-SunHiNeural	
 dfec34edcdd1	ko	이 진정 크림을 추천해요.	+12%	ko-KR-SunHiNeural	
 e596a1306527	ko	이 진정 크림을 추천해요. 자극이 적어요.	+12%	ko-KR-SunHiNeural	
+fe70c98908f4	ko	이 카드는 유니온페이 카드인데, 유니온페이 카드는 가끔 결제가 안 될 때가 있어요.	+12%	ko-KR-SunHiNeural	
 bed55ba13e3e	ko	이 크림을 추천해요.	+12%	ko-KR-SunHiNeural	
 811f2df83a09	ko	이 크림을 추천해요. 자국을 옅게 해요.	+12%	ko-KR-SunHiNeural	
 561e3623b608	ko	이 토너와 같이 쓰면 더 좋아요.	+12%	ko-KR-SunHiNeural	
@@ -1112,7 +1177,9 @@ b9744dfbc321	ko	이건 뭐예요?	+12%	ko-KR-SunHiNeural
 200b0cb32114	ko	이건 재생 크림이에요.	+12%	ko-KR-SunHiNeural	
 e08b96292095	ko	이건 철갑상어 연골로, 한국에서 함량이 제일 높아요.	+12%	ko-KR-SunHiNeural	
 44b1b4ca2a8a	ko	이것	+12%	ko-KR-SunHiNeural	
+99b457569658	ko	이게 저희가 제일 많이 파는 미백 에센스예요.	+12%	ko-KR-SunHiNeural	
 2f41da38b02f	ko	이게 제일 인기 있어요.	+12%	ko-KR-SunHiNeural	
+c9b8f6ce66da	ko	이게 제일 잘 팔리는 에센스예요.	+12%	ko-KR-SunHiNeural	
 89ef50f16880	ko	이득	+12%	ko-KR-SunHiNeural	
 026f2fdd173e	ko	이득, 알뜰함	+12%	ko-KR-SunHiNeural	
 1e59167335c3	ko	이런 경우에는	+12%	ko-KR-SunHiNeural	
@@ -1135,20 +1202,24 @@ f697818de924	ko	입술	+12%	ko-KR-SunHiNeural
 a0a5a86a37af	ko	입술도 건조하시면 같은 성분 립도 있어요.	+12%	ko-KR-SunHiNeural	
 2a9c1898b0c5	ko	입술도 건조하시면 립도 있어요.	+12%	ko-KR-SunHiNeural	
 025b8bcdb1d7	ko	있어요	+12%	ko-KR-SunHiNeural	
+d354ba89d42e	ko	있어요, 이건 연고라 효과가 더 세지만 밤에만 써야 해요.	+12%	ko-KR-SunHiNeural	
 a70528a4d527	ko	자국	+12%	ko-KR-SunHiNeural	
 c6c556383425	ko	자국을 옅게 해요.	+12%	ko-KR-SunHiNeural	
 51a366ff1495	ko	자극	+12%	ko-KR-SunHiNeural	
 6b44c2c6df1b	ko	자극이 강해서 밤에만 기미 부위에 바르세요.	+12%	ko-KR-SunHiNeural	
 1fd2c413fa9b	ko	자극이 강해서 밤에만이에요.	+12%	ko-KR-SunHiNeural	
 131e80f1839b	ko	자극이 세진 않을까요?	+12%	ko-KR-SunHiNeural	
+708c8ffdf427	ko	자극이 있으면 처음엔 이틀에 한 번 쓰세요.	+12%	ko-KR-SunHiNeural	
 93419681cc04	ko	자극이 적어요.	+12%	ko-KR-SunHiNeural	
 0585eedbeb07	ko	자기 자신	+12%	ko-KR-SunHiNeural	
+eb4fc9e2edbe	ko	자외선 차단, 선크림	+12%	ko-KR-SunHiNeural	
 1a78c334f799	ko	잘 맞다	+12%	ko-KR-SunHiNeural	
 9b5dbcf3daf4	ko	잘 모르겠어요.	+12%	ko-KR-SunHiNeural	
 93ebfc941c2b	ko	잠시만 기다려 주세요	+12%	ko-KR-SunHiNeural	
 00b457db1962	ko	잠시만 기다려 주세요.	+12%	ko-KR-SunHiNeural	
 e3bc50bcdfd1	ko	재생	+12%	ko-KR-SunHiNeural	
 79ad948f4150	ko	재생, 회복	+12%	ko-KR-SunHiNeural	
+c9b49b896bca	ko	저녁, 밤	+12%	ko-KR-SunHiNeural	
 7ff2af4487c7	ko	저도	+12%	ko-KR-SunHiNeural	
 bb02385b46e0	ko	저도 매일 쓰고 있어요.	+12%	ko-KR-SunHiNeural	
 f95bc707dffa	ko	저도 쓰고 있어요.	+12%	ko-KR-SunHiNeural	
@@ -1168,6 +1239,7 @@ dbf8c76c8048	ko	정품이에요?	+12%	ko-KR-SunHiNeural
 7975edc8d63b	ko	제 피부는 좀 건조한 편이에요.	+12%	ko-KR-SunHiNeural	
 fbb046d0f834	ko	제가 찍을게요	+12%	ko-KR-SunHiNeural	
 8b0e3dcd8cb9	ko	제일	+12%	ko-KR-SunHiNeural	
+9e90de6d34de	ko	제일 잘 팔리다	+12%	ko-KR-SunHiNeural	
 ff2d3925ab83	ko	제형, 질감	+12%	ko-KR-SunHiNeural	
 f6650b802f70	ko	제형이 좀 무겁네요.	+12%	ko-KR-SunHiNeural	
 fa835bc7fb31	ko	조금	+12%	ko-KR-SunHiNeural	
@@ -1176,6 +1248,7 @@ fa835bc7fb31	ko	조금	+12%	ko-KR-SunHiNeural
 97a750aa3976	ko	조금 더	+12%	ko-KR-SunHiNeural	
 d05ad88b2918	ko	조금 붉은기와 따끔거림이 있어요.	+12%	ko-KR-SunHiNeural	
 23cdf8996f91	ko	조금 빨개요.	+12%	ko-KR-SunHiNeural	
+4bc49b893005	ko	조금만 써도 충분해요.	+12%	ko-KR-SunHiNeural	
 f3bf9eca1fcb	ko	조여줘요	+12%	ko-KR-SunHiNeural	
 de8452f7a223	ko	졸려요?	+12%	ko-KR-SunHiNeural	
 046b9126f09a	ko	졸리지 않다	+12%	ko-KR-SunHiNeural	
@@ -1183,11 +1256,13 @@ fee1896a95d6	ko	졸리지 않아서 여행 중에도 안심하고 드실 수 있
 d21f4cd9649d	ko	좀 싸게 안 돼요?	+12%	ko-KR-SunHiNeural	
 d40ca5f7c29d	ko	좋네요! 알리페이 돼요?	+12%	ko-KR-SunHiNeural	
 6108b05005d2	ko	좋다	+12%	ko-KR-SunHiNeural	
+3bb7596dc8cd	ko	좋아요, 써볼게요.	+12%	ko-KR-SunHiNeural	
 c0b7f59c4b73	ko	좋아할 것 같다	+12%	ko-KR-SunHiNeural	
 d1e9372d0de2	ko	죄송하지만 이건 할인이 안 되는 상품이에요.	+12%	ko-KR-SunHiNeural	
 aa4f1326c4c2	ko	죄송합니다 (정중)	+12%	ko-KR-SunHiNeural	
 0a7a56162910	ko	죄송합니다, 할인이 안 되는 상품이에요.	+12%	ko-KR-SunHiNeural	
 366a58f45124	ko	죄송해요	+12%	ko-KR-SunHiNeural	
+c897e54b316c	ko	죄송해요, 결제가 안 됐어요.	+12%	ko-KR-SunHiNeural	
 b7b429a14502	ko	죄송해요. 면세가 안 됐어요.	+12%	ko-KR-SunHiNeural	
 6eb5fbab80e5	ko	주다, 선물하다	+12%	ko-KR-SunHiNeural	
 7d717f3457a0	ko	주세요	+12%	ko-KR-SunHiNeural	
@@ -1218,12 +1293,16 @@ f3dfa31f4d22	ko	최소	+12%	ko-KR-SunHiNeural
 a2b3ace4be3b	ko	최소 3개월은 계속해 보세요.	+12%	ko-KR-SunHiNeural	
 82a7f53f19fe	ko	최소 3개월은 꾸준히 써 보세요.	+12%	ko-KR-SunHiNeural	
 b9ba21cdd68c	ko	추천	+12%	ko-KR-SunHiNeural	
+5af61b95f353	ko	충분하다	+12%	ko-KR-SunHiNeural	
 54c680cf2245	ko	친구	+12%	ko-KR-SunHiNeural	
 a1cbd2a9b1cb	ko	친구 것도 사니까 조금 더 싸게 안 돼요?	+12%	ko-KR-SunHiNeural	
 a8558a425e5c	ko	친구 몫	+12%	ko-KR-SunHiNeural	
 7779044cea90	ko	친구 선물로 다섯 개요.	+12%	ko-KR-SunHiNeural	
 bd19fa57a142	ko	카드	+12%	ko-KR-SunHiNeural	
+d91a8dba6441	ko	카드 돼요?	+12%	ko-KR-SunHiNeural	
+913619618aab	ko	카드로 결제하다	+12%	ko-KR-SunHiNeural	
 1f891a037075	ko	카드로 할게요.	+12%	ko-KR-SunHiNeural	
+12339d6cc918	ko	카드를 꽂다	+12%	ko-KR-SunHiNeural	
 1be244ae9599	ko	카드예요, 현금이에요?	+12%	ko-KR-SunHiNeural	
 810a0f8a84f5	ko	칼슘	+12%	ko-KR-SunHiNeural	
 5a50beaa56cc	ko	코	+12%	ko-KR-SunHiNeural	
@@ -1259,17 +1338,23 @@ b87e655f981f	ko	피부과에서 레이저를 받았어요.	+12%	ko-KR-SunHiNeura
 751e7a788ffa	ko	하나, 한 개	+12%	ko-KR-SunHiNeural	
 c2b5eb892e4e	ko	하나만 써도 효과는 있지만, 같이 쓰는 게 훨씬 빨라요.	+12%	ko-KR-SunHiNeural	
 6c18a311e679	ko	하나에 얼마예요?	+12%	ko-KR-SunHiNeural	
+3b703bb97cf0	ko	하루	+12%	ko-KR-SunHiNeural	
+74017eb14aa6	ko	하루 두 번, 아침저녁이요.	+12%	ko-KR-SunHiNeural	
 c8630ba47336	ko	하루 세 번	+12%	ko-KR-SunHiNeural	
 02513de95151	ko	하루 세 번, 식후에 드세요.	+12%	ko-KR-SunHiNeural	
 b3b8d074be0c	ko	하루에 몇 번 바르면 돼요?	+12%	ko-KR-SunHiNeural	
+6e1236aa1c5e	ko	하루에 몇 번 써요?	+12%	ko-KR-SunHiNeural	
 6fd2a92d4ab7	ko	하루에 한 포씩 드세요.	+12%	ko-KR-SunHiNeural	
 9d576214cd48	ko	하루에 한 포씩, 봉지를 짜서 그대로 드세요.	+12%	ko-KR-SunHiNeural	
+2e7e3a909b9f	ko	하지만	+12%	ko-KR-SunHiNeural	
+96d9cbcad681	ko	하지만 꼭 선크림을 발라야 해요.	+12%	ko-KR-SunHiNeural	
 ff0099084366	ko	한 달분	+12%	ko-KR-SunHiNeural	
 260569812779	ko	한 박스	+12%	ko-KR-SunHiNeural	
 4c7cdbd4c905	ko	한 박스면 며칠분이에요?	+12%	ko-KR-SunHiNeural	
 f5cb6b4cef33	ko	한 박스에 30포 들어 있어서 한 달분이에요.	+12%	ko-KR-SunHiNeural	
 e90fa3e6a518	ko	한 박스에 얼마예요?	+12%	ko-KR-SunHiNeural	
 145ffa3c65e4	ko	한 박스에 한 달분이에요.	+12%	ko-KR-SunHiNeural	
+3fed3375763f	ko	한 번에 조금만 쓰면 충분해요.	+12%	ko-KR-SunHiNeural	
 7497c3c9b40d	ko	한 장씩	+12%	ko-KR-SunHiNeural	
 febd1c4714d2	ko	한 포	+12%	ko-KR-SunHiNeural	
 80369ce79e27	ko	한국	+12%	ko-KR-SunHiNeural	
@@ -1285,6 +1370,7 @@ fe6a939763f8	ko	할인하면 9만 원이에요.	+12%	ko-KR-SunHiNeural
 d95f5cbfc200	ko	함께, 같이	+12%	ko-KR-SunHiNeural	
 0220d57e57e4	ko	함량	+12%	ko-KR-SunHiNeural	
 a5cdb62b7fd0	ko	해 드리겠습니다	+12%	ko-KR-SunHiNeural	
+8700eb7178cb	ko	해보다	+12%	ko-KR-SunHiNeural	
 6832250834e2	ko	해요	+12%	ko-KR-SunHiNeural	
 947fd47b92dd	ko	현금	+12%	ko-KR-SunHiNeural	
 96c6e2ffbd47	ko	화장	+12%	ko-KR-SunHiNeural	
@@ -1294,6 +1380,7 @@ a5cdb62b7fd0	ko	해 드리겠습니다	+12%	ko-KR-SunHiNeural
 67a7ab0e2d99	ko	환급하면 더 싸요.	+12%	ko-KR-SunHiNeural	
 c3d14ab34c1e	ko	회복	+12%	ko-KR-SunHiNeural	
 eecf39d8c813	ko	효과	+12%	ko-KR-SunHiNeural	
+7128c1ba9c41	ko	효과가 없다	+12%	ko-KR-SunHiNeural	
 9d80929be0ef	ko	효과를 보려면 계속 드세요.	+12%	ko-KR-SunHiNeural	
 201319a3e8f8	ko	효과를 보려면 두 달은 계속 드세요.	+12%	ko-KR-SunHiNeural	
 2e091d8abbbf	ko	효과적	+12%	ko-KR-SunHiNeural	
@@ -1302,56 +1389,104 @@ eecf39d8c813	ko	효과	+12%	ko-KR-SunHiNeural
 77714bcc8623	ko	흡수	+12%	ko-KR-SunHiNeural	
 23083674d439	ko	흡수가 잘 안 되는	+12%	ko-KR-SunHiNeural	
 e80ac849f4d9	zh	PDRN是什么？	0%	zh-CN-XiaoxiaoNeural	
+91e3ebf5e4d6	zh	一下	0%	zh-CN-XiaoxiaoNeural	
 fc81dd901154	zh	一共	0%	zh-CN-XiaoxiaoNeural	
 29d7dc71e24a	zh	一共十二万韩元。	0%	zh-CN-XiaoxiaoNeural	
 1d75e3c1b48e	zh	一共十二万韩元，退税以后是十一万。	0%	zh-CN-XiaoxiaoNeural	
+6e9f811b940b	zh	一天	0%	zh-CN-XiaoxiaoNeural	
+918ed434afcf	zh	一天两次，早上和晚上。	0%	zh-CN-XiaoxiaoNeural	
+7efd0cd78ead	zh	一天用几次？	0%	zh-CN-XiaoxiaoNeural	
+592c1274278a	zh	一定	0%	zh-CN-XiaoxiaoNeural	
+d44ab1624816	zh	一定要	0%	zh-CN-XiaoxiaoNeural	
+01847ebe9139	zh	一次	0%	zh-CN-XiaoxiaoNeural	
+dd40e5f9e941	zh	一次用一点就够了。	0%	zh-CN-XiaoxiaoNeural	
 af7adf242b98	zh	一点	0%	zh-CN-XiaoxiaoNeural	
 1e06e3cf341f	zh	一盒	0%	zh-CN-XiaoxiaoNeural	
 e9d5c210fd6c	zh	万	0%	zh-CN-XiaoxiaoNeural	
 1c125c9e7832	zh	三文鱼	0%	zh-CN-XiaoxiaoNeural	
+9369d5944f96	zh	不好意思	0%	zh-CN-XiaoxiaoNeural	
+40c3b43b98a2	zh	不好意思，付款没成功。	0%	zh-CN-XiaoxiaoNeural	
+4d4c18995cff	zh	不然	0%	zh-CN-XiaoxiaoNeural	
 95a53cbcfd9a	zh	两万韩元，退税以后更便宜。	0%	zh-CN-XiaoxiaoNeural	
+d07804e830ba	zh	两个一起用可以吗？	0%	zh-CN-XiaoxiaoNeural	
+21edb3414fba	zh	两个星期	0%	zh-CN-XiaoxiaoNeural	
+df8dee0283ff	zh	两次	0%	zh-CN-XiaoxiaoNeural	
 f780542326b2	zh	为什么要护照？	0%	zh-CN-XiaoxiaoNeural	
+6d602ce8cf12	zh	久等了	0%	zh-CN-XiaoxiaoNeural	
 2492e5f89874	zh	也	0%	zh-CN-XiaoxiaoNeural	
+67a6418e7f08	zh	也可以	0%	zh-CN-XiaoxiaoNeural	
 cfb47d831aed	zh	买	0%	zh-CN-XiaoxiaoNeural	
 f01c4b29f826	zh	买五个的话，可以打九折。	0%	zh-CN-XiaoxiaoNeural	
 1c5e94a17915	zh	买这么多，可以便宜一点吗？	0%	zh-CN-XiaoxiaoNeural	
+ae3214159792	zh	了	0%	zh-CN-XiaoxiaoNeural	
 498efda26598	zh	五个	0%	zh-CN-XiaoxiaoNeural	
+6182e3e55c2e	zh	付款	0%	zh-CN-XiaoxiaoNeural	
 7fe6d118fec6	zh	付款成功了	0%	zh-CN-XiaoxiaoNeural	
 4a5da48d691a	zh	付款成功了，谢谢！	0%	zh-CN-XiaoxiaoNeural	
 d2ca8e432e18	zh	付款码	0%	zh-CN-XiaoxiaoNeural	
 f7d0b7925e94	zh	以后	0%	zh-CN-XiaoxiaoNeural	
+40581fd8dd6b	zh	但是	0%	zh-CN-XiaoxiaoNeural	
+fb3cdbb187c0	zh	但是一定要防晒。	0%	zh-CN-XiaoxiaoNeural	
 797abeb5e595	zh	你们真好！	0%	zh-CN-XiaoxiaoNeural	
 075eae30b498	zh	便宜	0%	zh-CN-XiaoxiaoNeural	
 c45d9cd0a49b	zh	保湿	0%	zh-CN-XiaoxiaoNeural	
 0c59d372db6a	zh	保湿效果很好。	0%	zh-CN-XiaoxiaoNeural	
 eeb2d114c70f	zh	修复	0%	zh-CN-XiaoxiaoNeural	
+398fca3ea953	zh	先	0%	zh-CN-XiaoxiaoNeural	
+a832b4a222af	zh	先洗脸。	0%	zh-CN-XiaoxiaoNeural	
+70d953f76efa	zh	先用精华，然后用面霜。	0%	zh-CN-XiaoxiaoNeural	
+ae1b466b28c8	zh	再	0%	zh-CN-XiaoxiaoNeural	
 08352f640eb3	zh	再生	0%	zh-CN-XiaoxiaoNeural	
 10436fb65053	zh	分开	0%	zh-CN-XiaoxiaoNeural	
+a7b45e1d8963	zh	别的	0%	zh-CN-XiaoxiaoNeural	
+0866a6c03dc5	zh	刷不了	0%	zh-CN-XiaoxiaoNeural	
+513368c28510	zh	刷卡	0%	zh-CN-XiaoxiaoNeural	
+d1bbceecf457	zh	刷新	0%	zh-CN-XiaoxiaoNeural	
+e066fbb2c1e4	zh	刺激	0%	zh-CN-XiaoxiaoNeural	
 13e113a89410	zh	十一	0%	zh-CN-XiaoxiaoNeural	
 cdc0ed8bcf8d	zh	十二	0%	zh-CN-XiaoxiaoNeural	
+bb0b0318f400	zh	卖得最好	0%	zh-CN-XiaoxiaoNeural	
+de5af9045768	zh	卡吗	0%	zh-CN-XiaoxiaoNeural	
 dac8ceef8dc3	zh	受欢迎	0%	zh-CN-XiaoxiaoNeural	
+35e5a7a363b1	zh	变亮	0%	zh-CN-XiaoxiaoNeural	
+b31b267e4922	zh	只能	0%	zh-CN-XiaoxiaoNeural	
 308fd2e266e2	zh	可以	0%	zh-CN-XiaoxiaoNeural	
 21b293b92180	zh	可以便宜一点吗？	0%	zh-CN-XiaoxiaoNeural	
 74e01b7ac3ad	zh	可以分开装。	0%	zh-CN-XiaoxiaoNeural	
+753345c32a6d	zh	可以刷卡吗？	0%	zh-CN-XiaoxiaoNeural	
+f3664831efcf	zh	可以让皮肤	0%	zh-CN-XiaoxiaoNeural	
 00034063a35c	zh	可以试一下吗？	0%	zh-CN-XiaoxiaoNeural	
 feb1213f1db6	zh	可以试一下，这是试用装。	0%	zh-CN-XiaoxiaoNeural	
 cc25d18e8505	zh	可以马上退税。	0%	zh-CN-XiaoxiaoNeural	
+508fbba77c8a	zh	可以，但是早上一定要涂防晒。	0%	zh-CN-XiaoxiaoNeural	
 b75b7d711cf1	zh	可以，支付宝和微信都可以。	0%	zh-CN-XiaoxiaoNeural	
 cd45869631bb	zh	可以，每个都给您一个袋子。	0%	zh-CN-XiaoxiaoNeural	
+9b32023406c8	zh	可以，白天用精华，晚上用药膏。	0%	zh-CN-XiaoxiaoNeural	
+fdd84541e27f	zh	可以，请插卡。	0%	zh-CN-XiaoxiaoNeural	
 ed8a32d0b5e4	zh	可以，这是试用装。	0%	zh-CN-XiaoxiaoNeural	
 6462e31c56ab	zh	吗	0%	zh-CN-XiaoxiaoNeural	
 e75054591287	zh	和	0%	zh-CN-XiaoxiaoNeural	
 35eb59d155d0	zh	在用	0%	zh-CN-XiaoxiaoNeural	
+db892e49806b	zh	坚持	0%	zh-CN-XiaoxiaoNeural	
+380278be301c	zh	坚持两个星期，就能感觉到。	0%	zh-CN-XiaoxiaoNeural	
+eaee1d10952a	zh	坚持用两个星期，就能感觉到。	0%	zh-CN-XiaoxiaoNeural	
+65f2a85270cb	zh	多久能看到效果？	0%	zh-CN-XiaoxiaoNeural	
 e9767fd0860d	zh	多少钱一盒？	0%	zh-CN-XiaoxiaoNeural	
+e291e1ac3c64	zh	够	0%	zh-CN-XiaoxiaoNeural	
 8672e75986d5	zh	太好了！	0%	zh-CN-XiaoxiaoNeural	
 0abd9d8f0705	zh	太好了！可以用支付宝吗？	0%	zh-CN-XiaoxiaoNeural	
 b716d25c9011	zh	好的，五个。	0%	zh-CN-XiaoxiaoNeural	
 c27d61090a4e	zh	好的，给你。	0%	zh-CN-XiaoxiaoNeural	
+c5a6fbe16ce4	zh	好，我试试。	0%	zh-CN-XiaoxiaoNeural	
+c89533919277	zh	如果	0%	zh-CN-XiaoxiaoNeural	
+bf8cd60dc913	zh	如果有刺激的话，先隔天用。	0%	zh-CN-XiaoxiaoNeural	
 587d7a9c88a0	zh	对，很多韩国人在用。我自己也在用。	0%	zh-CN-XiaoxiaoNeural	
 8f20d48d90e7	zh	对，我来扫。	0%	zh-CN-XiaoxiaoNeural	
 b3891fc4ae92	zh	对，这个是我们店最受欢迎的。	0%	zh-CN-XiaoxiaoNeural	
 6c19b726c384	zh	小样	0%	zh-CN-XiaoxiaoNeural	
 5fd3f04499cb	zh	小红书	0%	zh-CN-XiaoxiaoNeural	
+bc66f870eda3	zh	就	0%	zh-CN-XiaoxiaoNeural	
+f65ecbc60cde	zh	就能	0%	zh-CN-XiaoxiaoNeural	
 1fba3cd7ad58	zh	干	0%	zh-CN-XiaoxiaoNeural	
 1986522e6fb3	zh	当然	0%	zh-CN-XiaoxiaoNeural	
 091d85ecbcaf	zh	当然是正品。	0%	zh-CN-XiaoxiaoNeural	
@@ -1360,64 +1495,128 @@ b3891fc4ae92	zh	对，这个是我们店最受欢迎的。	0%	zh-CN-XiaoxiaoNeur
 dc9577044118	zh	很滋润，我要两个。	0%	zh-CN-XiaoxiaoNeural	
 db74d6025146	zh	很适合	0%	zh-CN-XiaoxiaoNeural	
 b2135937adcd	zh	微信	0%	zh-CN-XiaoxiaoNeural	
+6e46bde59168	zh	怎么回事	0%	zh-CN-XiaoxiaoNeural	
+f5020d441c5c	zh	怎么回事？	0%	zh-CN-XiaoxiaoNeural	
 c1e71a629e1d	zh	您好	0%	zh-CN-XiaoxiaoNeural	
 ef21be71cd9c	zh	您好，请给我护照。	0%	zh-CN-XiaoxiaoNeural	
+6b59bf88cd30	zh	感觉到	0%	zh-CN-XiaoxiaoNeural	
 26e352af365f	zh	成分	0%	zh-CN-XiaoxiaoNeural	
+d3046fcf66a7	zh	成功了！让您久等了。	0%	zh-CN-XiaoxiaoNeural	
 9f7df8beb614	zh	我	0%	zh-CN-XiaoxiaoNeural	
 902d1513e2ef	zh	我们	0%	zh-CN-XiaoxiaoNeural	
 c48b652aab1b	zh	我们是药店。	0%	zh-CN-XiaoxiaoNeural	
+9f5ae000d939	zh	我再试一次。	0%	zh-CN-XiaoxiaoNeural	
 820aee3b488c	zh	我在小红书上看到这个。	0%	zh-CN-XiaoxiaoNeural	
 43ffdd886059	zh	我来扫	0%	zh-CN-XiaoxiaoNeural	
+3113486bb730	zh	我用微信试试。	0%	zh-CN-XiaoxiaoNeural	
 3543f5a4c338	zh	我的皮肤比较干。	0%	zh-CN-XiaoxiaoNeural	
+bcfd5c7248e2	zh	我脸上有斑。	0%	zh-CN-XiaoxiaoNeural	
+8fe760bd89b8	zh	我脸上有斑，有美白的吗？	0%	zh-CN-XiaoxiaoNeural	
 90d36a8d59e4	zh	我自己也在用。	0%	zh-CN-XiaoxiaoNeural	
+fe6444dda245	zh	或者	0%	zh-CN-XiaoxiaoNeural	
+d973e0e6bf58	zh	或者用微信也可以。	0%	zh-CN-XiaoxiaoNeural	
 16d62a47e2a2	zh	打九折	0%	zh-CN-XiaoxiaoNeural	
 f9a55c4a7b54	zh	打折	0%	zh-CN-XiaoxiaoNeural	
 5682f46b7018	zh	打折以后是九万韩元。	0%	zh-CN-XiaoxiaoNeural	
 194baab72ee9	zh	护照	0%	zh-CN-XiaoxiaoNeural	
 d05dba359216	zh	护照还给您，欢迎再来！	0%	zh-CN-XiaoxiaoNeural	
 47f82a808786	zh	提取的	0%	zh-CN-XiaoxiaoNeural	
+4aeaf443a5bc	zh	插卡	0%	zh-CN-XiaoxiaoNeural	
 06fd38c94bf5	zh	支付宝	0%	zh-CN-XiaoxiaoNeural	
 416216c30a29	zh	支付宝和微信都可以。	0%	zh-CN-XiaoxiaoNeural	
 353e9d290d41	zh	效果	0%	zh-CN-XiaoxiaoNeural	
+19e795280690	zh	敏感肌	0%	zh-CN-XiaoxiaoNeural	
+81f3e6cfe23b	zh	敏感肌也比较温和。	0%	zh-CN-XiaoxiaoNeural	
+0b4faef10754	zh	敏感肌可以用吗？	0%	zh-CN-XiaoxiaoNeural	
+e29a7e7db1f4	zh	斑	0%	zh-CN-XiaoxiaoNeural	
+17d22d30c042	zh	斑很深，有更强的吗？	0%	zh-CN-XiaoxiaoNeural	
+d176fde04871	zh	早上	0%	zh-CN-XiaoxiaoNeural	
+ad8439cc0269	zh	早上也可以用吗？	0%	zh-CN-XiaoxiaoNeural	
 cc3c9cd3c520	zh	是	0%	zh-CN-XiaoxiaoNeural	
 8b3730438621	zh	是九万韩元	0%	zh-CN-XiaoxiaoNeural	
 556ba2310c74	zh	是从	0%	zh-CN-XiaoxiaoNeural	
 b99ef9b590ed	zh	是从三文鱼提取的成分。	0%	zh-CN-XiaoxiaoNeural	
 5844e34b07fa	zh	是从三文鱼提取的成分，对皮肤再生很好。	0%	zh-CN-XiaoxiaoNeural	
 b696ad93d241	zh	是正品吗？	0%	zh-CN-XiaoxiaoNeural	
+2b1b025b3d61	zh	晚上	0%	zh-CN-XiaoxiaoNeural	
+6b991b3946a3	zh	晚上用	0%	zh-CN-XiaoxiaoNeural	
 a5406509d76b	zh	更	0%	zh-CN-XiaoxiaoNeural	
+6020c178919b	zh	更强	0%	zh-CN-XiaoxiaoNeural	
 e41f6451a265	zh	最	0%	zh-CN-XiaoxiaoNeural	
+10f1af73682d	zh	有	0%	zh-CN-XiaoxiaoNeural	
+eb68b6f9552d	zh	有什么成分？	0%	zh-CN-XiaoxiaoNeural	
+4a794477bb08	zh	有别的卡吗？	0%	zh-CN-XiaoxiaoNeural	
+ba88a134a5c6	zh	有别的卡吗？或者用微信也可以。	0%	zh-CN-XiaoxiaoNeural	
+e500c95157a4	zh	有时候	0%	zh-CN-XiaoxiaoNeural	
+dcfdc6042bfb	zh	有烟酰胺和维C，可以让皮肤变亮。	0%	zh-CN-XiaoxiaoNeural	
+fa13bdf1f5d4	zh	有美白的吗？	0%	zh-CN-XiaoxiaoNeural	
+78ef76d36e80	zh	有，这个是药膏，效果更强，但是只能晚上用。	0%	zh-CN-XiaoxiaoNeural	
 d0d420c30697	zh	朋友	0%	zh-CN-XiaoxiaoNeural	
 452159d18130	zh	欢迎再来	0%	zh-CN-XiaoxiaoNeural	
 3dfb13042a5c	zh	正品	0%	zh-CN-XiaoxiaoNeural	
+9b18fd42453f	zh	比较	0%	zh-CN-XiaoxiaoNeural	
+f4187822c866	zh	比较温和。如果有刺激的话，先隔天用。	0%	zh-CN-XiaoxiaoNeural	
+587769a570b7	zh	没成功	0%	zh-CN-XiaoxiaoNeural	
+3c4549b5427d	zh	没有效果	0%	zh-CN-XiaoxiaoNeural	
 3b30e50cb710	zh	没问题	0%	zh-CN-XiaoxiaoNeural	
+5f721f428508	zh	洗脸	0%	zh-CN-XiaoxiaoNeural	
+9a2ad953cccd	zh	洗脸以后，先用精华，然后用面霜。	0%	zh-CN-XiaoxiaoNeural	
+d3602070b84f	zh	温和	0%	zh-CN-XiaoxiaoNeural	
+1544c61ccf0a	zh	烟酰胺	0%	zh-CN-XiaoxiaoNeural	
+231c3d0a0704	zh	然后	0%	zh-CN-XiaoxiaoNeural	
+97f91a195e45	zh	用	0%	zh-CN-XiaoxiaoNeural	
+46b8bf4202be	zh	用一点就够了。	0%	zh-CN-XiaoxiaoNeural	
+b6c45f6e6d40	zh	用多少？	0%	zh-CN-XiaoxiaoNeural	
+35fc32d2240d	zh	白天	0%	zh-CN-XiaoxiaoNeural	
+ed323a900ab8	zh	白天用精华，晚上用药膏。	0%	zh-CN-XiaoxiaoNeural	
+125cb6bf291c	zh	的	0%	zh-CN-XiaoxiaoNeural	
+a4735e9f83a8	zh	的吗	0%	zh-CN-XiaoxiaoNeural	
 bffb66e82430	zh	的话	0%	zh-CN-XiaoxiaoNeural	
 032cc8be48c6	zh	皮肤	0%	zh-CN-XiaoxiaoNeural	
+2e8fbf30983c	zh	精华	0%	zh-CN-XiaoxiaoNeural	
 20302eb18c08	zh	给您	0%	zh-CN-XiaoxiaoNeural	
+2f14afa32023	zh	维C	0%	zh-CN-XiaoxiaoNeural	
+2de726f0770f	zh	美白	0%	zh-CN-XiaoxiaoNeural	
+a7a09c2fdf83	zh	美白一定要防晒，不然没有效果。	0%	zh-CN-XiaoxiaoNeural	
 e0f3a0c02b88	zh	能帮我分开装吗？	0%	zh-CN-XiaoxiaoNeural	
+5b96cf24dca8	zh	脸上	0%	zh-CN-XiaoxiaoNeural	
 b45720e40df5	zh	自己	0%	zh-CN-XiaoxiaoNeural	
 a0b6b3bcf45d	zh	药店	0%	zh-CN-XiaoxiaoNeural	
+84252777b6a8	zh	药膏	0%	zh-CN-XiaoxiaoNeural	
+f9c0079d4501	zh	药膏效果更强，但是只能晚上用。	0%	zh-CN-XiaoxiaoNeural	
 231bc82c1050	zh	袋子	0%	zh-CN-XiaoxiaoNeural	
 a765a3e01274	zh	装	0%	zh-CN-XiaoxiaoNeural	
+2304138b9600	zh	要	0%	zh-CN-XiaoxiaoNeural	
 853bec338095	zh	要，谢谢。	0%	zh-CN-XiaoxiaoNeural	
+99b48f024336	zh	让您	0%	zh-CN-XiaoxiaoNeural	
+224dae0c1bcf	zh	让您久等了。	0%	zh-CN-XiaoxiaoNeural	
+28db5c18fb0e	zh	试	0%	zh-CN-XiaoxiaoNeural	
 2542770fa773	zh	试一下	0%	zh-CN-XiaoxiaoNeural	
 e41fb5a84a03	zh	试用装	0%	zh-CN-XiaoxiaoNeural	
+61da0322c115	zh	请	0%	zh-CN-XiaoxiaoNeural	
 39cc9ea69d55	zh	请出示	0%	zh-CN-XiaoxiaoNeural	
 7b1627a2ad20	zh	请出示付款码。	0%	zh-CN-XiaoxiaoNeural	
 22f4f7232668	zh	请给我	0%	zh-CN-XiaoxiaoNeural	
 81d2c69e6f36	zh	谢谢	0%	zh-CN-XiaoxiaoNeural	
+36dc7b9ffac4	zh	还是不行	0%	zh-CN-XiaoxiaoNeural	
+cf7e637c081a	zh	还是不行，可以刷卡吗？	0%	zh-CN-XiaoxiaoNeural	
+c8444ce851a8	zh	还是不行，请刷新一下付款码。	0%	zh-CN-XiaoxiaoNeural	
 3f0bcb868177	zh	还给您	0%	zh-CN-XiaoxiaoNeural	
 d5f3bba622dd	zh	这个	0%	zh-CN-XiaoxiaoNeural	
 b49d0477dfa8	zh	这个吗？	0%	zh-CN-XiaoxiaoNeural	
 d7f433c6f638	zh	这个小样也送给您。	0%	zh-CN-XiaoxiaoNeural	
 4991ff6dd892	zh	这个小样也送给您朋友。	0%	zh-CN-XiaoxiaoNeural	
+5a5402ba9dc0	zh	这个怎么用？	0%	zh-CN-XiaoxiaoNeural	
 c47cec9cb02b	zh	这个我要买五个，送朋友。	0%	zh-CN-XiaoxiaoNeural	
 99db3dda71d2	zh	这个最受欢迎。	0%	zh-CN-XiaoxiaoNeural	
 bac1e0654dc8	zh	这个有什么效果？	0%	zh-CN-XiaoxiaoNeural	
 33973edc4d71	zh	这个面膜也很适合送礼。	0%	zh-CN-XiaoxiaoNeural	
+31a853aa4f15	zh	这张是银联卡，银联卡有时候会刷不了。	0%	zh-CN-XiaoxiaoNeural	
 654b8ac8a1c7	zh	这是	0%	zh-CN-XiaoxiaoNeural	
 399382fa7fb7	zh	这是PDRN面霜，修复效果很好。	0%	zh-CN-XiaoxiaoNeural	
 89bfc460f850	zh	这是修复面霜。	0%	zh-CN-XiaoxiaoNeural	
+86a068fd815a	zh	这是卖得最好的精华。	0%	zh-CN-XiaoxiaoNeural	
+9b0ee1c5f6d6	zh	这是我们卖得最好的美白精华。	0%	zh-CN-XiaoxiaoNeural	
 cbadd6946304	zh	退税	0%	zh-CN-XiaoxiaoNeural	
 c8757ccdf9af	zh	退税以后是十一万。	0%	zh-CN-XiaoxiaoNeural	
 b8ba5d96896a	zh	退税以后更便宜。	0%	zh-CN-XiaoxiaoNeural	
@@ -1426,8 +1625,14 @@ b35a852f6372	zh	送	0%	zh-CN-XiaoxiaoNeural
 a44063b8faa3	zh	送礼	0%	zh-CN-XiaoxiaoNeural	
 416fc55e2699	zh	适合	0%	zh-CN-XiaoxiaoNeural	
 2e88ae1ca4fc	zh	适合干皮肤。	0%	zh-CN-XiaoxiaoNeural	
+d1c8ba02f465	zh	那怎么办？	0%	zh-CN-XiaoxiaoNeural	
 742cb38c2d87	zh	那更适合您，保湿效果很好。	0%	zh-CN-XiaoxiaoNeural	
+4b921b33fb3e	zh	那防晒霜也要一个。	0%	zh-CN-XiaoxiaoNeural	
 3aa23f71b8c1	zh	都	0%	zh-CN-XiaoxiaoNeural	
+b0c298317789	zh	银联卡	0%	zh-CN-XiaoxiaoNeural	
+0773f8200906	zh	银联卡有时候刷不了。	0%	zh-CN-XiaoxiaoNeural	
+445c69ea28bc	zh	防晒	0%	zh-CN-XiaoxiaoNeural	
+9a96ec48816e	zh	隔天	0%	zh-CN-XiaoxiaoNeural	
 8099fd760152	zh	需要	0%	zh-CN-XiaoxiaoNeural	
 37a32a2ded70	zh	需要袋子吗？	0%	zh-CN-XiaoxiaoNeural	
 3f56d89da53c	zh	面膜	0%	zh-CN-XiaoxiaoNeural	
