@@ -1641,3 +1641,211 @@ b0c298317789	zh	银联卡	0%	zh-CN-XiaoxiaoNeural
 7b408e643071	zh	韩元	0%	zh-CN-XiaoxiaoNeural	
 0bdd018f3fbf	zh	韩国人也用这个吗？	0%	zh-CN-XiaoxiaoNeural	
 6f9f816c089a	zh	马上	0%	zh-CN-XiaoxiaoNeural	
+9d358803219e	en	sore throat	0%	en-US-JennyNeural	
+073a5599495b	ko	목 아픔	+12%	ko-KR-SunHiNeural	
+d5f5513fa307	en	good for a sore throat	0%	en-US-JennyNeural	
+5f27e44bdb20	ko	목 아픈 데 좋은	+12%	ko-KR-SunHiNeural	
+7349d51ba5ee	en	sleepy	0%	en-US-JennyNeural	
+cbb24ea6b62e	ko	졸린	+12%	ko-KR-SunHiNeural	
+b14ce9d289bc	en	make you sleepy	0%	en-US-JennyNeural	
+ee4e363115da	ko	졸리게 하다	+12%	ko-KR-SunHiNeural	
+d76ba05a641d	en	a fever or a cough	0%	en-US-JennyNeural	
+ff89c543e8cf	ko	열이나 기침	+12%	ko-KR-SunHiNeural	
+2b56a487725d	en	after meals	0%	en-US-JennyNeural	
+9ceac8bc8c87	ko	식후에	+12%	ko-KR-SunHiNeural	
+194bac4dceec	en	three times a day	0%	en-US-JennyNeural	
+4c1bccd1b608	en	one pouch	0%	en-US-JennyNeural	
+21827cffc92d	en	one pouch a day	0%	en-US-JennyNeural	
+b46695e595fe	ko	하루 한 포	+12%	ko-KR-SunHiNeural	
+ddfccc087311	en	straight from the pouch	0%	en-US-JennyNeural	
+623f18f34224	ko	포에서 바로	+12%	ko-KR-SunHiNeural	
+eb71c6f3bcea	en	one of our best sellers	0%	en-US-JennyNeural	
+efd3fe91c5c6	ko	저희 인기 제품 중 하나	+12%	ko-KR-SunHiNeural	
+951fef843a26	en	shopping bag	0%	en-US-JennyNeural	
+5e8d2e754a1d	en	see a doctor	0%	en-US-JennyNeural	
+74b42fdf47bc	ko	병원에 가다	+12%	ko-KR-SunHiNeural	
+161eea42d411	en	doesn't get better	0%	en-US-JennyNeural	
+8b40bbd9d46b	en	This one is good for a sore throat.	0%	en-US-JennyNeural	
+bacaecc29d2a	ko	이게 목 아픈 데 좋아요.	+12%	ko-KR-SunHiNeural	
+2fa1a3b67e0c	en	It won't make you sleepy.	0%	en-US-JennyNeural	
+f2c6e5e6583e	ko	졸리지 않아요.	+12%	ko-KR-SunHiNeural	
+4491d4de7a8e	en	Do you have a fever or a cough?	0%	en-US-JennyNeural	
+589dada639e1	ko	열이나 기침 있으세요?	+12%	ko-KR-SunHiNeural	
+9933e4fc10cd	en	Take two tablets three times a day.	0%	en-US-JennyNeural	
+1f741f4eca1e	ko	하루 세 번 두 알씩 드세요.	+12%	ko-KR-SunHiNeural	
+aa80c29f548b	en	Take one pouch a day.	0%	en-US-JennyNeural	
+38634b99d073	ko	하루 한 포 드세요.	+12%	ko-KR-SunHiNeural	
+ee0390a224a2	en	You can squeeze it straight from the pouch.	0%	en-US-JennyNeural	
+196ef652926e	ko	포에서 바로 짜서 드시면 돼요.	+12%	ko-KR-SunHiNeural	
+258b85fca64a	en	Would you like a shopping bag?	0%	en-US-JennyNeural	
+79d9b7ca3b86	ko	쇼핑백 드릴까요?	+12%	ko-KR-SunHiNeural	
+78c46d63b8af	en	Please see a doctor.	0%	en-US-JennyNeural	
+52c24d56a38e	ko	병원에 가 보세요.	+12%	ko-KR-SunHiNeural	
+1007bef6c0e7	en	Hi, I have a sore throat. Do you have anything for it?	0%	en-US-JennyNeural	
+cd1b1ee52966	ko	안녕하세요, 목이 아픈데 약 있어요?	+12%	ko-KR-SunHiNeural	
+8b8a0833b3e7	en	Sure. Do you have a fever or a cough?	0%	en-US-JennyNeural	
+70f5b9ff16b2	ko	네. 열이나 기침 있으세요?	+12%	ko-KR-SunHiNeural	
+76271366c051	en	No fever, just a little cough.	0%	en-US-JennyNeural	
+fca6d2f9b48a	ko	열은 없고 기침이 조금 나요.	+12%	ko-KR-SunHiNeural	
+053698252541	en	This one is good for a sore throat, and it won't make you sleepy.	0%	en-US-JennyNeural	
+7295942a86cf	ko	이게 목 아픈 데 좋고, 졸리지 않아요.	+12%	ko-KR-SunHiNeural	
+ac870ec63367	en	How do I take it?	0%	en-US-JennyNeural	
+8aca884cd52c	en	Take two tablets three times a day, after meals.	0%	en-US-JennyNeural	
+6a99a220b5c6	ko	하루 세 번, 식후에 두 알씩 드세요.	+12%	ko-KR-SunHiNeural	
+9b5142dbef80	en	Okay. Oh, is this collagen?	0%	en-US-JennyNeural	
+3a04202226d4	ko	알겠어요. 아, 이거 콜라겐이에요?	+12%	ko-KR-SunHiNeural	
+f4448ab4e1b9	en	Yes, it's one of our best sellers.	0%	en-US-JennyNeural	
+3e0ae6a78022	ko	네, 저희 인기 제품이에요.	+12%	ko-KR-SunHiNeural	
+58b1ca75a4f5	en	How do I take this one?	0%	en-US-JennyNeural	
+c4e86b011aa6	ko	이건 어떻게 먹어요?	+12%	ko-KR-SunHiNeural	
+0c6f5dd4df55	en	Take one pouch a day. You can squeeze it straight from the pouch.	0%	en-US-JennyNeural	
+6ec888a63135	ko	하루 한 포, 포에서 바로 짜서 드시면 돼요.	+12%	ko-KR-SunHiNeural	
+169d3ba35f58	en	Great, I'll take both.	0%	en-US-JennyNeural	
+73bd1f5bac47	ko	좋아요, 둘 다 살게요.	+12%	ko-KR-SunHiNeural	
+adbd0b1b9648	en	Would you like a shopping bag? It's free.	0%	en-US-JennyNeural	
+36d906ca0ab8	ko	쇼핑백 드릴까요? 무료예요.	+12%	ko-KR-SunHiNeural	
+d0d7ba67bd53	en	Yes, please. Thank you!	0%	en-US-JennyNeural	
+f15dde5d9f55	ko	네, 감사해요!	+12%	ko-KR-SunHiNeural	
+d0572785a2e6	en	If your throat doesn't get better in three days, please see a doctor.	0%	en-US-JennyNeural	
+059266245bf1	ko	3일 지나도 안 나으면 병원에 가 보세요.	+12%	ko-KR-SunHiNeural	
+bc7d738601af	en	skin barrier	0%	en-US-JennyNeural	
+0d4923086e7e	ko	피부 장벽	+12%	ko-KR-SunHiNeural	
+a7dfacda9e8f	en	strengthens your skin barrier	0%	en-US-JennyNeural	
+efa9dd6eb795	ko	피부 장벽을 튼튼하게 하다	+12%	ko-KR-SunHiNeural	
+1d183137237c	en	dark spots	0%	en-US-JennyNeural	
+8851fc9f09e2	ko	잡티	+12%	ko-KR-SunHiNeural	
+28dfe9bcc870	en	helps with dark spots	0%	en-US-JennyNeural	
+75d473d7dd15	ko	잡티에 도움이 되다	+12%	ko-KR-SunHiNeural	
+d9da0608b385	en	recover	0%	en-US-JennyNeural	
+6fff7d42b923	ko	회복하다	+12%	ko-KR-SunHiNeural	
+818f8ba366c3	en	helps your skin recover	0%	en-US-JennyNeural	
+be0d37c9bb85	ko	피부 회복을 돕다	+12%	ko-KR-SunHiNeural	
+26d5e3a45150	en	laser treatments	0%	en-US-JennyNeural	
+96e540085a36	ko	레이저 시술	+12%	ko-KR-SunHiNeural	
+e2b0e9597284	en	great after laser treatments	0%	en-US-JennyNeural	
+ffe2524dcb4f	ko	레이저 시술 후에 좋은	+12%	ko-KR-SunHiNeural	
+66d069313980	en	perfect for you	0%	en-US-JennyNeural	
+fdeb009be34e	ko	손님께 딱이에요	+12%	ko-KR-SunHiNeural	
+fd5504fa5689	en	very gentle	0%	en-US-JennyNeural	
+14e0673b54a4	ko	아주 순한	+12%	ko-KR-SunHiNeural	
+c9985972f9ba	en	calms down	0%	en-US-JennyNeural	
+234b51cad150	ko	진정되다	+12%	ko-KR-SunHiNeural	
+f56c4bcaa307	en	wait about a week	0%	en-US-JennyNeural	
+767a40218784	ko	일주일쯤 기다리다	+12%	ko-KR-SunHiNeural	
+803b01f62939	en	only at night	0%	en-US-JennyNeural	
+40f92423b036	en	use it only at night	0%	en-US-JennyNeural	
+4a9a34f75cee	ko	밤에만 쓰다	+12%	ko-KR-SunHiNeural	
+4f97fcc7c05d	en	wear sunscreen	0%	en-US-JennyNeural	
+cc5a3b102be3	ko	선크림을 바르다	+12%	ko-KR-SunHiNeural	
+2eb685605393	en	in the morning	0%	en-US-JennyNeural	
+827121cf970d	ko	아침에	+12%	ko-KR-SunHiNeural	
+617430566af5	en	see the difference	0%	en-US-JennyNeural	
+02a6d4e1cd44	ko	차이를 느끼다	+12%	ko-KR-SunHiNeural	
+8104d8857ee8	en	Niacinamide strengthens your skin barrier.	0%	en-US-JennyNeural	
+226af5984505	ko	나이아신아마이드는 피부 장벽을 튼튼하게 해요.	+12%	ko-KR-SunHiNeural	
+5477c0fabd14	en	It helps with dark spots.	0%	en-US-JennyNeural	
+ced14e92eb35	ko	잡티에도 도움이 돼요.	+12%	ko-KR-SunHiNeural	
+edcdbf0f2681	en	PDRN helps your skin recover.	0%	en-US-JennyNeural	
+7bebaa3e626f	ko	PDRN은 피부 회복을 도와요.	+12%	ko-KR-SunHiNeural	
+63a19941f0b2	en	It's great after laser treatments.	0%	en-US-JennyNeural	
+13aad613f03e	ko	레이저 시술 후에 좋아요.	+12%	ko-KR-SunHiNeural	
+0258d93ab4fb	en	It's very gentle.	0%	en-US-JennyNeural	
+336841a46f64	ko	아주 순해요.	+12%	ko-KR-SunHiNeural	
+252b49082aa5	en	Wait about a week until your skin calms down.	0%	en-US-JennyNeural	
+04ee4ae14f7b	ko	피부가 진정될 때까지 일주일쯤 기다리세요.	+12%	ko-KR-SunHiNeural	
+db96d97477c8	en	Retinol is strong, so use it only at night.	0%	en-US-JennyNeural	
+e9740eab6188	ko	레티놀은 강해서 밤에만 쓰세요.	+12%	ko-KR-SunHiNeural	
+9bb68564faa2	en	Wear sunscreen in the morning.	0%	en-US-JennyNeural	
+ee67d4e7db71	en	You'll see the difference in a few weeks.	0%	en-US-JennyNeural	
+7b37387b255c	ko	몇 주 뒤면 차이가 느껴질 거예요.	+12%	ko-KR-SunHiNeural	
+df3ea9f83ad7	en	What's niacinamide? I see it everywhere.	0%	en-US-JennyNeural	
+1d1b9dc7f120	ko	나이아신아마이드가 뭐예요? 어디에나 있던데요.	+12%	ko-KR-SunHiNeural	
+c6fc1c62295c	en	Niacinamide strengthens your skin barrier and helps with dark spots.	0%	en-US-JennyNeural	
+3ecb7568cce5	ko	피부 장벽을 튼튼하게 하고 잡티에도 도움이 돼요.	+12%	ko-KR-SunHiNeural	
+860fd74ab9e4	en	And what about PDRN?	0%	en-US-JennyNeural	
+5116b9e44836	ko	PDRN은요?	+12%	ko-KR-SunHiNeural	
+a24441ae2069	en	PDRN helps your skin recover, so it's great after laser treatments.	0%	en-US-JennyNeural	
+b34a1ccc7f63	ko	피부 회복을 도와서 레이저 시술 후에 좋아요.	+12%	ko-KR-SunHiNeural	
+f9909c924603	en	Actually, I had a laser treatment yesterday.	0%	en-US-JennyNeural	
+a657a919e5e7	ko	사실 어제 레이저 받았어요.	+12%	ko-KR-SunHiNeural	
+6abfcbe82924	en	Then this PDRN cream is perfect for you. It's very gentle.	0%	en-US-JennyNeural	
+71de5899a11b	ko	그럼 이 PDRN 크림이 딱이에요. 아주 순해요.	+12%	ko-KR-SunHiNeural	
+b2dd8c9e03ed	en	Can I use retinol too?	0%	en-US-JennyNeural	
+2a125145458b	ko	레티놀도 써도 돼요?	+12%	ko-KR-SunHiNeural	
+deb726134532	en	Not right now. Wait about a week until your skin calms down.	0%	en-US-JennyNeural	
+908df692c30b	ko	지금은 안 돼요. 피부가 진정될 때까지 일주일쯤 기다리세요.	+12%	ko-KR-SunHiNeural	
+bbc1055c6ee8	en	Retinol is strong, so use it only at night and wear sunscreen in the morning.	0%	en-US-JennyNeural	
+dd520659ff16	ko	레티놀은 강해서 밤에만 쓰시고, 아침엔 꼭 선크림 바르세요.	+12%	ko-KR-SunHiNeural	
+223477b1c965	en	That makes sense. I'll take the PDRN cream and the retinol for later.	0%	en-US-JennyNeural	
+ba013a915937	ko	이해돼요. PDRN 크림이랑 나중에 쓸 레티놀도 살게요.	+12%	ko-KR-SunHiNeural	
+493f47287147	en	Great choice. You'll see the difference in a few weeks.	0%	en-US-JennyNeural	
+a3e8f317fdc8	ko	좋은 선택이에요. 몇 주 뒤면 차이가 느껴질 거예요.	+12%	ko-KR-SunHiNeural	
+0abdaad657a3	en	skin type	0%	en-US-JennyNeural	
+4fdef9adfd9c	ko	피부 타입	+12%	ko-KR-SunHiNeural	
+38b4af83af52	en	depends on her skin type	0%	en-US-JennyNeural	
+38e976daca19	ko	그분 피부 타입에 따라 달라요	+12%	ko-KR-SunHiNeural	
+eeee9c9c5906	en	oily or dry	0%	en-US-JennyNeural	
+2e0e5e17e664	ko	지성 또는 건성	+12%	ko-KR-SunHiNeural	
+65cf5be15808	en	lighter texture	0%	en-US-JennyNeural	
+c51fc3c36085	ko	더 가벼운 제형	+12%	ko-KR-SunHiNeural	
+87ac03b1598d	en	has a lighter texture	0%	en-US-JennyNeural	
+723984647cf9	ko	제형이 더 가볍다	+12%	ko-KR-SunHiNeural	
+964845d77b2a	en	better for oily skin	0%	en-US-JennyNeural	
+3597d307626e	ko	지성 피부에 더 좋은	+12%	ko-KR-SunHiNeural	
+d9cdaf54468a	en	Good point.	0%	en-US-JennyNeural	
+c9d58c19c624	ko	맞아요. (좋은 지적이에요)	+12%	ko-KR-SunHiNeural	
+41e9a92d6d83	en	even oily skin	0%	en-US-JennyNeural	
+9f4f5fae7259	ko	지성 피부도	+12%	ko-KR-SunHiNeural	
+3b99162d6e26	en	get dry	0%	en-US-JennyNeural	
+e959cdce349d	en	I'd recommend this one	0%	en-US-JennyNeural	
+2323a104333f	ko	이걸 추천해요	+12%	ko-KR-SunHiNeural	
+82a9634f8a22	en	richer	0%	en-US-JennyNeural	
+6342f7eadc06	ko	더 리치한	+12%	ko-KR-SunHiNeural	
+400e9c234664	en	lasts all day	0%	en-US-JennyNeural	
+75f69e29d3b0	ko	하루 종일 가다	+12%	ko-KR-SunHiNeural	
+4b71dacceed1	en	the light one in the morning	0%	en-US-JennyNeural	
+adcad423f83d	ko	아침엔 가벼운 것	+12%	ko-KR-SunHiNeural	
+832e62abf2a1	en	the rich one at night	0%	en-US-JennyNeural	
+7a37021e163a	ko	밤엔 리치한 것	+12%	ko-KR-SunHiNeural	
+400612c268d7	en	a nice shopping bag	0%	en-US-JennyNeural	
+8ea96941b40c	ko	예쁜 쇼핑백	+12%	ko-KR-SunHiNeural	
+e147526014c7	en	Both are good, but it depends on her skin type.	0%	en-US-JennyNeural	
+934f44e569ce	ko	둘 다 좋은데 피부 타입에 따라 달라요.	+12%	ko-KR-SunHiNeural	
+f2c4d0a30ec4	en	Is her skin oily or dry?	0%	en-US-JennyNeural	
+fb3cd9ca910b	ko	지성이세요, 건성이세요?	+12%	ko-KR-SunHiNeural	
+670a65f47f52	en	This one has a lighter texture.	0%	en-US-JennyNeural	
+5b792abe5663	ko	이게 제형이 더 가벼워요.	+12%	ko-KR-SunHiNeural	
+b3cbf068c27b	en	It's better for oily skin.	0%	en-US-JennyNeural	
+3e3b854f7f9b	ko	지성 피부에 더 좋아요.	+12%	ko-KR-SunHiNeural	
+e7d9e217c909	en	In winter, even oily skin can get dry.	0%	en-US-JennyNeural	
+4ed953bfa6c1	ko	겨울엔 지성 피부도 건조해질 수 있어요.	+12%	ko-KR-SunHiNeural	
+47d5a874db83	en	If her skin gets dry, I'd recommend this one.	0%	en-US-JennyNeural	
+beb088a9d2b5	ko	건조해지시면 이걸 추천해요.	+12%	ko-KR-SunHiNeural	
+5511a35ba82c	en	It's richer and lasts all day.	0%	en-US-JennyNeural	
+9715f4a4109b	ko	더 리치하고 하루 종일 가요.	+12%	ko-KR-SunHiNeural	
+f703bb5e2804	en	Many customers use the light one in the morning.	0%	en-US-JennyNeural	
+5c9f8c6882ce	ko	많은 손님들이 아침엔 가벼운 걸 쓰세요.	+12%	ko-KR-SunHiNeural	
+c8cca0d91d4e	en	I'll put them in a nice shopping bag for you.	0%	en-US-JennyNeural	
+74f8029ccb50	ko	예쁜 쇼핑백에 담아드릴게요.	+12%	ko-KR-SunHiNeural	
+fa925991ac41	en	My wife asked me to get a cream. Which one is better, this or that?	0%	en-US-JennyNeural	
+5e3fcaed2962	ko	아내가 크림 사오라고 했는데, 이거랑 저거 중 뭐가 나아요?	+12%	ko-KR-SunHiNeural	
+aa3c0c963462	en	Both are good, but it depends on her skin type. Is her skin oily or dry?	0%	en-US-JennyNeural	
+5c46717292ab	ko	둘 다 좋은데 피부 타입에 따라 달라요. 지성이세요, 건성이세요?	+12%	ko-KR-SunHiNeural	
+765072bdd6df	en	Hmm, I'm not sure. A bit oily, I think.	0%	en-US-JennyNeural	
+4252af48aba8	ko	음, 잘 모르겠어요. 좀 지성인 것 같아요.	+12%	ko-KR-SunHiNeural	
+d74a399e4703	en	This one has a lighter texture, so it's better for oily skin.	0%	en-US-JennyNeural	
+c037e16c9b48	ko	이게 제형이 더 가벼워서 지성 피부에 더 좋아요.	+12%	ko-KR-SunHiNeural	
+b04d581e3469	en	But it's winter. Won't it be too light?	0%	en-US-JennyNeural	
+d166173a03fd	ko	근데 겨울이잖아요. 너무 가볍지 않을까요?	+12%	ko-KR-SunHiNeural	
+ddf4e6effab1	en	Good point. In winter, even oily skin can get dry.	0%	en-US-JennyNeural	
+102557d47e80	ko	맞아요. 겨울엔 지성 피부도 건조해질 수 있어요.	+12%	ko-KR-SunHiNeural	
+b4b3cf86dd71	en	If her skin gets dry, I'd recommend this one. It's richer and lasts all day.	0%	en-US-JennyNeural	
+26ce71ae16c4	ko	건조해지시면 이걸 추천해요. 더 리치하고 하루 종일 가요.	+12%	ko-KR-SunHiNeural	
+8b184b8e9004	en	So which should I buy?	0%	en-US-JennyNeural	
+db9ed5237afd	ko	그럼 뭘 사야 해요?	+12%	ko-KR-SunHiNeural	
+ba4420b3c5af	en	Many customers use the light one in the morning and the rich one at night.	0%	en-US-JennyNeural	
+bbf9efd6f4d2	ko	많은 손님들이 아침엔 가벼운 걸, 밤엔 리치한 걸 쓰세요.	+12%	ko-KR-SunHiNeural	
+41f69f212eb1	en	That's a good idea. I'll get both.	0%	en-US-JennyNeural	
+ea33699d4347	ko	좋은 생각이네요. 둘 다 살게요.	+12%	ko-KR-SunHiNeural	
+cb1e06938260	en	Your wife will be happy. I'll put them in a nice shopping bag for you.	0%	en-US-JennyNeural	
+6e30a8bfc5cf	ko	아내분이 좋아하시겠어요. 예쁜 쇼핑백에 담아드릴게요.	+12%	ko-KR-SunHiNeural	
