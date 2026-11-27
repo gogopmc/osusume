@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>트리니 링고</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-title" content="오스스메">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#D97300">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{
+  --bg:#EEF1F0; --surface:#FFFFFF; --ink:#1F2A2E; --muted:#5F6D73; --line:#D6DDDB;
+  --amber:#D97300; --amber-ink:#FFFFFF; --amber-soft:#FBE7CC; --ok:#2C7A57; --ok-soft:#DCEFE5; --no:#B03F2C; --no-soft:#F6DED8;
+  --cust:#E4ECEE; --tip:#FFF6E8; --m1:#C9D2D0; --m2:#F3C27A; --m3:#E89A3A; --m4:#2C7A57;
+  color-scheme: light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121819; --surface:#1B2325; --ink:#ECF0EF; --muted:#9AA7AB; --line:#2B3638;
+  --amber:#F2992E; --amber-ink:#1A1206; --amber-soft:#3A2810; --ok:#5DBB8E; --ok-soft:#173327; --no:#E07A64; --no-soft:#3A1E18;
+  --cust:#223033; --tip:#2A2215; --m1:#36423F; --m2:#7A5A2C; --m3:#C7802F; --m4:#5DBB8E; color-scheme: dark; } }
+:root[data-theme="dark"]{
+  --bg:#121819; --surface:#1B2325; --ink:#ECF0EF; --muted:#9AA7AB; --line:#2B3638;
+  --amber:#F2992E; --amber-ink:#1A1206; --amber-soft:#3A2810; --ok:#5DBB8E; --ok-soft:#173327; --no:#E07A64; --no-soft:#3A1E18;
+  --cust:#223033; --tip:#2A2215; --m1:#36423F; --m2:#7A5A2C; --m3:#C7802F; --m4:#5DBB8E; color-scheme: dark; }
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.55;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.ja{font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.app{max-width:560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 16px 96px}
+
+/* start screen */
+.start{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;max-width:440px;margin:0 auto;text-align:center}
+.logo{width:116px;height:116px;border-radius:32px;background:var(--amber);display:grid;place-items:center;box-shadow:0 14px 40px -12px rgba(217,115,0,.55)}
+.logo svg{width:70px;height:70px}
+.wordmark{margin-top:20px;font-weight:700;letter-spacing:.18em;font-size:13px;color:var(--muted)}
+.wordmark2{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:44px;line-height:1.1;margin-top:2px}
+.wordmark3{color:var(--muted);font-size:14px;margin-top:6px}
+.who{width:100%;margin-top:32px;text-align:left}
+.who h3{font-size:14px;color:var(--muted);margin:0 0 8px;font-weight:600}
+.plist{display:flex;flex-wrap:wrap;gap:8px}
+.pbtn{padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600}
+.pbtn[aria-pressed="true"]{background:var(--amber-soft);border-color:var(--amber);color:var(--amber)}
+.addrow{display:flex;gap:8px;margin-top:10px}
+.addrow input{flex:1;min-width:0;font:inherit;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.addrow button{padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
+.go{width:100%;margin-top:22px;min-height:60px;border-radius:18px;background:var(--amber);color:var(--amber-ink);font-size:19px;font-weight:700}
+.go:disabled{opacity:.4}
+.staffonly{margin:14px 0 0;font-size:11.5px;color:var(--muted);text-align:center;word-break:keep-all}
+.langseg{display:flex;gap:0;margin:16px auto 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;width:100%;max-width:320px;background:var(--surface)}.langseg button{flex:1;font:inherit;font-size:15px;font-weight:700;padding:11px 0;border:0;background:none;color:var(--muted);cursor:pointer}.langseg button.on{background:var(--amber);color:#fff}
+.tipline{margin:16px 0 4px;padding:10px 14px;border-radius:14px;background:var(--amber-soft);color:var(--ink);font-size:14px;line-height:1.5;text-align:center;width:100%;box-sizing:border-box;word-break:keep-all}
+.cardwrap{position:relative}.flag{position:absolute;bottom:8px;right:8px;border:0;background:none;font-size:15px;opacity:.45;padding:6px;cursor:pointer;z-index:2}.flag:hover{opacity:1}
+.rpsheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.45);display:flex;align-items:flex-end;justify-content:center}
+.rpsheet .box{background:var(--surface);color:var(--ink);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+.rpsheet h3{margin:0 0 4px;font-size:16px}.rpsheet .q{font-size:13px;color:var(--muted);margin-bottom:12px}
+.rpsheet .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.rpsheet .opts button{font:inherit;font-size:14px;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.rpsheet .opts button.on{border-color:var(--amber);background:var(--amber-soft);color:var(--amber)}
+.rpsheet input{width:100%;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);margin-bottom:12px;box-sizing:border-box}
+.rpsheet .row{display:flex;gap:10px}.rpsheet .row .btn{flex:1}
+.chg{font:inherit;font-size:12px;color:var(--muted);background:none;border:0;text-decoration:underline;padding:6px 4px;cursor:pointer;align-self:center}
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.ccard{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px;text-align:left;cursor:pointer}.ccard img,.ccard .qm{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:12px;display:block}.ccard .qm{display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:var(--muted);background:var(--line)}.cimg{position:relative;overflow:hidden;border-radius:12px}.ccard .cimg img.blur{filter:blur(14px) grayscale(.4) brightness(.9);transform:scale(1.15)}.cimg .qmk{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:64px;font-weight:900;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.medal{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;font-size:12px!important;font-weight:900;color:#4a3300;box-shadow:inset 0 -3px 0 rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.25)}.medal.m1{background:radial-gradient(circle at 35% 30%,#FFF3B0,#F2C230 60%,#C9971A)}.medal.m2{background:radial-gradient(circle at 35% 30%,#FFFFFF,#C9CED6 60%,#9097A3);color:#2f3540}.medal.m3{background:radial-gradient(circle at 35% 30%,#FFE1C4,#D4894A 60%,#A4602B);color:#3d1f08}
+.cimg{position:relative}.cimg .lock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:46px;opacity:.75;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.ccard.lk img{filter:grayscale(1) brightness(.75)}.ccard .ct{font-weight:700;font-size:14px;margin-top:6px}.ccard .cs{font-size:12px;color:var(--muted);margin-top:2px}
+.schead{display:flex;align-items:center;gap:10px;margin-bottom:8px}.schead img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top}.backb{font:inherit;font-size:13px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+#convBtn:disabled{opacity:.55}
+.memline{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:var(--muted)}.memline i{flex:1;height:4px;border-radius:4px;background:var(--line);overflow:hidden}.memline u{display:block;height:100%;background:var(--ok)}
+.uchips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.uchips button{font:inherit;font-size:13px;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}.uchips button.on{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}.uchips button.lk{opacity:.5}
+.lockbox{text-align:center;padding:30px 10px;color:var(--muted);font-size:15px;line-height:1.6}
+.conv{position:fixed;inset:0;z-index:60;background:var(--bg,#FFF8EE);display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+.cvtop{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;font-weight:700;font-size:15px}
+.cvtop button{font:inherit;font-size:14px;padding:6px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.cvstage{position:relative;height:30vh;min-height:190px;margin:0 14px;border-radius:22px;overflow:hidden;background:var(--amber-soft)}
+.cvcust{position:absolute;right:0;bottom:0;height:100%;width:54%;object-fit:cover;object-position:top;border-radius:0 22px 22px 0;transition:transform .25s,filter .25s}
+.cvchick{position:absolute;left:2%;bottom:2%;width:48%;max-width:230px;transition:transform .25s,filter .25s}
+.cvchick svg{width:100%;height:auto}
+.cvstage .dim{filter:saturate(.6) brightness(.85);transform:scale(.94)}
+.cvstage .talk{transform:scale(1.04)}
+.cvlog{flex:1;overflow-y:auto;padding:12px 14px 8px;display:flex;flex-direction:column;gap:10px}
+.bub{max-width:84%;padding:10px 12px;border-radius:16px;font-size:16px;line-height:1.45}
+.bub.c{align-self:flex-end;background:var(--surface);border:1px solid var(--line);border-bottom-right-radius:4px}
+.bub.s{align-self:flex-start;background:var(--amber-soft);border-bottom-left-radius:4px}
+.bub .ja{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:18px}
+.bub .pr{font-size:13px;color:var(--muted)}
+.bub .ko{font-size:14px;margin-top:4px;transition:filter .4s}
+.bub .ko.mask{filter:blur(6px);cursor:pointer}
+.bub .mic.cvmic{width:40px;height:40px;margin:2px 0 6px 2px}.bub .mic.cvmic svg{width:22px;height:22px}
+.cvhint{font-size:12px;color:var(--muted);margin-top:4px}
+.bub .rp{border:0;background:none;font-size:18px;padding:2px 4px;cursor:pointer}
+.bub.s.ok{box-shadow:inset 0 0 0 2px var(--ok)} .bub.s.no{box-shadow:inset 0 0 0 2px var(--no)}
+.cvbar{padding:10px 14px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px}
+.cvbar .btn{flex:1}
+.offer{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.offer .box{background:var(--surface);border-radius:22px;padding:18px;max-width:380px;width:100%;text-align:center}
+.offer img{width:110px;height:130px;object-fit:cover;object-position:top;border-radius:16px}
+.offer h3{margin:10px 0 4px;font-size:18px}.offer p{margin:0 0 14px;color:var(--muted);font-size:14px}
+.offer .actions{display:flex;gap:10px}.offer .btn{flex:1}
+
+.pinin{width:100%;font:inherit;font-size:22px;letter-spacing:.5em;text-align:center;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.rank{display:flex;flex-direction:column;gap:6px}
+.rk{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:12px;background:var(--bg);font-weight:600}
+.rk.me{background:var(--amber-soft);color:var(--amber)}
+.rk .no{font-weight:700;width:46px}
+.choice{min-height:54px;border-radius:14px;border:1px solid var(--line);background:var(--surface);font-size:16px;font-weight:600;text-align:left;padding:10px 14px}
+.choice.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.choice.wrongc{background:var(--no-soft);border-color:var(--no);color:var(--no)}
+.mic.spk{background:var(--cust);color:var(--ink)}
+.mic.spk::after{border-color:var(--muted)}
+
+/* HUD */
+.hud{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding:6px 0 6px}
+.hudrow{display:flex;align-items:center;gap:10px}
+.lv{flex:none;width:34px;height:34px;border-radius:10px;background:var(--amber);color:var(--amber-ink);display:grid;place-items:center;font-weight:700;line-height:1;font-size:11px}
+.lv b{font-size:15px;display:block}
+.xp{flex:1;min-width:0}
+.xp .nm{font-weight:700;font-size:13px;display:flex;justify-content:space-between;gap:8px}
+.xp .nm small{color:var(--muted);font-weight:500;font-size:12px}
+.bar{height:5px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .5s ease}
+.chips{display:flex;gap:5px;margin-top:6px;font-size:11.5px;color:var(--muted);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips span{white-space:nowrap}
+.chips span{padding:2px 8px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chips b{color:var(--ink)}
+.stages{display:flex;gap:6px;margin:2px 0 12px}
+.stages span{flex:1;font-size:12px;font-weight:600;color:var(--muted);text-align:center;padding:5px 0;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.stages span.on{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+
+/* card */
+.card{background:var(--surface);border-radius:22px;padding:20px 18px 18px;flex:1;display:flex;flex-direction:column;min-height:430px;border:1px solid var(--line)}
+.kind{font-size:13px;font-weight:600;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.kind b{color:var(--amber)}
+.cue{margin-top:14px;background:var(--cust);border-radius:14px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start}
+.cue .who2{font-size:12px;font-weight:600;color:var(--muted);flex:none;margin-top:3px}
+.cue .t{flex:1}.cue .t .ja{font-size:17px;font-weight:700;line-height:1.4}.cue .t small{display:block;color:var(--muted);font-size:13px}
+.play{flex:none;width:38px;height:38px;border-radius:50%;background:var(--surface);display:grid;place-items:center;border:1px solid var(--line)}
+.play svg{width:16px;height:16px}
+.task{margin:auto 0;padding:20px 0 14px}
+.task .ko{font-size:clamp(24px,7vw,32px);font-weight:700;line-height:1.3}
+.task .hint{margin-top:10px;color:var(--muted);font-size:14px}
+.mic{width:64px;height:64px;border-radius:50%;background:var(--amber-soft);color:var(--amber);display:grid;place-items:center;margin-bottom:16px;position:relative;animation:wig 1.6s ease-in-out infinite}
+.mic svg{width:30px;height:30px}
+.mic::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--amber);animation:ring 1.6s ease-out infinite}
+@keyframes wig{0%,100%{transform:rotate(0) scale(1)}10%{transform:rotate(-9deg) scale(1.06)}20%{transform:rotate(8deg) scale(1.06)}30%{transform:rotate(-5deg)}40%{transform:rotate(0) scale(1)}}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+.answer{margin:auto 0;padding:16px 0 10px}
+.answer .jbig{font-size:clamp(26px,8vw,38px);font-weight:900;line-height:1.35;word-break:keep-all;overflow-wrap:anywhere}
+.answer.long .jbig{font-size:clamp(21px,6vw,28px)}
+.answer .reading{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--amber);font-size:15px;font-weight:700;margin-top:6px}
+.answer .pron{font-size:19px;font-weight:600;margin-top:10px}
+.answer .mean{color:var(--muted);margin-top:4px}
+.peek{margin-top:10px;font-size:14px;font-weight:600;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:4px 0}
+.replay{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:600}
+.replay svg{width:15px;height:15px}
+.parts{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.part{border-radius:10px;padding:5px 9px;background:var(--bg);border:1px solid var(--line);text-align:center}
+.part .pj{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:16px;display:block}
+.part .pm{font-size:11.5px;color:var(--muted);display:block;line-height:1.3}
+.part.g{border-style:dashed;background:transparent}.part.g .pm{color:var(--amber)}
+.tip{margin-top:12px;background:var(--tip);border-radius:14px;padding:10px 12px;font-size:14px}
+.tip b{color:var(--amber)}
+.selfnote{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 2px}
+.actions{display:grid;gap:10px;margin-top:8px}
+.actions.two{grid-template-columns:1fr 1fr}
+.btn{min-height:58px;border-radius:16px;font-size:17px;font-weight:700;padding:0 14px}
+.btn.primary{background:var(--amber);color:var(--amber-ink)}
+.btn.ok{background:var(--ok-soft);color:var(--ok)}
+.btn.no{background:var(--no-soft);color:var(--no)}
+.btn.ghost{border:1px solid var(--line);background:var(--surface)}
+.btn:active{transform:scale(.985)}
+.known{align-self:center;margin-top:10px;font-size:13px;color:var(--muted);padding:6px 10px;text-decoration:underline;text-underline-offset:3px}
+.quit{display:block;margin:14px auto 0;font-size:14px;font-weight:600;color:var(--muted);padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.done{margin:auto 0}.done h2{font-size:24px;margin:0 0 8px;line-height:1.3}.done p{color:var(--muted);margin:0 0 6px}
+
+/* summary + status */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:12px}
+.panel h3{margin:0 0 10px;font-size:15px}
+.panel .sub{color:var(--muted);font-size:13px;margin:-6px 0 10px}
+.big{font-size:30px;font-weight:700;line-height:1.1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--bg);border-radius:14px;padding:12px}
+.stat small{display:block;color:var(--muted);font-size:12px}
+.stat b{font-size:22px}
+.dist{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--m1)}
+.dist i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:12px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:0;background:var(--c)}
+.wl{display:flex;flex-direction:column;gap:8px}
+.wi{display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;background:var(--bg);text-align:left;width:100%}
+.wi .tx{flex:1;min-width:0}.wi .ja{font-weight:700;font-size:16px;line-height:1.4}.wi .mn{font-size:13px;color:var(--muted)}
+.wi .cnt{font-size:12px;font-weight:700;color:var(--no);flex:none}
+.empty{color:var(--muted);font-size:14px}
+.lessonrow{display:flex;justify-content:space-between;font-weight:700}
+.stepbar{display:flex;gap:4px;margin-top:8px}
+.stepbar span{flex:1;font-size:11px;text-align:center;color:var(--muted)}
+.stepbar span i{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:4px;overflow:hidden}
+.stepbar span i u{display:block;height:100%;background:var(--amber)}
+
+/* tabs, toast */
+.toast{position:fixed;left:50%;transform:translate(-50%,20px);bottom:calc(92px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:all .35s ease;z-index:30;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding-bottom:env(safe-area-inset-bottom,0px);z-index:20}
+nav.tabs .in{display:flex;max-width:560px;width:100%}
+nav.tabs button{flex:1;height:44px;font-size:12.5px;font-weight:600;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{color:var(--amber)}
+.dl{display:flex;flex-direction:column;gap:8px}
+.ln{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:14px;background:var(--surface);border:1px solid var(--line);text-align:left;width:100%}
+.ln.c{background:var(--cust);border-color:transparent}
+.ln .role{font-size:12px;font-weight:600;color:var(--muted);width:30px;flex:none;margin-top:3px}
+.ln.s .role{color:var(--amber)}
+.ln .tx{flex:1;min-width:0}.ln .ja{font-size:16px;font-weight:700;line-height:1.45}
+.ln .pr{font-size:13px}.ln .mn{font-size:13px;color:var(--muted)}
+.ln .tip{margin-top:8px}
+.note{color:var(--muted);font-size:14px;margin:0 0 12px}
+@media (prefers-reduced-motion: reduce){.mic,.mic::after{animation:none}.bar i{transition:none}}
+.actbar{position:fixed;left:0;right:0;bottom:calc(44px + env(safe-area-inset-bottom,0px));z-index:15;background:var(--bg);padding:10px 16px 8px;border-top:1px solid var(--line)}
+.actbar .in{max-width:528px;margin:0 auto;display:flex;flex-direction:column}
+.actbar .actions{margin-top:0}
+.actbar .btn{min-height:64px;font-size:18px}
+.actbar .known{margin-top:6px;padding:4px 10px}
+.actbar .selfnote{margin:0 0 8px}
+.hudquit{flex:none;font-size:12px;font-weight:700;color:#fff;padding:5px 10px;border-radius:999px;background:var(--no);box-shadow:0 2px 8px -2px rgba(176,63,44,.5)}
+.saved{display:flex;gap:10px;align-items:flex-start;background:var(--ok-soft);color:var(--ok);border-radius:14px;padding:12px 14px;margin-top:12px;font-size:14px;line-height:1.5}
+.saved b{display:block;font-size:15px}
+#study .card{min-height:0}
+.app.withbar{padding-bottom:230px}
+.wpick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;max-height:150px;overflow:auto}
+.wchip{border-radius:12px;padding:6px 10px;border:1px solid var(--line);background:var(--surface);text-align:center}
+.wchip .pj{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:16px;display:block}
+.wchip .pm{font-size:11.5px;color:var(--muted);display:block}
+.wchip.on{background:var(--no-soft);border-color:var(--no);color:var(--no)}
+.wchip.on .pm{color:var(--no)}
+.lvup{position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(18,24,25,.82);overflow:hidden}
+.lvburst{position:absolute;width:520px;height:520px;border-radius:50%;background:repeating-conic-gradient(rgba(242,153,46,.18) 0 10deg,transparent 10deg 20deg);animation:spin 6s linear infinite,pop .5s ease-out}
+.lvbox{position:relative;text-align:center;color:#fff;animation:bounce .7s cubic-bezier(.2,1.6,.4,1)}
+.lvsmall{font-weight:700;letter-spacing:.3em;font-size:15px;color:#FFD08A}
+.lvnum{font-weight:700;font-size:76px;line-height:1;text-shadow:0 6px 0 #B85F00,0 10px 30px rgba(0,0,0,.4)}
+.lvmsg{margin-top:10px;font-size:15px;font-weight:600;opacity:.95}
+.cf{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pop{from{transform:scale(.2);opacity:0}}
+@keyframes bounce{0%{transform:scale(.3);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion: reduce){.lvburst,.lvbox,.cf{animation:none}}
+.mascot{width:190px;height:190px}
+.chick{width:100%;height:100%;animation:bob 2.4s ease-in-out infinite;transform-origin:50% 90%;overflow:visible}
+.chick .blink{animation:blink 4s infinite;transform-origin:center;transform-box:fill-box}
+.chick .wing{animation:wave 1.2s ease-in-out infinite;transform-origin:150px 116px;transform-box:view-box}
+.lvchick{width:120px;height:120px;margin:0 auto 6px}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1,1)}45%,55%{transform:translateY(-7px) scale(.98,1.02)}90%{transform:translateY(0) scale(1.04,.96)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes wave{0%,100%{transform:rotate(0)}50%{transform:rotate(-14deg)}}
+@media (prefers-reduced-motion: reduce){.chick,.chick .blink,.chick .wing{animation:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- 시작 화면 -->
+<section id="startView" class="start">
+  <div class="mascot"><svg viewBox="0 0 200 200" class="chick" aria-label="오스스메 병아리">
+          <ellipse cx="96" cy="184" rx="50" ry="7" fill="#000" opacity=".1"/>
+          <rect x="112" y="10" width="82" height="34" rx="14" fill="#fff" stroke="#D97300" stroke-width="3"/>
+          <path d="M126 42l-8 12 18-10z" fill="#fff" stroke="#D97300" stroke-width="3" stroke-linejoin="round"/>
+          <text x="153" y="33" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-weight="900" font-size="15" fill="#D97300">おすすめ!</text>
+          <path d="M90 46c-4-12 8-16 12-8" fill="none" stroke="#F4B400" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="96" cy="120" rx="66" ry="62" fill="#FFD43B"/>
+          <ellipse cx="96" cy="134" rx="40" ry="34" fill="#FFE57A"/>
+          <path d="M34 128c-14 6-14 22 2 24 8 0 12-8 10-14" fill="#F4C21F"/>
+          <path class="wing" d="M152 112c18-14 28-4 22 6-4 8-14 10-20 6" fill="#F4C21F"/>
+          <g class="blink"><ellipse cx="76" cy="108" rx="7" ry="9" fill="#2A2A2A"/><path d="M110 108q8-9 16 0" fill="none" stroke="#2A2A2A" stroke-width="5" stroke-linecap="round"/></g>
+          <circle cx="78" cy="105" r="2.4" fill="#fff"/>
+          <ellipse cx="62" cy="124" rx="10" ry="6" fill="#FF9AA2" opacity=".7"/><ellipse cx="132" cy="124" rx="10" ry="6" fill="#FF9AA2" opacity=".7"/>
+          <path d="M84 120q12 14 24 0z" fill="#FF8A1E" stroke="#E5700A" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M80 182v-6M112 182v-6" stroke="#FF8A1E" stroke-width="6" stroke-linecap="round"/>
+        </svg></div>
+  <div class="wordmark" style="margin-top:6px">TRINITY</div>
+  <div class="wordmark2" id="wm2">트리니 링고</div>
+  <div class="wordmark3">매장 상담 외국어</div>
+  <div class="langseg" id="langSeg"><button data-l="ja">일본어</button><button data-l="zh">중국어</button><button data-l="en">영어</button></div>
+  <p class="tipline" id="tipline"></p>
+  <div class="who">
+    <h3>누가 공부하나요?</h3>
+    <div class="plist" id="plist"></div>
+  </div>
+  <div class="who" id="pinBox" hidden><h3 id="pinLabel">비밀번호 4자리</h3><input id="pin" class="pinin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" aria-label="비밀번호 4자리"></div>
+  <div class="who" id="newWho" style="margin-top:14px;font-size:12px;opacity:.75"><h3 style="font-size:12px;margin:0 0 4px">처음이세요?</h3>
+    <div class="addrow"><input id="newName" placeholder="이름 추가" maxlength="12" aria-label="새 사용자 이름"><button id="addBtn">추가</button></div>
+  </div>
+  <button class="go" id="goBtn" disabled>시작하기</button>
+  <p class="staffonly">트리니티성수약국 직원 전용 앱입니다. 외부인 사용과 내용 공유를 금합니다.</p>
+</section>
+
+<div class="app" id="mainView" hidden>
+  <header class="hud">
+    <div class="hudrow">
+      <div class="lv" aria-label="레벨"><span>Lv<b id="hLv">1</b></span></div>
+      <div class="xp">
+        <div class="nm"><span id="hName">-</span><small id="hXp">0 / 100 XP</small></div>
+        <div class="bar"><i id="hBar"></i></div>
+      </div>
+      <button class="hudquit" id="quitBtn">그만할래요</button>
+    </div>
+    <div class="chips"><span>🔥 <b id="hStreak">0</b>일 <small id="hBest"></small></span><span>오늘 <b id="hToday">0</b>문제</span><span>익힘 <b id="hDone">0</b>%</span><span>복습 <b id="hDue">0</b></span></div>
+  </header>
+
+  <section id="study">
+    <div class="stages" aria-hidden="true"><span id="sgW">단어</span><span id="sgS">문장</span><span id="sgD">대화</span></div>
+    <div class="cardwrap"><div class="card" id="card"></div><button class="flag" id="flagBtn" aria-label="오류 신고" title="오류 신고" hidden>🚩</button></div>
+  </section>
+
+  <section id="summary" hidden></section>
+  <section id="status" hidden></section>
+  <section id="script" hidden>
+    <div id="uchips"></div>
+    <div id="scDetail" hidden>
+      <div class="schead"><button id="scBack" class="backb">← 손님 목록</button><img id="scImg" alt=""><b id="scTitle"></b></div>
+      <p class="note">줄을 누르면 들려주고, 직원 줄 아래에는 판매 노하우가 붙어 있어요.</p>
+      <button class="btn ghost" style="width:100%;margin-bottom:10px" id="playAll">대화 전체 듣기</button>
+      <button class="btn ok" style="width:100%;margin-bottom:10px" id="convBtn">🎬 실전 연습 (직원 역할)</button>
+      <div class="dl" id="dl"></div>
+    </div>
+  </section>
+</div>
+
+<div class="actbar" id="actbar" hidden><div class="in" id="actin"></div></div>
+<nav class="tabs" id="tabs" hidden><div class="in" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="study">연습</button>
+  <button role="tab" aria-selected="false" data-tab="status">내 현황</button>
+  <button role="tab" aria-selected="false" data-tab="script">대화문</button>
+</div></nav>
+<div class="lvup" id="lvup" hidden><div class="lvburst"></div><div class="lvbox"><div class="lvchick"><svg viewBox="0 0 200 200" class="chick small" aria-label="오스스메 병아리">
+          <ellipse cx="96" cy="184" rx="50" ry="7" fill="#000" opacity=".1"/>
+          <rect x="112" y="10" width="82" height="34" rx="14" fill="#fff" stroke="#D97300" stroke-width="3"/>
+          <path d="M126 42l-8 12 18-10z" fill="#fff" stroke="#D97300" stroke-width="3" stroke-linejoin="round"/>
+          <text x="153" y="33" text-anchor="middle" font-family="Zen Kaku Gothic New, sans-serif" font-weight="900" font-size="15" fill="#D97300">おすすめ!</text>
+          <path d="M90 46c-4-12 8-16 12-8" fill="none" stroke="#F4B400" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="96" cy="120" rx="66" ry="62" fill="#FFD43B"/>
+          <ellipse cx="96" cy="134" rx="40" ry="34" fill="#FFE57A"/>
+          <path d="M34 128c-14 6-14 22 2 24 8 0 12-8 10-14" fill="#F4C21F"/>
+          <path class="wing" d="M152 112c18-14 28-4 22 6-4 8-14 10-20 6" fill="#F4C21F"/>
+          <g class="blink"><ellipse cx="76" cy="108" rx="7" ry="9" fill="#2A2A2A"/><path d="M110 108q8-9 16 0" fill="none" stroke="#2A2A2A" stroke-width="5" stroke-linecap="round"/></g>
+          <circle cx="78" cy="105" r="2.4" fill="#fff"/>
+          <ellipse cx="62" cy="124" rx="10" ry="6" fill="#FF9AA2" opacity=".7"/><ellipse cx="132" cy="124" rx="10" ry="6" fill="#FF9AA2" opacity=".7"/>
+          <path d="M84 120q12 14 24 0z" fill="#FF8A1E" stroke="#E5700A" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M80 182v-6M112 182v-6" stroke="#FF8A1E" stroke-width="6" stroke-linecap="round"/>
+        </svg></div><div class="lvsmall">LEVEL UP</div><div class="lvnum">Lv.<span id="lvN">2</span></div><div class="lvmsg" id="lvMsg"></div></div><div id="confetti"></div></div>
+<div class="conv" id="conv" hidden><div class="cvtop"><span id="cvTitle"></span><button id="cvQuit">그만하기</button></div><div class="cvstage"><img class="cvcust" id="cvImg" alt="손님"><div class="cvchick" id="cvChick"></div></div><div class="cvlog" id="cvLog"></div><div class="cvbar" id="cvBar"></div></div>
+<div class="offer" id="offer" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+__CONTENT__
+const CLIPS=__CLIPS__;
+
+/* ---------- items ---------- */
+/* 단원: 진도는 단원 순서대로, 복습은 모든 단원에서 섞여 나온다 */
+const LANG=(()=>{try{const v=JSON.parse(localStorage.getItem("trini-lang"));return (v==="zh"||v==="en")?v:"ja";}catch(e){return "ja";}})();
+const LN=LANG==="zh"?"중국어":LANG==="en"?"영어":"일본어";
+const UNITS=LANG==="zh"?(window.__UNITS_ZH||[]):LANG==="en"?(window.__UNITS_EN||[]):[{id:"u1",title:"여드름 자국이 남아요",W:WORDS,S:SENTS,D:DIALOG}].concat(window.__EXTRA_UNITS||[]);
+const PRE=(U,u)=>LANG==="zh"?"z"+U.id+"-":LANG==="en"?"e"+U.id+"-":(u===0?"":U.id+"-");
+const UK=u=>LANG==="zh"?"z"+u:LANG==="en"?"e"+u:u;
+const ITEMS=[];const BY={};
+UNITS.forEach((U,u)=>{const pre=PRE(U,u);const add=(x,t)=>ITEMS.push({...x,id:pre+x.id,dn:x.dn?x.dn.map(d=>pre+d):undefined,t,u});
+  const gm=Math.max(...U.W.map(w=>w.g),...U.S.map(s=>s.g));
+  for(let g=1;g<=gm;g++){U.W.filter(w=>w.g===g).forEach(w=>add(w,"w"));U.S.filter(s=>s.g===g).forEach(s=>add(s,"s"));}
+  U.D.forEach((d,i)=>{if(d.r==="c"&&d.ja.length>=6)add({...d,id:"c"+i},"l");if(d.r==="s"){const prev=U.D[i-1];add({...d,cue:prev&&prev.r==="c"?prev:null},"d");}});});
+const curU=()=>{const it=ITEMS.find(x=>!S.st[x.id]);return it?it.u:UNITS.length-1;};
+const unitTitle=()=>UNITS[curU()].title;
+ITEMS.forEach(it=>BY[it.id]=it);
+/* 사다리(영어부터): dn=바로 아래 단계. 아래 단계를 한 번 이상 맞혀야 위 단계가 열리고, 위 단계를 아는 동안엔 아래 단계는 복습에서 빠진다 */
+const UP={};ITEMS.forEach(i=>(i.dn||[]).forEach(c=>(UP[c]=UP[c]||[]).push(i.id)));
+const walk=(id,m)=>{const out=new Set(),q=[...(m(id)||[])];while(q.length){const a=q.pop();if(!out.has(a)){out.add(a);q.push(...(m(a)||[]));}}return [...out];};
+const ANC={},DESC={};ITEMS.forEach(i=>{ANC[i.id]=walk(i.id,x=>UP[x]);DESC[i.id]=walk(i.id,x=>(BY[x]||{}).dn);});
+const dnOK=it=>(it.dn||[]).every(c=>{const s=S.st[c];return s&&(s.eo||s.kn||(s.ok||0)>=1||(s.wrong||0)>=3);});
+const covered=it=>ANC[it.id].some(a=>{const s=S.st[a];return s&&(s.eo||s.kn);});
+const TLABEL={w:"단어",s:"문장",d:"실전 대화",l:"손님 말 알아듣기"};
+
+/* ---------- 반복 규칙 ----------
+   간격(분): 처음 2 → 맞음 ×5 / 틀림 ×0.5(+3문제 뒤 재출제) / 이미 알아요 ×20. 최소 2분, 최대 6개월.
+   60분 미만 간격은 '푼 문제 수'(1문제≈1분)로 세서 자리를 비운 시간은 빼고, 60분 이상은 실제 시간으로 잰다. */
+const MIN=60e3,DAY=864e5,MULT={ok:6,no:0.5,known:20},FIRST=4,MIN_IVL=2,MAX_IVL=259200;
+const XPV={ok:10,no:3,known:5,intro:4};
+function dayKey(t=Date.now()){const d=new Date(t);return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}
+function fresh(){return{v:1,st:{},step:0,days:[],today:dayKey(),todayN:0,todayWrong:{},last:0,xp:0,updated:0};}
+
+/* ---------- 사용자 ---------- */
+const PKEY="osusume-profiles",SKEY=n=>"osusume-p-"+n;
+let profiles=[],me=null,S=fresh();
+function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+profiles=lsGet(PKEY,[]);let picked=profiles[0]||null;
+let docBase=null,saveT=null;
+function docFor(n){return docBase?docBase.doc("osu-p-"+Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("")):null;}
+/* ---------- 숨김 학습 로그 (화면에 안 보임, 오류 점검용) ----------
+   기기: localStorage "osusume-log-이름" 최근 5000건 / 계정 DB: "osu-log-사용자키-날짜" 하루치 문서
+   한 줄 = [시각, 문제번호(step), 세션ID, 종류, ...내용] */
+const APP_VER="v43";let LOGDAY=[],logT=null,logDayKey="";
+function ukey(n){return Array.from(n).map(c=>c.codePointAt(0).toString(36)).join("");}
+function logEv(type,...a){if(!me)return;try{const e=[Date.now(),S.step,SESS,type,...a];
+  const k="osusume-log-"+me;const all=lsGet(k,[]);all.push(e);if(all.length>5000)all.splice(0,all.length-5000);lsSet(k,all);
+  const dk=dayKey().replace(/-/g,".");if(dk!==logDayKey){logDayKey=dk;LOGDAY=[];}LOGDAY.push(e);
+  if(docBase){clearTimeout(logT);logT=setTimeout(flushLog,2500);}}catch(x){}}
+async function flushLog(){try{if(!docBase||!me)return;const d=docBase.doc("osu-log-"+ukey(me)+"-"+logDayKey);
+  const sn=await d.get();let prev=sn.exists?(sn.data().e||[]):[];const seen=new Set(prev.map(x=>x[0]+"|"+x[3]+"|"+x[1]));
+  LOGDAY.forEach(x=>{if(!seen.has(x[0]+"|"+x[3]+"|"+x[1]))prev.push(JSON.stringify(x));});
+  prev=prev.map(x=>typeof x==="string"?x:JSON.stringify(x)).slice(-2000);LOGDAY=[];
+  await d.set({name:me,ver:APP_VER,day:logDayKey,e:prev});}catch(x){}}
+window.addEventListener("error",ev=>logEv("ERR",String(ev.message||ev).slice(0,200),(ev.filename||"").slice(-30)+":"+(ev.lineno||"")));
+window.addEventListener("unhandledrejection",ev=>logEv("ERR",String(ev.reason).slice(0,200)));
+function snap(id){const st=S.st[id];if(!st)return null;return{ivl:Math.round(st.ivl||0),ok:st.ok||0,w:st.wrong||0,lad:st.lad,kn:st.kn,ds:st.dueStep,da:st.dueAt?Math.round((st.dueAt-Date.now())/MIN):null};}
+function save(){S.updated=Date.now();lsSet(SKEY(me),S);const d=remoteReady?docFor(me):null;if(d){clearTimeout(saveT);saveT=setTimeout(()=>d.set({v:1,name:me,updated:S.updated,mxp:S.mxp||{},xp:S.xp||0,json:JSON.stringify(S)}).catch(e=>logEv("ERR","save "+String(e.message).slice(0,120))),1000);}}
+let fbRes;const fbP=new Promise(r=>fbRes=r);
+(async()=>{try{const ld=u=>new Promise((r,j)=>{const x=document.createElement("script");x.src=u;x.onload=r;x.onerror=j;document.head.append(x);});
+  const FB="https://www.gstatic.com/firebasejs/10.12.2/";await ld(FB+"firebase-app-compat.js");await ld(FB+"firebase-firestore-compat.js");
+  if(!window.firebase){fbRes();return;}
+  firebase.initializeApp({apiKey:"AIzaSyBRtZT_GIaFAG6XWZmYAbZKL352OmlA8UU",authDomain:"trinity-osusume.firebaseapp.com",projectId:"trinity-osusume",storageBucket:"trinity-osusume.firebasestorage.app",messagingSenderId:"973094802398",appId:"1:973094802398:web:e78ae5d16be461ded2034f"});
+  docBase=firebase.firestore().collection("osusume");fbRes();
+  const pd=docBase.doc("osu-profiles");const ps=await pd.get();
+  if(ps.exists){const rp=ps.data().pins||{};Object.keys(rp).forEach(k=>{if(!pins[k])pins[k]=rp[k];});lsSet(PINKEY,pins);const list=(ps.data().list)||[];let ch=false;list.forEach(n=>{if(!profiles.includes(n)){profiles.push(n);ch=true;}});if(ch){lsSet(PKEY,profiles);if(!picked)picked=profiles[0];renderProfiles();}}
+  window.__pd=pd;pd.set({list:profiles,pins}).catch(()=>{});
+  if(me)pullRemote();}catch(e){fbRes();}})();
+let remoteReady=false;
+async function fetchRemote(){const d=docFor(me);if(!d)return null;try{const sn=await d.get();if(!sn.exists)return null;const raw=sn.data();if(raw.json){try{return JSON.parse(raw.json);}catch(e){return null;}}return raw;}catch(e){logEv("ERR","fetch "+String(e.message).slice(0,120));return "ERR";}}
+async function pullRemote(){const d=docFor(me);if(!d)return;try{const sn=await d.get();if(sn.exists){const raw=sn.data();let r=raw;try{if(raw.json)r=JSON.parse(raw.json);}catch(e){}if(r&&r.v===1&&(r.updated||0)>(S.updated||0)){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);hud();if(!cur||cur.type==="done")next();}}else if(S.updated)save();}catch(e){}}
+let showAll=false;
+function renderProfiles(){const pl=$("#plist");pl.innerHTML="";const last=lsGet("osusume-last","");
+  const solo=!showAll&&last&&profiles.includes(last);if(solo&&!picked)picked=last;
+  $("#newWho").hidden=!!solo;const lst=solo?[last]:profiles;
+  lst.forEach(n=>{const b=el("button","pbtn",n);b.setAttribute("aria-pressed",n===picked);b.onclick=()=>{picked=n;$("#pin").value="";renderProfiles();};pl.append(b);});if(solo){const c=el("button","chg","사용자 변경");c.onclick=()=>{showAll=true;picked=null;$("#pin").value="";renderProfiles();};pl.append(c);}needPin();$("#goBtn").disabled=!picked;if(solo)setTimeout(()=>{try{$("#pin").focus();}catch(e){}},50);}
+const PINKEY="osusume-pins";let pins=lsGet(PINKEY,{});
+function needPin(){const has=picked&&pins[picked];$("#pinBox").hidden=!picked;$("#pinLabel").textContent=has?picked+"님 비밀번호 4자리":"새 비밀번호 4자리 정하기 (숫자)";}
+function addProfile(){const n=$("#newName").value.trim();if(!n)return;if(!profiles.includes(n)){profiles.push(n);lsSet(PKEY,profiles);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});}picked=n;$("#newName").value="";renderProfiles();}
+
+/* ---------- audio ---------- */
+const player=new Audio(),sfx=new Audio();player.preload=sfx.preload="auto";
+const AUD=__AUD__;
+const src=t=>{if(t.startsWith("ko:")){const k=AUD.ko[t.slice(3)];return k?"audio/"+k+".mp3":null;}if((AUD[LANG]||{})[t])return "audio/"+AUD[LANG][t]+".mp3";return CLIPS[t]?"data:audio/mpeg;base64,"+CLIPS[t]:null;};
+let unlocked=false;document.addEventListener("pointerdown",()=>{if(unlocked)return;unlocked=true;
+  [player,sfx].forEach(a=>{try{a.muted=true;a.src=src("__ok");a.play().then(()=>{a.pause();a.muted=false;}).catch(()=>{a.muted=false;});}catch(e){}});},{capture:true});
+let tok=0;
+let dingP=Promise.resolve(),speaking=false;
+sfx.addEventListener("playing",()=>{if(speaking){try{sfx.pause();}catch(e){}}});
+function say(t,rate=1){return dingP.then(()=>new Promise(res=>{const s=src(t);if(!s){res();return;}let d=false;const f=()=>{if(!d){d=true;speaking=false;res();}};
+  speaking=true;try{sfx.pause();}catch(e){}
+  try{player.pause();player.muted=false;player.src=s;player.playbackRate=rate;player.onended=f;player.onerror=f;const p=player.play();if(p)p.catch(f);}catch(e){f();}setTimeout(f,Math.max(4000,t.length*600));}));}
+const synth=window.speechSynthesis||null;let koV=null;
+function pickKo(){if(!synth)return;koV=synth.getVoices().find(v=>/^ko/i.test(v.lang))||null;}
+if(synth){pickKo();synth.onvoiceschanged=pickKo;}
+function sayKo(t){if(AUD.ko[t])return say("ko:"+t);return new Promise(res=>{if(!synth){res();return;}if(!koV)pickKo();try{const u=new SpeechSynthesisUtterance(t);u.lang="ko-KR";if(koV)u.voice=koV;u.rate=1.05;let d=false;const f=()=>{if(!d){d=true;res();}};u.onend=f;u.onerror=f;synth.speak(u);setTimeout(f,4000+t.length*250);}catch(e){res();}});}
+function hush(){tok++;try{player.pause();}catch(e){}try{if(synth)synth.cancel();}catch(e){}}
+function ding(k){try{player.pause();speaking=false;sfx.muted=false;sfx.src=src(k==="no"?"__no":"__ok");dingP=new Promise(r=>{let o=false;const z=()=>{if(!o){o=true;r();}};sfx.onended=z;sfx.onerror=z;setTimeout(z,900);});sfx.play().catch(()=>{});}catch(e){}}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- scheduling ---------- */
+function schedule(st,ivl){st.ivl=Math.min(MAX_IVL,Math.max(MIN_IVL,ivl));
+  if(st.ivl<60){st.dueStep=S.step+Math.round(st.ivl);st.dueAt=null;}else{st.dueAt=Date.now()+st.ivl*MIN;st.dueStep=null;}}
+let cur=null,reviewOnly=false,retryQ=[];
+function rollover(){const k=dayKey();if(S.today!==k){S.today=k;S.todayN=0;S.todayWrong={};}}
+let SESS=Date.now(),hardHist=[];
+function startSession(){SESS=Date.now();logEv("SESSION",APP_VER,{gapDay:S.last?+((Date.now()-S.last)/DAY).toFixed(2):null,learned:Object.keys(S.st).length,xp:S.xp,ua:navigator.userAgent.slice(0,80)});hardHist=[];wordSeen={};sessN={};rollover();recent=[];const gap=S.last?(Date.now()-S.last)/DAY:0;reviewOnly=gap>=3;retryQ=[];if(reviewOnly)toast("오랜만이에요. 밀린 복습부터 할게요.");}
+const learned=()=>ITEMS.filter(it=>S.st[it.id]);
+const isDue=st=>(st.dueStep!=null&&S.step>=st.dueStep)||(st.dueAt!=null&&Date.now()>=st.dueAt);
+const learning=()=>learned().filter(it=>S.st[it.id].ivl<60);
+function dueList(){return learned().filter(it=>isDue(S.st[it.id])).sort((a,b)=>{const A=S.st[a.id],B=S.st[b.id];
+  const wa=(A.wrong||0)>=2?0:1,wb=(B.wrong||0)>=2?0:1;if(wa!==wb)return wa-wb;
+  const sa=A.dueStep!=null?0:1,sb=B.dueStep!=null?0:1;if(sa!==sb)return sa-sb;return (A.dueAt||0)-(B.dueAt||0);});}
+/* 같은 문제가 붙어서 나오지 않게: 최근 3개는 피하고, 섞을 거리가 부족하면 새 내용으로 진도를 나간다 */
+let recent=[];
+function remember(id){recent=[id,...recent.filter(x=>x!==id)].slice(0,3);}
+/* 섞기 규칙: ① 같은 항목은 최소 3문제 간격(쿨다운) ② 돌릴 수 있는 배운 항목이 3개 미만이면 새 항목부터
+   ③ 새 항목 1개마다 복습 2개(배운 항목 15개 미만) 또는 4개 ④ 뽑을 순서: 다시 묻기 → 복습 시점 된 것 → 새 항목 → 오래 안 본 것 */
+const COOL=3,MIN_POOL=3;
+/* 틀린 항목 대책: ⑤ 틀린 간격은 3→6문제로 점점 벌리고, 한 세션에 3번 틀리면 오늘은 쉬게(12시간 뒤 맨 먼저)
+   ⑥ 두 번째 틀리면 쪼개서 다시 배우기 화면 ⑦ 틀린 항목은 3문제 중 1개까지만 */
+const hard=it=>{const st=S.st[it.id];return st&&st.swS===SESS&&(st.sw||0)>0;};
+/* 포함 관계: 각 항목에 들어 있는 단어 목록. 너무 흔한 단어(5개 이상 항목에 등장)는 간격 계산에서 뺀다 */
+const WIN={};(()=>{const ws=ITEMS.filter(i=>i.t==="w");ITEMS.forEach(it=>{WIN[it.id]=ws.filter(w=>w.u===it.u&&it.ja.includes(w.ja)).map(w=>w.id);});
+  const freq={};Object.values(WIN).forEach(l=>l.forEach(w=>freq[w]=(freq[w]||0)+1));Object.keys(WIN).forEach(k=>WIN[k]=WIN[k].filter(w=>freq[w]<5||k===w));})();
+/* 문장·대화에 실제로 들어 있는 단어 목록(헷갈린 단어 고르기에 사용) */
+function wordsOf(it){const ws=ITEMS.filter(i=>i.t==="w"&&i.u===it.u);const out=[];const push=w=>{if(w&&!out.includes(w.id)&&w.id!==it.id)out.push(w.id);};
+  const fromPiece=p=>{const ex=ws.find(w=>w.ja===p);if(ex)return push(ex);ws.filter(w=>w.ja.length>=2&&p.includes(w.ja)).forEach(push);
+    if(/です/.test(p))push(ws.find(w=>w.ja==="です"));if(/か$/.test(p))push(ws.find(w=>w.ja==="か"));};
+  if(it.parts)it.parts.filter(p=>p[2]==="w").forEach(p=>fromPiece(p[0]));
+  else if(it.t==="d"){ITEMS.filter(s=>s.t==="s"&&s.u===it.u&&it.ja.includes(s.ja.replace(/。$/,""))).forEach(s=>wordsOf(s).forEach(id=>push(BY[id])));
+    ws.filter(w=>w.ja.length>=2&&it.ja.includes(w.ja)).forEach(push);}
+  return out;}
+function wrongWord(wid){const st=S.st[wid];if(!st)return;st.wrong=(st.wrong||0)+1;st.ok=0;if(st.lad!=null)st.lad=0;
+  S.todayWrong[wid]=(S.todayWrong[wid]||0)+1;st.ivl=Math.max(MIN_IVL,st.ivl*MULT.no);st.dueStep=S.step+3;st.dueAt=null;
+  if(!retryQ.some(x=>x.id===wid))retryQ.push({id:wid,at:S.step+3});}
+let wordSeen={},sessN={};
+const RELGAP=4,SESS_MAX=5;
+/* 처음 배운 항목의 빠른 리마인드: 배운 뒤 2문제 안에 반드시 한 번, 맞으면 7문제 뒤 한 번 더, 그다음은 1시간 간격부터 일반 복습 */
+const LADDER=[2,7];
+/* 이미 알아요: 이번 공부 중엔 다시 안 나오고, 한 달 뒤 한 번 확인 → 맞히면 3개월 뒤, 틀리면 일반 복습 */
+const KNOWN1=30*1440,KNOWN2=90*1440;
+function markKnown(st,id){logEv("KNOWN",id);delete st.lad;st.kn=1;st.ok=(st.ok||0)+3;st.ivl=KNOWN1;st.dueAt=Date.now()+KNOWN1*MIN;st.dueStep=null;
+  retryQ=retryQ.filter(x=>x.id!==id);sessN[id]=99;S.knownSess=S.knownSess||{};S.knownSess[id]=SESS;}
+const ready=it=>{const st=S.st[it.id];if(!st)return false;if(S.step-(st.seen==null?-99:st.seen)<COOL)return false;
+  if((sessN[it.id]||0)>=SESS_MAX)return false;
+  return (WIN[it.id]||[]).every(w=>S.step-(wordSeen[w]==null?-99:wordSeen[w])>=RELGAP);};
+function markShown(it){sessN[it.id]=(sessN[it.id]||0)+1;(WIN[it.id]||[]).forEach(w=>wordSeen[w]=S.step);}
+function creditWords(it){(WIN[it.id]||[]).forEach(w=>{if(w===it.id)return;const st=S.st[w];if(!st)return;
+  if(st.dueStep!=null)st.dueStep=Math.max(st.dueStep,S.step+10);else if(st.dueAt!=null)st.dueAt=Math.max(st.dueAt,Date.now()+Math.min(st.ivl,1440)*MIN*.5);});}
+function introOrListen(it){if(it.dn&&it.dn.length){const s={ok:0,wrong:0,lad:1};S.step++;schedule(s,FIRST);s.dueStep=S.step+LADDER[1];s.seen=S.step-COOL;S.unitStart=S.unitStart||{};if(S.unitStart[UK(it.u)]==null)S.unitStart[UK(it.u)]=Date.now();S.sinceNew=0;S.newRun=(S.newRun||0)+1;S.st[it.id]=s;return show({type:"quiz",id:it.id,first:true});}if(it.t==="l"){const s={ok:0,wrong:0};S.step++;schedule(s,FIRST);s.seen=S.step-COOL;S.st[it.id]=s;return show({type:"quiz",id:it.id,first:true});}return show({type:"intro",id:it.id});}
+function next(){
+  if(!$("#conv").hidden||!$("#offer").hidden)return;
+  rollover();hush();
+  const hardOK=hardHist.slice(-3).every(x=>!x); // 틀린 항목은 4문제 중 1개까지
+  const lOK=!typeHist.slice(-6).includes("l"); // 손님 말 알아듣기는 6문제에 1번까지
+  const okT=it=>it.t!=="l"||lOK;
+  const cu=curU();
+  // 틀린 항목은 반드시 5문제 안에 다시: 재출제 시점이 되면 다른 규칙보다 먼저 낸다(직전 문제와 같은 것만 피함)
+  retryQ=retryQ.filter(x=>x.pk||!BY[x.id]||!covered(BY[x.id]));
+  const rq=retryQ.filter(x=>x.at<=S.step&&BY[x.id]&&S.st[x.id]&&S.st[x.id].seen!==S.step).sort((a,b)=>a.at-b.at);
+  const r=rq.find(x=>S.step>=x.at+1)||(hardOK?rq[0]:null);
+  if(r){retryQ=retryQ.filter(x=>x!==r);return show({why:"p1",type:r.relearn?"relearn":"quiz",id:r.id,again:true});}
+  const fresh=learned().filter(it=>{const st=S.st[it.id];return st.lad!=null&&!covered(it)&&st.dueStep!=null&&S.step>=st.dueStep&&S.step-(st.seen==null?-99:st.seen)>=2&&(sessN[it.id]||0)<SESS_MAX+2&&!retryQ.some(x=>x.id===it.id);}).sort((a,b)=>S.st[a.id].dueStep-S.st[b.id].dueStep);
+  if(fresh.length)return show({why:"p2",type:"quiz",id:fresh[0].id});
+  if(S.chain&&S.chain.length){const id=S.chain.shift();const n=S.chainN;return show({why:"p3",type:"quiz",id,chain:(n-S.chain.length)+"/"+n});}
+  if(cu>0&&S.step-(S.lastChain||0)>=30&&Date.now()-((S.unitStart||{})[cu]||Date.now())>=2*DAY){
+    const pu=Math.floor(Math.random()*cu);const ch=ITEMS.filter(i=>i.u===pu&&i.t==="d"&&S.st[i.id]).map(i=>i.id);
+    if(ch.length){S.lastChain=S.step;S.chain=ch;S.chainN=ch.length;toast("지난 단원 '"+UNITS[pu].title+"' 대화를 이어서 말해 봐요");const id=S.chain.shift();return show({why:"p4",type:"quiz",id,chain:"1/"+ch.length});}}
+  const priorOK=unitHist.slice(-10).filter(u=>u<cu).length<3;
+  // 세션 상한에 걸린 재출제는 다음 세션으로 넘긴다
+  retryQ=retryQ.filter(x=>{const sx=S.st[x.id];if(!sx||sx.kn)return false;if((sessN[x.id]||0)>=SESS_MAX){const st=S.st[x.id];st.dueAt=Date.now()+12*60*MIN;st.dueStep=null;return false;}return true;});
+  const due=dueList().filter(it=>!covered(it)&&ready(it)&&(hardOK||!hard(it))&&!retryQ.some(x=>x.id===it.id)&&(priorOK||it.u>=cu)&&okT(it));
+  // 새 항목도 비슷한 말 간격을 지킨다. 막히면 그 단어를 다 배운 뒤에 나올 다음 항목을 먼저 소개한다
+  const relFree=it=>(WIN[it.id]||[]).every(w=>w===it.id||S.step-(wordSeen[w]==null?-99:wordSeen[w])>=RELGAP);
+  const unl=ITEMS.filter(it=>!S.st[it.id]&&okT(it));
+  const nwFirst=unl[0];
+  const nw=unl.slice(0,8).find(it=>dnOK(it)&&relFree(it)&&(WIN[it.id]||[]).every(w=>w===it.id||S.st[w]));
+  if(reviewOnly){if(due.length)return show({why:"p5",type:"quiz",id:due[0].id});reviewOnly=false;toast("밀린 복습 끝! 이제 새 내용이에요.");}
+  const pool=learned().filter(it=>!covered(it)&&ready(it)&&okT(it)&&(hardOK||!hard(it)));
+  const per=(level(S.xp).lv<=3||learned().length<20)?1:2; // 초반·저레벨은 새 1 : 복습 1, 이후 새 1 : 복습 2
+  const byFresh=(a,b)=>((sessN[a.id]||0)-(sessN[b.id]||0))||(mastery(a)-mastery(b))||((S.st[a.id].seen||0)-(S.st[b.id].seen||0));
+  if((S.newRun||0)>=3){const o=learned().filter(it=>!covered(it)&&S.step-(S.st[it.id].seen||0)>=2&&okT(it)&&(sessN[it.id]||0)<SESS_MAX).sort(byFresh);if(o.length)return show({why:"p6",type:"quiz",id:o[0].id});}
+  if(nw&&(pool.length<MIN_POOL||(S.sinceNew||0)>=per||!due.length))return introOrListen(nw);
+  if(due.length)return show({why:"p7",type:"quiz",id:due[0].id});
+  if(nw)return introOrListen(nw);
+  if(nwFirst&&!pool.length)return introOrListen(nwFirst);
+  if(pool.length){pool.sort(byFresh);return show({why:"p8",type:"quiz",id:pool[0].id});}
+  const any=learned().filter(it=>!covered(it)&&S.st[it.id].seen!==S.step&&okT(it)&&(sessN[it.id]||0)<SESS_MAX).sort(byFresh);
+  if(any.length)return show({why:"p9",type:"quiz",id:any[0].id});
+  show({type:"done"});
+}
+const monthKey=()=>{const d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1);};
+function addXp(n){const before=level(S.xp).lv;S.xp+=n;S.mxp=S.mxp||{};const mk=monthKey();S.mxp[mk]=(S.mxp[mk]||0)+n;const after=level(S.xp).lv;if(after>before)setTimeout(()=>levelUp(after),650);}
+function grade(id,kind){const _b=snap(id);setTimeout(()=>logEv("GRADE",id,kind,{before:_b,after:snap(id),retryQ:retryQ.map(x=>x.id+"@"+x.at)}),0);
+  const st=S.st[id];if(!st)return;S.step++;S.todayN++;S.last=Date.now();st.seen=S.step;S.sinceNew=(S.sinceNew||0)+1;S.newRun=0;
+  const k=dayKey();if(!S.days.includes(k))S.days.push(k);
+  // 맞았어요·이미 알아요를 누르면 다시 낼 목록에서 바로 뺀다
+  if(kind!=="no")retryQ=retryQ.filter(x=>x.id!==id);
+  if(kind==="ok")st.eo=1;
+  if(kind==="ok"&&st.kn===1){delete st.kn;st.ok=(st.ok||0)+1;schedule(st,KNOWN2);}
+  else if(kind==="ok"&&st.lad!=null){st.ok=(st.ok||0)+1;st.lad++;if(st.lad>=LADDER.length){delete st.lad;schedule(st,60);}else{st.dueStep=S.step+LADDER[st.lad];st.dueAt=null;}}
+  else if(kind==="ok"){st.ok=(st.ok||0)+1;schedule(st,st.ivl*MULT.ok);const I=BY[id];if(I.t==="s"||I.t==="d")creditWords(I);}
+  else if(kind==="no"){delete st.kn;if(st.lad!=null)st.lad=0;st.wrong=(st.wrong||0)+1;st.ok=0;S.todayWrong[id]=(S.todayWrong[id]||0)+1;
+    if(st.swS!==SESS){st.swS=SESS;st.sw=0;}st.sw++;st.ivl=Math.max(MIN_IVL,st.ivl*MULT.no);retryQ=retryQ.filter(x=>x.id!==id);
+    if(st.sw>=4){st.dueAt=Date.now()+12*60*MIN;st.dueStep=null;toast("이 표현은 오늘은 쉬고, 다음에 맨 먼저 나와요");}
+    else{const L=!!BY[id].dn;const gap=L?8:[0,2,3,4][st.sw];st.dueStep=S.step+gap;st.dueAt=null;retryQ=retryQ.filter(x=>x.id!==id);retryQ.push({id,at:S.step+gap,relearn:!L&&st.sw===2});}}
+  else{markKnown(st,id);}
+  if(kind!=="no"&&BY[id].dn)DESC[id].forEach(d=>{const ds=S.st[d];if(!ds)return;retryQ=retryQ.filter(x=>x.id!==d);if(ds.lad!=null){delete ds.lad;ds.eo=1;}const iv=Math.max(60,st.ivl||0);if((ds.ivl||0)<iv)schedule(ds,iv);});
+  S.best=Math.max(S.best||0,streak());
+  addXp(XPV[kind]);save();hud();ding(kind);
+  const MS={20:"🎉 20문제 돌파! 입이 풀리기 시작했어요",50:"🔥 50문제! 오늘 제대로 하고 있어요",100:"🏅 100문제! 이 정도면 오늘 상담 거뜬해요",200:"👑 200문제! 오늘의 전설이에요"};
+  const msg=MS[S.todayN]||(S.todayN>200&&S.todayN%100===0?"👑 "+S.todayN+"문제! 멈출 줄 모르네요":null);
+  if(msg){S.xp+=S.todayN>=100?50:20;setTimeout(()=>{ding("ok");toast(msg);},300);}
+  $("#actbar").style.pointerEvents="none";setTimeout(()=>{$("#actbar").style.pointerEvents="";if(kind!=="no"&&S.todayN%8===0&&maybeOffer())return;next();},kind==="no"?450:550);
+}
+
+/* ---------- 레벨·성취도 ---------- */
+function level(xp){let lv=1,need=100,base=0;while(xp>=base+need){base+=need;lv++;need=100+(lv-1)*50;}return{lv,cur:xp-base,need};}
+function mastery(it){const st=S.st[it.id];if(!st)return 0;let m=st.ivl<60?1:st.ivl<7*1440?2:3;
+  if(st.dueAt&&Date.now()>st.dueAt+st.ivl*MIN)m=Math.max(1,m-1);return m;} // 복습을 너무 미루면 익힌 정도가 한 칸 내려간다
+const MW=[0,.25,.6,1];
+const isLearned=it=>{const st=S.st[it.id];return !!st&&((st.ok||0)>=1||st.kn||st.ivl>=60);};
+function learnPct(list){return list.length?Math.round(list.filter(isLearned).length/list.length*100):0;}
+const UI_=u=>ITEMS.filter(it=>it.u===u);
+function progress(list=ITEMS){return Math.round(list.reduce((a,it)=>a+MW[mastery(it)],0)/list.length*100);}
+function streak(){let n=0;const set=new Set(S.days);const d=new Date();if(!set.has(dayKey(d.getTime())))d.setDate(d.getDate()-1);while(set.has(dayKey(d.getTime()))&&n<999){n++;d.setDate(d.getDate()-1);}return n;}
+
+/* ---------- render ---------- */
+const $=s=>document.querySelector(s);
+const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const MIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>';
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function hud(){rollover();const L=level(S.xp);$("#hLv").textContent=L.lv;$("#hXp").textContent=L.cur+" / "+L.need+" XP";$("#hBar").style.width=Math.round(L.cur/L.need*100)+"%";
+  $("#hName").textContent=me+" · "+unitTitle();$("#hStreak").textContent=streak();$("#hBest").textContent="(최장 "+Math.max(S.best||0,streak())+")";$("#hToday").textContent=S.todayN;$("#hDone").textContent=learnPct(UI_(curU()));$("#hDue").textContent=dueList().length;}
+function stage(t){["W","S","D"].forEach(x=>$("#sg"+x).classList.toggle("on",{w:"W",s:"S",d:"D",l:"D"}[t]===x));}
+function cueBlock(c){const b=el("div","cue");b.append(el("span","who2","손님"));const t=el("div","t");t.append(el("div","ja",c.ja));t.append(el("small",null,c.m));b.append(t);
+  const p=el("button","play");p.innerHTML=PLAY;p.setAttribute("aria-label","손님 말 듣기");p.onclick=()=>{hush();say(c.ja);};b.append(p);return b;}
+function answer(it,help){
+  const a=el("div","answer"+(it.ja.length>22?" long":""));a.append(el("div","jbig ja",it.ja));
+  if(it.rd)a.append(el("div","reading",it.rd));
+  const pr=el("div","pron",it.p);
+  if(!it.p);else if(help)a.append(pr);else{const b=el("button","peek","한글 발음 보기");b.onclick=()=>b.replaceWith(pr);a.append(b);}
+  a.append(el("div","mean",it.m));
+  if(it.parts&&help){const ps=el("div","parts");it.parts.forEach(([j,mm,k])=>{const c=el("span","part "+k);c.append(el("span","pj",j));c.append(el("span","pm",mm));ps.append(c);});a.append(ps);}
+  const r=el("button","replay");r.innerHTML=PLAY+"<span>다시 듣기</span>";r.onclick=()=>{hush();say(it.ja);};a.append(r);
+  if(it.tip){const tp=el("div","tip");tp.innerHTML="<b>판매 노하우</b> ";tp.append(document.createTextNode(it.tip));a.append(tp);}
+  return a;}
+function pickWords(it,ws){const bar=$("#actin");bar.innerHTML="";const sel=new Set();
+  bar.append(el("div","selfnote","헷갈린 단어를 눌러 주세요. 그 단어를 더 자주 연습해요."));
+  const box=el("div","wpick");ws.forEach(id=>{const w=BY[id];const b=el("button","wchip");b.append(el("span","pj",w.ja));b.append(el("span","pm",w.m.split(" (")[0]));
+    b.onclick=()=>{sel.has(id)?sel.delete(id):sel.add(id);b.classList.toggle("on",sel.has(id));hush();say(w.ja);};box.append(b);});bar.append(box);
+  const g=el("div","actions two");const skip=el("button","btn ghost","단어는 다 알아요");skip.onclick=()=>grade(it.id,"no");
+  const okb=el("button","btn no","선택 완료");okb.onclick=()=>{logEv("WORDPICK",it.id,[...sel]);sel.forEach(wrongWord);if(sel.size)toast(sel.size+"개 단어를 더 연습할게요");grade(it.id,"no");};
+  g.append(skip,okb);bar.append(g);}
+function ladWrong(cid){if(!S.st[cid])return;wrongWord(cid);const at=S.step+3+Math.floor(Math.random()*3);retryQ=retryQ.filter(x=>x.id!==cid);retryQ.push({id:cid,at,pk:true});S.st[cid].dueStep=at;}
+function pickParts(it){const bar=$("#actin");bar.innerHTML="";const sel=new Set();
+  bar.append(el("div","selfnote","어느 부분이 어려웠어요? 고른 부분을 몇 문제 뒤에 짧게 연습해요."));
+  const box=el("div","wpick");it.dn.forEach(id=>{const w=BY[id];const b=el("button","wchip");b.append(el("span","pj",w.ja));b.append(el("span","pm",w.m));
+    b.onclick=()=>{sel.has(id)?sel.delete(id):sel.add(id);b.classList.toggle("on",sel.has(id));hush();say(w.ja);};box.append(b);});bar.append(box);
+  const fin=all=>{const ids=all||!sel.size?it.dn:[...sel];logEv("PARTPICK",it.id,ids);ids.forEach(ladWrong);grade(it.id,"no");};
+  const g=el("div","actions two");const a=el("button","btn ghost","다 어려워요");a.onclick=()=>fin(true);
+  const okb=el("button","btn no","선택 완료");okb.onclick=()=>fin(false);g.append(a,okb);bar.append(g);}
+function knownBtn(fn){const b=el("button","known","이미 알아요 · 덜 나오게");b.onclick=fn;return b;}
+let unitHist=[],typeHist=[];
+let guard=0;
+function show(c,resume){
+  // 안전장치: 직전 2문제와 같은 항목·같은 일본어면 다른 문제로 바꾼다
+  if(!resume&&c.id&&c.type!=="done"&&c.type!=="intro"&&guard<4){const it=BY[c.id];const rec=S.recent||[];
+    if(rec.some(r=>r.id===c.id||r.ja===it.ja)||(S.st[c.id]&&S.st[c.id].kn&&sessN[c.id]>=99)){logEv("GUARD",c.id,c.type,c.why||"");guard++;if(S.st[c.id])S.st[c.id].seen=S.step;return next();}}
+  guard=0;
+  window.__curId=(c.id&&c.type!=="done")?c.id:null;try{$("#flagBtn").hidden=!window.__curId;}catch(e){}
+  if(!resume&&c.id&&c.type!=="done"){S.recent=[{id:c.id,ja:BY[c.id].ja},...(S.recent||[])].slice(0,2);
+    S.dbg=[[Date.now(),S.step,c.id,c.type,c.why||""],...(S.dbg||[])].slice(0,60);
+    logEv("SHOW",c.id,c.type,c.why||"",c.again?"again":"",c.chain||"",{retryQ:retryQ.map(x=>x.id+"@"+x.at),st:snap(c.id),sessN:sessN[c.id]||0});markShown(BY[c.id]);hardHist.push(hard(BY[c.id]));unitHist.push(BY[c.id].u);typeHist.push(BY[c.id].t);}
+  cur=c;if(c.id)remember(c.id);const card=$("#card");card.innerHTML="";const bar=$("#actin");bar.innerHTML="";hud();
+  if(c.type==="done"){stage("");bar.innerHTML="";const d=el("div","done");d.append(el("h2",null,"지금 할 분량을 다 했어요"));
+    d.append(el("p",null,"다음 복습 시간이 되면 다시 나와요. 시간을 두고 다시 열어 주세요."));card.append(d);return;}
+  const it=BY[c.id];stage(it.t);const st=S.st[it.id];const help=!st||(st.ok||0)<3;
+  const kd=el("div","kind");const l=el("span");
+  if(c.type==="intro")l.append(el("b",null,"새 "+TLABEL[it.t]));else if(c.type==="relearn")l.append(el("b",null,TLABEL[it.t]+" · 쪼개서 다시 배우기"));else l.textContent=c.chain?"복습 대화 "+c.chain:TLABEL[it.t]+(c.again?" · 다시 한 번":" 복습");
+  kd.append(l);kd.append(el("span",null,reviewOnly?"복습 먼저":(it.g?"묶음 "+it.g:"대화")));card.append(kd);
+  if(it.cue)card.append(cueBlock(it.cue));
+  if(c.type==="relearn"){
+    card.append(answer(it,true));const ac=el("div","actions");const b=el("button","btn primary","다시 따라 말했어요");
+    b.onclick=()=>{S.step++;S.st[it.id].seen=S.step;retryQ.push({id:it.id,at:S.step+3});save();next();};ac.append(b);bar.append(ac);
+    (async()=>{const t=++tok;for(let i=0;i<2;i++){if(t!==tok)return;await say(it.ja,0.8);if(t!==tok)return;await wait(1500+it.ja.length*60);}})();
+    return;}
+  if(c.type==="intro"){
+    card.append(answer(it,true));
+    const ac=el("div","actions");const b=el("button","btn primary","따라 말했어요");
+    b.onclick=()=>{S.unitStart=S.unitStart||{};if(S.unitStart[UK(it.u)]==null)S.unitStart[UK(it.u)]=Date.now();const s={ok:0,wrong:0,lad:0};S.step++;schedule(s,FIRST);s.dueStep=S.step+LADDER[0];s.seen=S.step;S.sinceNew=0;S.newRun=(S.newRun||0)+1;S.st[it.id]=s;addXp(XPV.intro);save();next();};
+    ac.append(b);bar.append(ac);
+    bar.append(knownBtn(()=>{const s={ok:3,wrong:0};S.step++;s.seen=S.step;markKnown(s,it.id);S.sinceNew=0;S.newRun=(S.newRun||0)+1;S.st[it.id]=s;addXp(XPV.known);save();next();}));
+    (async()=>{const t=++tok;if(it.cue){await say(it.cue.ja);if(t!==tok)return;await wait(500);}
+      for(let i=0;i<2;i++){if(t!==tok)return;await say(it.ja,0.9);if(t!==tok)return;await wait(1500+it.ja.length*60);}})();
+    return;}
+  if(it.t==="l"){
+    const task=el("div","task");const sp=el("div","mic spk");sp.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>';
+    task.append(sp);task.append(el("div","ko","손님이 뭐라고 했을까요?"));task.append(el("div","hint","듣고 뜻을 골라 주세요. 다시 들으려면 스피커를 누르세요."));
+    sp.onclick=()=>{hush();say(it.ja,0.9);};card.append(task);
+    const others=ITEMS.filter(x=>x.t==="l"&&x.id!==it.id).map(x=>x.m);const opts=[it.m,...others.sort(()=>Math.random()-.5).slice(0,2)].sort(()=>Math.random()-.5);
+    const ac=el("div","actions");opts.forEach(o=>{const b=el("button","choice",o);b.onclick=()=>{
+      const right=o===it.m;[...ac.children].forEach(x=>{x.disabled=true;if(x.textContent===it.m)x.classList.add("right");});if(!right)b.classList.add("wrongc");
+      task.remove();card.append(answer(it,true));setTimeout(()=>grade(it.id,right?"ok":"no"),right?900:1800);};ac.append(b);});
+    bar.append(ac);(async()=>{const t=++tok;await wait(200);if(t!==tok)return;await say(it.ja,0.9);})();return;}
+  const task=el("div","task");const mic=el("div","mic");mic.innerHTML=MIC;task.append(mic);task.append(el("div","ko",it.m));
+  task.append(el("div","hint",it.t==="d"?"손님에게 이어서 "+LN+"로 말해 보세요":LN+"로 소리 내어 말해 보세요"));card.append(task);
+  const ac=el("div","actions");const rv=el("button","btn primary","말했어요 · 정답 듣기");
+  rv.onclick=()=>{task.remove();card.append(answer(it,help));
+    bar.innerHTML="";bar.append(el("div","selfnote","인식 오류를 막기 위해 이 앱은 음성 인식을 쓰지 않아요. 직접 채점해 주세요."));
+    const g=el("div","actions two");const no=el("button","btn no","틀렸어요");no.onclick=()=>{if(it.dn&&it.dn.length){if(it.dn.length===1){ladWrong(it.dn[0]);return grade(it.id,"no");}return pickParts(it);}const ws=(it.t==="s"||it.t==="d")?wordsOf(it).filter(w=>S.st[w]):[];if(!ws.length)return grade(it.id,"no");pickWords(it,ws);};
+    const ok=el("button","btn ok","맞았어요");ok.onclick=()=>grade(it.id,"ok");g.append(no,ok);bar.append(g);
+    bar.append(knownBtn(()=>grade(it.id,"known")));hush();say(it.ja);};
+  ac.append(rv);bar.append(ac);
+  (async()=>{const t=++tok;if(it.cue){await say(it.cue.ja);if(t!==tok)return;await wait(400);}if(t!==tok)return;await sayKo(it.m);})();
+}
+
+/* ---------- 오늘은 그만할래요 ---------- */
+function wrongItem(it,cnt){const b=el("button","wi");const tx=el("div","tx");tx.append(el("div","ja",it.ja));tx.append(el("div","mn",(it.p?it.p+" · ":"")+it.m));b.append(tx);
+  if(cnt)b.append(el("span","cnt","틀림 "+cnt+"회"));const p=el("span","play");p.innerHTML=PLAY;b.append(p);b.onclick=()=>{hush();say(it.ja);};return b;}
+function showSummary(){logEv("QUIT",{today:S.todayN,wrong:S.todayWrong});flushLog();
+  hush();save();$("#actbar").hidden=true;$("#mainView").classList.remove("withbar");const v=$("#summary");v.innerHTML="";
+  const p1=el("div","panel");p1.append(el("h3",null,"오늘 수고했어요, "+me+"님"));
+  const g=el("div","grid2");[["오늘 푼 문제",S.todayN],["연속 학습",streak()+"일 (최장 "+Math.max(S.best||0,streak())+"일)"],["레벨","Lv."+level(S.xp).lv],["성취도",progress()+"%"]].forEach(([a,b])=>{const s=el("div","stat");s.append(el("small",null,a));s.append(el("b",null,String(b)));g.append(s);});
+  p1.append(g);
+  const sv=el("div","saved");const svt=el("div");svt.append(el("b",null,"✓ 오늘 학습 기록이 저장됐어요"));
+  svt.append(document.createTextNode(Object.keys(S.todayWrong||{}).length?"다음에 들어오면 오늘 틀린 표현부터 먼저 복습해요. 쉬는 동안 잊기 쉬운 것도 알아서 챙겨 드릴게요.":"다음에 들어오면 잊을 때가 된 표현부터 알아서 복습해요."));
+  sv.append(svt);p1.append(sv);v.append(p1);
+  const p2=el("div","panel");p2.append(el("h3",null,"오늘 많이 틀린 표현"));p2.append(el("div","sub","자기 전에 한 번씩만 더 들어 보세요. 다음에 먼저 나와요."));
+  const w=Object.entries(S.todayWrong||{}).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  if(!w.length)p2.append(el("div","empty","오늘 틀린 표현이 없어요. 완벽해요!"));else{const l=el("div","wl");w.forEach(([id,c])=>BY[id]&&l.append(wrongItem(BY[id],c)));p2.append(l);}
+  v.append(p2);
+  const b1=el("button","btn primary","조금 더 할래요");b1.style.width="100%";b1.onclick=()=>tab("study");
+  const b2=el("button","btn ghost","사용자 바꾸기");b2.style.cssText="width:100%;margin-top:10px";b2.onclick=toStart;
+  v.append(b1,b2);
+  ["study","status","script"].forEach(x=>$("#"+x).hidden=true);v.hidden=false;
+  document.querySelectorAll("nav.tabs button").forEach(x=>x.setAttribute("aria-selected","false"));
+}
+
+/* ---------- 내 현황 ---------- */
+function renderStatus(){
+  const v=$("#status");v.innerHTML="";
+  const mk=monthKey();window.__rk=window.__rk||{};const rows=profiles.map(n=>{const s=n===me?S:(window.__rk[n]||lsGet(SKEY(n),{}));return{n,x:((s.mxp||{})[mk])||0};}).sort((a,b)=>b.x-a.x);
+  if(docBase&&(!window.__rkT||Date.now()-window.__rkT>60000)){window.__rkT=Date.now();Promise.all(profiles.filter(n=>n!==me).map(n=>docFor(n).get().then(sn=>{if(sn.exists)window.__rk[n]={mxp:sn.data().mxp||{}};}).catch(()=>{}))).then(()=>{if(!$("#status").hidden)renderStatus();});}
+  const pr=el("div","panel");pr.append(el("h3",null,(new Date().getMonth()+1)+"월 순위"));pr.append(el("div","sub","이번 달에 얻은 경험치 기준이에요. 매달 1일에 새로 시작해요."));
+  const rk=el("div","rank");const myI=rows.findIndex(r=>r.n===me);
+  rows.slice(0,3).forEach((r,i)=>{const d=el("div","rk"+(r.n===me?" me":""));d.append(el("span","no medal m"+(i+1),(i+1)+"위"));d.append(el("span",null,r.n));d.append(el("span",null,r.x+" XP"));rk.append(d);});
+  if(myI>=3){const d=el("div","rk me");d.append(el("span","no",(myI+1)+"위"));d.append(el("span",null,"나 ("+me+")"));d.append(el("span",null,rows[myI].x+" XP"));rk.append(d);}
+  pr.append(rk);v.append(pr);
+  UNITS.forEach((U,u)=>{const UI=ITEMS.filter(i=>i.u===u);
+  const p0=el("div","panel");const row=el("div","lessonrow");row.append(el("span",null,(u===curU()?"▶ ":"")+U.title));row.append(el("span",null,"익힘 "+learnPct(UI)+"%"));p0.append(row);
+  const sb=el("div","stepbar");[["단어","w"],["문장","s"],["대화","d"]].forEach(([n,t])=>{const list=UI.filter(i=>i.t===t);const pc=learnPct(list);const s=el("span");const i=el("i");const u=el("u");u.style.width=pc+"%";i.append(u);s.append(i);s.append(document.createTextNode(n+" "+pc+"%"));sb.append(s);});
+  p0.append(sb);const mm=el("div","memline");const mb=el("i");const mu=el("u");mu.style.width=progress(UI)+"%";mb.append(mu);mm.append(el("span",null,"오래 기억"),mb,el("span",null,progress(UI)+"%"));p0.append(mm);v.append(p0);});
+  const p1=el("div","panel");p1.append(el("h3",null,"익힌 정도"));const cnt=[0,0,0,0];ITEMS.forEach(it=>cnt[mastery(it)]++);
+  const d=el("div","dist");const cols=["--m1","--m2","--m3","--m4"];cnt.forEach((c,i)=>{const x=el("i");x.style.width=(c/ITEMS.length*100)+"%";x.style.background="var("+cols[i]+")";d.append(x);});p1.append(d);
+  const lg=el("div","legend");["아직 안 배움","익히는 중","거의 앎","완전히 앎"].forEach((n,i)=>{const s=el("span",null,n+" "+cnt[i]);s.style.setProperty("--c","var("+cols[i]+")");lg.append(s);});p1.append(lg);v.append(p1);
+  const p2=el("div","panel");p2.append(el("h3",null,"학습 습관"));const g=el("div","grid2");
+  const wk=new Set();for(let i=0;i<7;i++){const t=Date.now()-i*DAY;if(S.days.includes(dayKey(t)))wk.add(i);}
+  const last=S.last?new Date(S.last):null;
+  [["연속 학습",streak()+"일 (최장 "+Math.max(S.best||0,streak())+"일)"],["이번 주 공부한 날",wk.size+"일"],["오늘 푼 문제",S.todayN],["지금 복습할 항목",dueList().length],["레벨","Lv."+level(S.xp).lv+" ("+S.xp+" XP)"],["마지막 학습",last?(last.getMonth()+1)+"/"+last.getDate()+" "+String(last.getHours()).padStart(2,"0")+":"+String(last.getMinutes()).padStart(2,"0"):"-"]].forEach(([a,b])=>{const s=el("div","stat");s.append(el("small",null,a));s.append(el("b",null,String(b)));g.append(s);});
+  p2.append(g);v.append(p2);
+  const p3=el("div","panel");p3.append(el("h3",null,"약점 표현 TOP 5"));
+  const w=learned().filter(it=>(S.st[it.id].wrong||0)>0).sort((a,b)=>S.st[b.id].wrong-S.st[a.id].wrong).slice(0,5);
+  if(!w.length)p3.append(el("div","empty","아직 틀린 표현이 없어요."));else{const l=el("div","wl");w.forEach(it=>l.append(wrongItem(it,S.st[it.id].wrong)));p3.append(l);}
+  v.append(p3);
+}
+
+/* ---------- 대화문 ---------- */
+let scU=null;
+const unitStarted=u=>UI_(u).some(it=>S.st[it.id]);
+const unitOpen=u=>learnPct(UI_(u))>=100;
+const convOpen=u=>unitOpen(u)&&progress(UI_(u))>=50;
+function renderScript(){const gal=$("#uchips");const det=$("#scDetail");
+  if(scU==null||!unitOpen(scU)){scU=null;det.hidden=true;gal.hidden=false;gal.innerHTML="";
+    gal.append(el("p","note","손님을 골라 들어가요. 단원을 100% 익히면 대화문이 열려요."));
+    const g=el("div","cgrid");UNITS.forEach((U,u)=>{const st=unitStarted(u),op=unitOpen(u);const c=el("button","ccard"+(op?"":" lk"));
+      if(st){const w=el("div","cimg");const im=el("img");im.src=custImg(u);im.alt="";w.append(im);if(!op)w.append(el("span","lock","🔒"));c.append(w);}else{const w=el("div","cimg");const im=el("img");im.src=custImg(u);im.alt="";im.className="blur";w.append(im,el("span","qmk","?"));c.append(w);}
+      c.append(el("div","ct",st?U.title:"???"));c.append(el("div","cs",!st?"아직 만나지 않은 손님":op?(convOpen(u)?"🎬 실전 연습 가능":"대화문 열람 가능"):"익힘 "+learnPct(UI_(u))+"%"));
+      c.onclick=()=>{if(!st){toast("이 단원을 시작하면 손님이 공개돼요");return;}if(!op){toast("익힘 100%가 되면 대화문이 열려요 (지금 "+learnPct(UI_(u))+"%)");return;}scU=u;renderScript();};g.append(c);});
+    gal.append(g);return;}
+  gal.hidden=true;det.hidden=false;$("#scTitle").textContent=(scU+1)+". "+UNITS[scU].title;$("#scImg").src=custImg(scU);
+  const cb=$("#convBtn");const co=convOpen(scU);cb.disabled=!co;cb.textContent=co?"🎬 실전 연습 (직원 역할)":"🔒 실전 연습 (오래 기억 "+progress(UI_(scU))+"/50%)";
+  const dl=$("#dl");dl.innerHTML="";UNITS[scU].D.forEach(d=>{const b=el("button","ln "+d.r);b.append(el("span","role",d.r==="c"?"손님":"직원"));
+  const tx=el("div","tx");tx.append(el("div","ja",d.ja));tx.append(el("div","pr",d.p));tx.append(el("div","mn",d.m));
+  if(d.tip){const tp=el("div","tip");tp.innerHTML="<b>판매 노하우</b> ";tp.append(document.createTextNode(d.tip));tx.append(tp);}
+  b.append(tx);b.onclick=()=>{hush();say(d.ja);};dl.append(b);});}
+$("#playAll").onclick=async()=>{hush();const t=++tok;for(const d of UNITS[scU].D){if(t!==tok)return;await say(d.ja);await wait(600);}};
+
+/* ---------- navigation ---------- */
+function tab(name){hush();$("#actbar").hidden=name!=="study";$("#mainView").classList.toggle("withbar",name==="study");["study","status","script","summary"].forEach(x=>$("#"+x).hidden=x!==name);
+  document.querySelectorAll("nav.tabs button").forEach(x=>x.setAttribute("aria-selected",x.dataset.tab===name));
+  if(name==="status")renderStatus();if(name==="script")renderScript();if(name==="study"){if(!cur||cur.type==="done")next();else show(cur,true);}hud();}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+$("#quitBtn").onclick=showSummary;
+function toStart(){remoteReady=false;hush();$("#actbar").hidden=true;$("#mainView").hidden=true;$("#tabs").hidden=true;$("#startView").hidden=false;showAll=false;picked=null;renderProfiles();try{showTip()}catch(e){}}
+$("#addBtn").onclick=addProfile;$("#pin").addEventListener("keydown",e=>{if(e.key==="Enter")$("#goBtn").click();});$("#newName").addEventListener("keydown",e=>{if(e.key==="Enter")addProfile();});
+$("#goBtn").onclick=async()=>{if(!picked)return;lsSet("osusume-last",picked);const pv=$("#pin").value.trim();
+  if(!/^\d{4}$/.test(pv)){toast("비밀번호 숫자 4자리를 입력해 주세요");return;}
+  if(pins[picked]&&pins[picked]!==pv){toast("비밀번호가 맞지 않아요");$("#pin").value="";return;}
+  if(!pins[picked]){pins[picked]=pv;lsSet(PINKEY,pins);if(window.__pd)window.__pd.set({list:profiles,pins}).catch(()=>{});toast("비밀번호를 정했어요. 다음부터 이 번호로 들어와요");}
+  $("#pin").value="";me=picked;S=Object.assign(fresh(),lsGet(SKEY(me),{}));if(S.v!==1)S=fresh();
+  // 이 기기에 진도가 있으면 바로 시작하고 서버 기록은 뒤에서 맞춘다. 맞추기 전엔 서버에 저장하지 않는다(0으로 덮어쓰기 방지)
+  remoteReady=false;const who=me;const hasLocal=Object.keys(S.st||{}).length>0;
+  const merge=r=>{if(me!==who)return;if(r&&r.v===1){const nl=Object.keys(S.st||{}).length,nr=Object.keys(r.st||{}).length;
+      if((r.updated||0)>(S.updated||0)||nr>nl+3){S=Object.assign(fresh(),r);lsSet(SKEY(me),S);try{hud();if(!cur||cur.type==="done")next();}catch(e){}}}
+    remoteReady=true;try{save();}catch(e){}};
+  const sync=async(tries)=>{for(let k=0;k<tries&&me===who&&!remoteReady;k++){const r=await Promise.race([fetchRemote(),new Promise(res=>setTimeout(()=>res(undefined),12000))]);
+      if(r!==undefined&&r!=="ERR"){merge(r);return true;}await new Promise(z=>setTimeout(z,Math.min(30000,3000*(k+1))));}return false;};
+  if(!docBase&&!hasLocal){const gb=$("#goBtn");const t0=gb.textContent;gb.disabled=true;gb.textContent="연결 중…";await Promise.race([fbP,new Promise(r=>setTimeout(r,8000))]);gb.disabled=false;gb.textContent=t0;if(me!==who)return;}
+  if(!hasLocal&&docBase){const gb=$("#goBtn");gb.disabled=true;const oldTxt=gb.textContent;gb.textContent="기록 불러오는 중…";
+    const r=await Promise.race([fetchRemote(),new Promise(res=>setTimeout(()=>res(undefined),7000))]);gb.disabled=false;gb.textContent=oldTxt;
+    if(r!==undefined&&r!=="ERR")merge(r);else{toast("기록 서버 연결이 느려요. 연결되면 자동으로 맞출게요");sync(20);}}
+  else if(docBase){sync(20);}else fbP.then(()=>{if(docBase)sync(20);else remoteReady=true;});
+  $("#startView").hidden=true;$("#mainView").hidden=false;$("#tabs").hidden=false;startSession();cur=null;tab("study");};
+function levelUp(n){const o=$("#lvup");$("#lvN").textContent=n;
+  $("#lvMsg").textContent=["","","입이 트이기 시작했어요","손님 인사가 자연스러워져요","이제 상담 흐름이 잡혀요","추천 멘트가 술술 나와요","매장의 외국어 에이스!"][Math.min(6,n)]||"계속 성장 중이에요!";
+  const cf=$("#confetti");cf.innerHTML="";const cols=["#F2992E","#FFD08A","#5DBB8E","#fff","#E07A64"];
+  for(let i=0;i<46;i++){const p=el("i","cf");p.style.left=Math.random()*100+"vw";p.style.background=cols[i%cols.length];p.style.animationDuration=(1.6+Math.random()*1.6)+"s";p.style.animationDelay=(Math.random()*.4)+"s";cf.append(p);}
+  o.hidden=false;try{sfx.src=src("__lv");sfx.play().catch(()=>{});}catch(e){}
+  const close=()=>{o.hidden=true;o.onclick=null;};o.onclick=close;setTimeout(close,2600);}
+let toastT;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
+let hiddenAt=0;document.addEventListener("visibilitychange",()=>{logEv(document.hidden?"HIDE":"BACK");if(document.hidden){hiddenAt=Date.now();flushLog();hush();}else if(me&&hiddenAt&&Date.now()-hiddenAt>30*MIN){startSession();hud();tab("study");}});
+renderProfiles();
+
+// ===== 대화 연습 =====
+const CUST=LANG==="zh"?Array.from({length:6},(_,i)=>"img/z"+(i+1)+".jpg"):LANG==="en"?Array.from({length:3},(_,i)=>"img/e"+(i+1)+".jpg"):Array.from({length:15},(_,i)=>"img/c"+(i+1)+".jpg");
+const custImg=u=>CUST[u%CUST.length];
+function convLines(u){const U=UNITS[u],pre=PRE(U,u);return U.D.map(d=>({...d,iid:d.id?pre+d.id:null}));}
+const convMin=u=>Math.max(2,Math.round(convLines(u).length*20/60));
+function convReady(u){return convOpen(u);}
+function convReadyOld(u){const ls=convLines(u).filter(d=>d.iid);if(!ls.length)return false;const seen=ls.filter(d=>S.st[d.iid]&&(S.st[d.iid].ok||0)>=1).length;return seen/ls.length>=0.7;}
+function maybeOffer(){S.conv=S.conv||{};const now=Date.now();
+  for(let u=0;u<UNITS.length;u++){const c=S.conv[UK(u)]||{};if(!convReady(u))continue;
+    if(c.skip&&S.step<c.skip)continue;if(c.done&&now-c.done<3*DAY)continue;
+    showOffer(u);return true;}
+  return false;}
+function showOffer(u){const o=$("#offer");o.innerHTML="";const b=el("div","box");const im=el("img");im.src=custImg(u);im.alt="손님";
+  b.append(im,el("h3",null,"“"+UNITS[u].title+"” 대화를 처음부터 끝까지 해볼까요?"),el("p",null,"약 "+convMin(u)+"분 걸려요. 직원 대사를 내가 말해요."));
+  const a=el("div","actions");const n=el("button","btn ghost","다음에요");const y=el("button","btn ok","시작할래요");
+  n.onclick=()=>{cvFrom="study";S.conv[UK(u)]={...(S.conv[UK(u)]||{}),skip:S.step+20};save();o.hidden=true;next();};
+  y.onclick=()=>{cvFrom="study";o.hidden=true;startConv(u);};a.append(n,y);b.append(a);o.append(b);o.hidden=false;logEv("CONV_OFFER",u);}
+let CV=null;
+function cvScroll(){const l=$("#cvLog");const f=()=>{l.scrollTop=l.scrollHeight;};f();requestAnimationFrame(f);setTimeout(f,120);setTimeout(f,450);}
+function startConv(u){hush();CV={u,ls:convLines(u),i:0,ok:0,no:0,wrong:[]};logEv("CONV_START",u);
+  $("#cvTitle").textContent="🎬 "+UNITS[u].title;$("#cvImg").src=custImg(u);
+  const ch=document.querySelector(".lvchick svg");$("#cvChick").innerHTML=ch?ch.outerHTML:"🐥";
+  $("#cvLog").innerHTML="";$("#conv").hidden=false;convStep();}
+function speaker(r){$("#cvImg").className="cvcust "+(r==="c"?"talk":"dim");$("#cvChick").className="cvchick "+(r==="s"?"talk":"dim");}
+function bubble(d){const b=el("div","bub "+d.r);const top=el("div");const ja=el("span","ja",d.ja);const rp=el("button","rp","🔊");rp.setAttribute("aria-label","다시 듣기");
+  rp.onclick=()=>{hush();say(d.ja);};top.append(ja,rp);b.append(top);if(d.p)b.append(el("div","pr",d.p));const ko=el("div","ko",d.m);b.append(ko);
+  $("#cvLog").append(b);cvScroll();return{b,top,ko};}
+async function convStep(){const bar=$("#cvBar");bar.innerHTML="";if(!CV)return;if(CV.i>=CV.ls.length)return convEnd();
+  const d=CV.ls[CV.i],t=++tok;speaker(d.r);
+  if(d.r==="c"){const x=bubble(d);x.ko.classList.add("mask");x.b.append(el("div","cvhint","🎧 잘 듣고 속으로 뜻을 맞혀 보세요"));cvScroll();x.ko.onclick=()=>x.ko.classList.remove("mask");
+    const nb=el("button","btn ok","다음 ▶");nb.onclick=()=>{hush();CV.i++;convStep();};bar.append(nb);
+    await say(d.ja);if(t!==tok)return;setTimeout(()=>{x.ko.classList.remove("mask");cvScroll();},1200);return;}
+  // 직원(내 차례): 한국어 먼저
+  const b=el("div","bub s");const mc=el("div","mic cvmic");mc.innerHTML=MIC;b.append(mc,el("div","cvhint","내 차례! "+LN+"로 소리 내어 말해 보세요"),el("div","ko",d.m));if(d.tip)b.append(el("div","pr","💡 "+d.tip));$("#cvLog").append(b);cvScroll();
+  sayKo(d.m);
+  const rv=el("button","btn ok",LN+"로 말해보고 → 정답 보기");rv.onclick=()=>{hush();b.remove();const x=bubble(d);cvScroll();say(d.ja);bar.innerHTML="";
+    const no=el("button","btn no","틀렸어요"),ok=el("button","btn ok","맞았어요");
+    const fin=k=>{x.b.classList.add(k);convGrade(d,k);CV.i++;bar.innerHTML="";setTimeout(convStep,k==="no"?500:350);};
+    no.onclick=()=>fin("no");ok.onclick=()=>fin("ok");bar.append(no,ok);};
+  bar.append(rv);}
+function convGrade(d,k){ding(k);logEv("CONV_GRADE",d.iid,k);if(k==="ok"){CV.ok++;addXp(3);}else{CV.no++;CV.wrong.push(d);
+  const st=d.iid&&S.st[d.iid];if(st){st.wrong=(st.wrong||0)+1;st.ok=0;st.ivl=Math.max(MIN_IVL,st.ivl*MULT.no);st.dueStep=S.step+3;st.dueAt=null;S.todayWrong[d.iid]=(S.todayWrong[d.iid]||0)+1;}}
+  save();hud();}
+function convEnd(){const u=CV.u;S.conv=S.conv||{};S.conv[UK(u)]={done:Date.now()};const tot=CV.ok+CV.no;addXp(30);save();hud();logEv("CONV_END",u,CV.ok,CV.no);
+  speaker("c");const log=$("#cvLog");const b=el("div","bub s");b.append(el("div","ja","🎉 완주!"),el("div","ko",tot+"문장 중 "+CV.ok+"개 성공 · 보너스 +30 XP"));
+  if(CV.wrong.length){b.append(el("div","pr","다시 볼 문장"));CV.wrong.forEach(w=>{const r=el("div","ko",w.ja+" — "+w.m);b.append(r);});}
+  log.append(b);cvScroll();setTimeout(()=>ding("ok"),300);
+  const bar=$("#cvBar");bar.innerHTML="";const bk=el("button","btn ok","기본 학습으로 돌아가기");bk.onclick=closeConv;bar.append(bk);}
+let cvFrom="study";function closeConv(){hush();CV=null;$("#conv").hidden=true;tab(cvFrom);}
+$("#cvQuit").onclick=()=>{if(CV)logEv("CONV_QUIT",CV.u,CV.i);closeConv();};
+$("#scBack").onclick=()=>{hush();scU=null;renderScript();};
+$("#convBtn").onclick=()=>{cvFrom="script";startConv(scU);};
+
+// ===== 첫 화면 팁 =====
+const TIPS=["💬 오늘 배운 한 문장, 매장에서 꼭 한 번 써보세요. 배운 말이 진짜 내 말이 돼요.",
+"🌱 하루 10분도 충분해요. 매일 조금씩이 한 번에 몰아서보다 훨씬 오래 남아요.",
+"😊 틀려도 괜찮아요. 손님은 발음보다 말을 걸어준 마음을 기억해요.",
+"🔁 '틀렸어요'를 누르는 건 실패가 아니라 복습 예약이에요.",
+"🗣️ 눈으로만 보지 말고 꼭 소리 내서 말해보세요. 입이 기억해야 매장에서 나와요.",
+"⭐ 손님이 「日本語上手ですね!」「你的中文真好!」라고 하면 성공이에요. 그 말을 들을 때까지!",
+"🏪 교과서 외국어가 아니라, 약국 카운터에서 진짜 쓰는 말만 모았어요.",
+"⌨️ 키보드가 있다면 → 맞았어요, ← 틀렸어요, ↑ 다시 듣기, ↓ 이미 알아요",
+"🎧 블루투스 스피커나 이어폰을 연결하면 다음곡은 맞았어요·넘어가기, 이전곡은 틀렸어요·다시 듣기예요.",
+"🔊 말풍선의 스피커를 누르면 몇 번이든 다시 들을 수 있어요.",
+"🎬 단원을 다 익히면 대화문 탭에서 손님을 만나 실전 연습을 할 수 있어요.",
+"🤔 이미 아는 말은 '이미 알아요'를 누르세요. 덜 자주 나와서 모르는 말에 더 집중할 수 있어요.",
+"⏸️ 바쁠 땐 '그만할래요'를 누르세요. 진도는 자동으로 저장되고 다음에 이어서 해요.",
+"🚩 발음이나 뜻이 이상하면 🚩를 눌러 알려주세요. 바로 고칠게요.",
+"📱 아이폰은 사파리 공유 버튼 → '홈 화면에 추가', 갤럭시는 크롬 메뉴(⋮) → '홈 화면에 추가'를 누르면 앱처럼 바로 열려요."];
+function showTip(){try{let i=Math.floor(Math.random()*TIPS.length);const last=+lsGet("osusume-tip",-1);if(i===last)i=(i+1)%TIPS.length;lsSet("osusume-tip",i);$("#tipline").textContent=TIPS[i];}catch(e){}}
+showTip();
+
+// ===== 키보드 · 블루투스 버튼 =====
+const vis=b=>b&&b.offsetParent!==null&&!b.disabled;
+function visBtns(){const cvOn=!$("#conv").hidden;const scope=[...document.querySelectorAll(cvOn?".rpsheet button,#conv #cvBar button":".offer:not([hidden]) button,.rpsheet button,#actin button,#card button")];return scope.filter(vis);}
+function findBtn(re){return visBtns().find(b=>re.test(b.textContent));}
+function keyAct(k){if(!$("#startView").hidden)return false;
+  if(k==="ok"){const b=findBtn(/^맞았어요/);if(b){b.click();return true;}}
+  if(k==="no"){const b=findBtn(/^틀렸어요/);if(b){b.click();return true;}}
+  if(k==="known"){const b=visBtns().find(b=>b.classList.contains("known"));if(b){b.click();return true;}}
+  if(k==="replay"){if(CV){const r=[...document.querySelectorAll("#cvLog .rp")].pop();if(r){r.click();return true;}}
+    const r=visBtns().find(b=>b.classList.contains("replay"));if(r){r.click();return true;}
+    if(window.__curId&&BY[window.__curId]){hush();say(BY[window.__curId].ja);return true;}}
+  if(k==="primary"){const bs=visBtns().filter(b=>!/^(맞았어요|틀렸어요)/.test(b.textContent)&&!b.classList.contains("known")&&!b.classList.contains("replay")&&!b.classList.contains("rp"));
+    if(findBtn(/^맞았어요/))return false;const b=bs[bs.length-1];if(b){b.click();return true;}}
+  return false;}
+document.addEventListener("keydown",e=>{const t=e.target;if(t&&(t.tagName==="INPUT"||t.tagName==="TEXTAREA"))return;if(e.metaKey||e.ctrlKey||e.altKey)return;
+  const m={ArrowRight:"ok",ArrowLeft:"no",ArrowUp:"replay",ArrowDown:"known"," ":"primary",Enter:"primary"}[e.key];
+  if(m&&keyAct(m))e.preventDefault();});
+try{if("mediaSession" in navigator){const ms=navigator.mediaSession;ms.metadata=new MediaMetadata({title:"트리니 링고",artist:LN+" 학습"});
+  const fwd=()=>keyAct("ok")||keyAct("primary"),back=()=>keyAct("no")||keyAct("replay");
+  const H={nexttrack:fwd,previoustrack:back,play:()=>keyAct("replay"),pause:()=>keyAct("replay"),seekforward:fwd,seekbackward:back};
+  for(const [a,f] of Object.entries(H)){try{ms.setActionHandler(a,f);}catch(e){}}}}catch(e){}
+
+// ===== 오류 신고 =====
+function openReport(){const id=window.__curId;if(!id)return;const it=BY[id];const sh=el("div","rpsheet");const box=el("div","box");
+  box.append(el("h3",null,"🚩 이 문제에 오류가 있나요?"),el("div","q",it.ja+" — "+it.m));
+  const op=el("div","opts");let pick=null;["발음이 이상해요","뜻이 이상해요",LN+"가 이상해요","기타"].forEach(t=>{const b=el("button",null,t);b.onclick=()=>{pick=t;[...op.children].forEach(x=>x.classList.toggle("on",x===b));};op.append(b);});
+  const memo=el("input");memo.placeholder="메모 (선택)";memo.maxLength=200;
+  const row=el("div","row");const c=el("button","btn ghost","취소"),s=el("button","btn ok","보내기");
+  c.onclick=()=>sh.remove();sh.onclick=e=>{if(e.target===sh)sh.remove();};
+  s.onclick=async()=>{if(!pick){toast("사유를 하나 골라주세요");return;}const rec={name:me||"",id,ja:it.ja,m:it.m,unit:(UNITS[it.u]||{}).title||"",reason:pick,memo:memo.value.trim(),at:Date.now(),ver:APP_VER,done:false};
+    sh.remove();logEv("REPORT",id,pick);try{if(docBase)await docBase.doc("osu-rep-"+Date.now()+"-"+ukey(me||"x")).set(rec);toast("신고 고마워요! 확인해서 고칠게요");}catch(e){toast("전송 실패, 잠시 후 다시 해주세요");}};
+  row.append(c,s);box.append(op,memo,row);sh.append(box);document.body.append(sh);}
+$("#flagBtn").onclick=openReport;
+
+// ===== 언어 선택 =====
+(function(){const seg=$("#langSeg");if(!seg)return;[...seg.children].forEach(b=>{b.classList.toggle("on",b.dataset.l===LANG);
+  b.onclick=()=>{if(b.dataset.l===LANG)return;lsSet("trini-lang",b.dataset.l);location.reload();};});
+  if(LANG==="en"){document.querySelectorAll("svg text").forEach(t=>{if(t.textContent==="おすすめ!")t.textContent="For you!";});}
+  if(LANG==="zh"){document.querySelectorAll("svg text").forEach(t=>{if(t.textContent==="おすすめ!")t.textContent="推荐!";});}})();
+</script>
+</body>
+</html>
