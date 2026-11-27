@@ -527,6 +527,7 @@ function next(){
   if(r){retryQ=retryQ.filter(x=>x!==r);return show({why:"p1",type:r.relearn?"relearn":"quiz",id:r.id,again:true});}
   const fresh=learned().filter(it=>{const st=S.st[it.id];return st.lad!=null&&!covered(it)&&st.dueStep!=null&&S.step>=st.dueStep&&S.step-(st.seen==null?-99:st.seen)>=2&&(sessN[it.id]||0)<SESS_MAX+2&&!retryQ.some(x=>x.id===it.id);}).sort((a,b)=>S.st[a.id].dueStep-S.st[b.id].dueStep);
   if(fresh.length)return show({why:"p2",type:"quiz",id:fresh[0].id});
+  if(S.chain)S.chain=S.chain.filter(id=>BY[id]);
   if(S.chain&&S.chain.length){const id=S.chain.shift();const n=S.chainN;return show({why:"p3",type:"quiz",id,chain:(n-S.chain.length)+"/"+n});}
   if(cu>0&&S.step-(S.lastChain||0)>=30&&Date.now()-((S.unitStart||{})[cu]||Date.now())>=2*DAY){
     const pu=Math.floor(Math.random()*cu);const ch=ITEMS.filter(i=>i.u===pu&&i.t==="d"&&S.st[i.id]).map(i=>i.id);
@@ -630,6 +631,7 @@ let unitHist=[],typeHist=[];
 let guard=0;
 function show(c,resume){
   // 안전장치: 직전 2문제와 같은 항목·같은 일본어면 다른 문제로 바꾼다
+  if(c.id&&!BY[c.id]){logEv("BADID",c.id);return next();}
   if(!resume&&c.id&&c.type!=="done"&&c.type!=="intro"&&guard<4){const it=BY[c.id];const rec=S.recent||[];
     if(rec.some(r=>r.id===c.id||r.ja===it.ja)||(S.st[c.id]&&S.st[c.id].kn&&sessN[c.id]>=99)){logEv("GUARD",c.id,c.type,c.why||"");guard++;if(S.st[c.id])S.st[c.id].seen=S.step;return next();}}
   guard=0;
